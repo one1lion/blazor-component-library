@@ -1,0 +1,32 @@
+﻿.and-or-toggle {
+  display: flex;
+  color: #888;
+  font-size: .8rem;
+
+  div {
+    width: 3.5em;
+    text-align: center;
+    padding: 2px 0;
+    border: 1px solid var(--gray-dark);
+    background-color: #bbb;
+    font-weight: bolder;
+    cursor: default;
+
+    &:first-of-type {
+      border-right: 1px solid rgba(0,0,0,.4);
+    }
+
+    &:nth-of-type(2) {
+      border-left: none;
+    }
+
+    &.selected {
+      background-color: #86cb29;
+      color: #fff;
+    }
+
+    &:not(.selected) {
+      cursor: pointer;
+    }
+  }
+}

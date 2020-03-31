@@ -1,0 +1,148 @@
+﻿@using One1Lion.BlazorComponents.DragAndDrop
+@using One1Lion.Samples.SharedLib.Generic
+
+<O1LDragAndDrop Children="itemToWrapGroup.Children"
+                ChildrenPropertyName="@nameof(Group.Children)"
+                AllowGrouping="true"
+                NewGroupMethod="Group.NewGroup"
+                AllowNewItem="true"
+                NewItemMethod="Group.NewChildItem"
+                SeparatorDisplay="SeparatorDisplay.Between">
+  <DisplayTemplate Context="curItem">
+    <WrappedItemTemplate Item="curItem as IItem" />
+  </DisplayTemplate>
+  <EditTemplate Context="curItem">
+    <WrappedItemTemplate Item="curItem as IItem" EditMode="true" />
+  </EditTemplate>
+  <SeparatorTemplate Context="curItem">
+    <div class="and-or-toggle" onselect="preventDefault();">
+      <div class="@(curItem.AndWithNext ? "selected" : "")"
+           onselect="preventDefault();"
+           @onclick="(async (e) => { if (!curItem.AndWithNext) {curItem.AndWithNext = !curItem.AndWithNext; } })">
+        And
+      </div>
+      <div class="@(curItem.AndWithNext ? "" : "selected")"
+           onselect="preventDefault();"
+           @onclick="(async (e) => { if (curItem.AndWithNext) { curItem.AndWithNext = !curItem.AndWithNext; } })">
+        Or
+      </div>
+    </div>
+  </SeparatorTemplate>
+</O1LDragAndDrop>
+
+@code {
+  Group itemToWrapGroup;
+
+  protected override void OnInitialized() {
+    itemToWrapGroup = new Group();
+
+    var group1 = new Group() { Parent = itemToWrapGroup };
+    group1.Children = new List<IElement>() {
+      new Item() {
+        ItemContent = "Group 1, Item 1",
+        Parent = group1
+      },
+      new Item() {
+        ItemContent = "Group 1, Item 2",
+        Parent = group1,
+        AndWithNext = false
+      },
+      new Item() {
+        ItemContent = "Group 1, Item 3",
+        Parent = group1
+      },
+      new Item() {
+        ItemContent = "Group 1, Item 4",
+        Parent = group1
+      }
+    };
+    var group2 = new Group() { Parent = itemToWrapGroup, AndWithNext = false };
+    group2.Children = new List<IElement>() {
+      new Item() {
+        ItemContent = "Group 2, Item 1",
+        Parent = group2
+      },
+      new Item() {
+        ItemContent = "Group 2, Item 2",
+        Parent = group2
+      },
+      new Item() {
+        ItemContent = "Group 2, Item 3",
+        Parent = group2
+      },
+      new Item() {
+        ItemContent = "Group 2, Item 4",
+        Parent = group2
+      }
+    };
+    var group3 = new Group() { Parent = itemToWrapGroup };
+    var group3_1 = new Group() { Parent = group3, AndWithNext = false };
+    group3_1.Children = new List<IElement>() {
+      new Item() {
+        ItemContent = "Group 3.1, Item 1",
+        Parent = group3_1
+      },
+      new Item() {
+        ItemContent = "Group 3.1, Item 2",
+        Parent = group3_1
+      },
+      new Item() {
+        ItemContent = "Group 3.1, Item 3",
+        Parent = group3_1
+      },
+      new Item() {
+        ItemContent = "Group 3.1, Item 4",
+        Parent = group3_1
+      }
+    };
+    group3.Children = new List<IElement>() {
+      new Item() {
+        ItemContent = "Group 3, Item 1",
+        Parent = group3
+      },
+      group3_1,
+      new Item() {
+        ItemContent = "Group 3, Item 3",
+        Parent = group3
+      },
+      new Item() {
+        ItemContent = "Group 3, Item 4",
+        Parent = group3
+      },
+      new Item() {
+        ItemContent = "Group 3, Item 5",
+        Parent = group3
+      }
+    };
+    var group4 = new Group() { Parent = itemToWrapGroup };
+    group4.Children = new List<IElement>() {
+      new Item() {
+        ItemContent = "Group 4, Item 1",
+        Parent = group4
+      },
+      new Item() {
+        ItemContent = "Group 4, Item 2",
+        Parent = group4
+      },
+      new Item() {
+        ItemContent = "Group 4, Item 3",
+        Parent = group4
+      },
+      new Item() {
+        ItemContent = "Group 4, Item 4",
+        Parent = group4
+      }
+    };
+
+    itemToWrapGroup.Children = new List<IElement>() {
+      new Item() {
+        ItemContent = "Base Group, Item 1",
+        Parent = itemToWrapGroup
+      },
+      group1,
+      group2,
+      group3,
+      group4
+    };
+  }
+}

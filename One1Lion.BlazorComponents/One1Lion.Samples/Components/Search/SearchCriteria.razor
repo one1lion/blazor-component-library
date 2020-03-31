@@ -1,0 +1,25 @@
+﻿@using One1Lion.Samples.SharedLib.Search.DBExpressions
+@using One1Lion.Samples.SharedLib.Search.FileRepositoryExpressions
+@using One1Lion.Samples.SharedLib.Search.QueryExpressions
+@using One1Lion.Samples.SharedLib.DbInfo
+
+@if (IsFileRepoQuery) {
+  var frItem = Item as IFileRepositoryExpressionItem;
+  <FileRepoSearchCriteria Item="frItem" />
+} else if (!EditMode) {
+  @Item.FormattedDisplay()
+} else {
+  var dbeItem = Item as IDBExpressionItem;
+  <EditSearchCriteria QueryableFields="QueryableFields" Item="dbeItem" />
+}
+
+@code {
+  [Parameter] public IQueryExpressionItem Item { get; set; } = new DBExpressionItem();
+  [Parameter] public bool EditMode { get; set; }
+  [Parameter] public List<DbFieldViewModel> QueryableFields { get; set; }
+  bool IsFileRepoQuery => Item.GetType().GetInterface(nameof(IFileRepositoryExpressionItem)) is { };
+
+  protected override void OnParametersSet() {
+
+  }
+}

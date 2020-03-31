@@ -1,0 +1,61 @@
+﻿@using One1Lion.BlazorComponents.DragAndDrop
+@using One1Lion.Samples.Components.Search
+@using One1Lion.Samples.Data
+@using One1Lion.Samples.SharedLib.Search.QueryExpressions
+@using One1Lion.Samples.SharedLib.Search.DBExpressions
+
+@implements IDisposable
+
+<h3>Drag And Drop Query Builder</h3>
+<O1LDragAndDrop Children="baseGroup.Children"
+                ChildrenPropertyName="@nameof(IQueryExpressionGroup.Children)"
+                AllowGrouping="true"
+                NewGroupMethod="QueryExpressionGroup.NewGroup"
+                AllowNewItem="true"
+                NewItemMethod="QueryExpressionGroup.NewItem"
+                SeparatorDisplay="SeparatorDisplay.Between">
+  <DisplayTemplate Context="curItem">
+    <SearchCriteria Item="curItem as IQueryExpressionItem" EditMode="false" />
+  </DisplayTemplate>
+  <EditTemplate Context="curItem">
+    <SearchCriteria Item="curItem as IQueryExpressionItem" EditMode="true" />
+  </EditTemplate>
+  <SeparatorTemplate Context="curItem">
+    <div class="and-or-toggle" onselect="preventDefault();">
+      <div class="@(curItem.AndWithNext ? "selected" : "")"
+           onselect="preventDefault();"
+           @onclick="(async (e) => { if (!curItem.AndWithNext) {curItem.AndWithNext = !curItem.AndWithNext; } })">
+        And
+      </div>
+      <div class="@(curItem.AndWithNext ? "" : "selected")"
+           onselect="preventDefault();"
+           @onclick="(async (e) => { if (curItem.AndWithNext) { curItem.AndWithNext = !curItem.AndWithNext; } })">
+        Or
+      </div>
+    </div>
+  </SeparatorTemplate>
+</O1LDragAndDrop>
+
+<h4>Live output</h4>
+<p>@baseGroup.FormattedDisplay()</p>
+
+@code {
+  IQueryExpressionGroup baseGroup = new QueryExpressionGroup();
+
+  DnDState<IQueryElement> DnDState = new DnDState<IQueryElement>();
+
+  protected override void OnInitialized() {
+    baseGroup = QueryDataSampleGenerator.GenerateQueryExpressionGroup();
+
+    DnDState.OnNotifyStateChanged += StateHasChanged;
+  }
+
+  async Task ToggleAndOr(MouseEventArgs e, IQueryElement curElem) {
+    curElem.AndWithNext = !curElem.AndWithNext;
+    await InvokeAsync(() => StateHasChanged());
+  }
+
+  void IDisposable.Dispose() {
+    DnDState.OnNotifyStateChanged -= StateHasChanged;
+  }
+}

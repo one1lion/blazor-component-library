@@ -1,0 +1,104 @@
+﻿@using One1Lion.BlazorComponents.TypeAhead
+@using One1Lion.Samples.SharedLib.DbInfo
+@using One1Lion.Samples.SharedLib.Search.DBExpressions
+@using One1Lion.Samples.SharedLib.Search.QueryExpressions
+
+<span>TODO: Fill in logic for Edit Search Criteria</span>
+
+@code {
+  [Parameter] public IDBExpressionItem Item { get; set; } = new DBExpressionItem();
+  [Parameter] public List<DbFieldViewModel> QueryableFields { get; set; }
+
+  bool loading = true;
+
+  bool inputBool;
+
+  string inputString;
+  DateTime inputDate;
+  double inputNumber;
+
+  string inputStringTo;
+  DateTime inputDateTo;
+  double inputNumberTo;
+
+  List<ExpressionType> ExpressionTypes = new List<ExpressionType>();
+  List<TypeAheadItem> DbFieldTypeAheadItems = new List<TypeAheadItem>();
+  List<TypeAheadItem> ExprTypeTypeAheadItems = new List<TypeAheadItem>();
+
+  protected override void OnParametersSet() {
+    loading = QueryableFields is null;
+    if (QueryableFields is { }) {
+      // Since we have asked specifically for fields that are queryable, the QueryableFieldInfo object will not be null
+      DbFieldTypeAheadItems = QueryableFields.GroupBy(qf => new {
+        qf.QueryableFieldInfo.DisplayName,
+        qf.DbField.Id
+      }).Select(qfg => new TypeAheadItem() {
+        MenuText = qfg.Key.DisplayName,
+        DisplayText = qfg.Key.DisplayName,
+        Value = qfg.Key.Id.ToString(),
+        Item = qfg.ToList()
+      }).Distinct().OrderBy(ta => ta.DisplayText).ToList();
+    }
+    if (!string.IsNullOrWhiteSpace(Item?.QueryField)) {
+      // Pre-populate the expression types for this field
+      ExpressionTypes = ExpressionTypeDisplay.GetExpressionTypes(QueryableFields.FirstOrDefault(qf => qf.QueryableFieldInfo.DisplayName == Item.QueryField)?.TypeName).Where(et => et != ExpressionType.NotSet).ToList();
+      // TODO: also perform any operations that have to do with the selected expression type
+      if (Item.Values != null && Item.Values.Count() > 0) {
+        inputString = Item.Values[0].ToString();
+        bool.TryParse(inputString, out inputBool);
+        DateTime.TryParse(inputString, out inputDate);
+        double.TryParse(inputString, out inputNumber);
+        if (Item.Values.Count() > 1) {
+          inputStringTo = Item.Values[1].ToString();
+          DateTime.TryParse(inputStringTo, out inputDateTo);
+          double.TryParse(inputStringTo, out inputNumberTo);
+        }
+      }
+    }
+  }
+
+  void HandleEditValueChanged(ChangeEventArgs e, bool firstVal = true) {
+    Console.WriteLine($"Value changed.  Item.Values is null: {Item.Values is null}");
+    if (Item.Values is null) {
+      Item.Values = new List<object>() { null };
+      Console.WriteLine($"After newing Item.Values, its count is now : {Item.Values.Count}");
+    }
+
+    if (!firstVal) {
+      if (Item.Values.Count == 1) {
+        Item.Values.Add(e.Value);
+      } else {
+        Item.Values[1] = e.Value;
+      }
+    } else {
+      Item.Values[0] = e.Value;
+    }
+
+    Console.WriteLine($"Item.Value: {string.Join(", ", Item.Values)}");
+  }
+
+  void HandleFieldSelectionMade(TypeAheadItem selectedItem) {
+    var qf = ((List<DbFieldViewModel>)selectedItem.Item);
+    Item.QueryField = qf.First().DbField.FieldName;
+    Console.WriteLine($"Item.QueryField: {Item.QueryField}");
+    if (!string.IsNullOrWhiteSpace(Item.QueryField)) {
+      ExpressionTypes = ExpressionTypeDisplay.GetExpressionTypes(qf.First().TypeName).Where(et => et != ExpressionType.NotSet).ToList();
+    } else {
+      ExpressionTypes = new List<ExpressionType>();
+    }
+    if (!ExpressionTypes.Contains(Item.ExpressionType)) { Item.ExpressionType = ExpressionType.NotSet; }
+    if (ExpressionTypes is { }) {
+      ExprTypeTypeAheadItems = ExpressionTypes.Select(qf => new TypeAheadItem() {
+        MenuText = ExpressionTypeDisplay.GetDisplayText(qf),
+        DisplayText = ExpressionTypeDisplay.GetDisplayText(qf),
+        Value = qf.ToString(),
+        Item = qf
+      }).ToList();
+    }
+  }
+
+  void HandleExpressionSelectionMade(TypeAheadItem selectedItem) {
+    Item.ExpressionType = (ExpressionType)selectedItem.Item;
+    Console.WriteLine($"Item.ExpressionType: {Item.ExpressionType}");
+  }
+}

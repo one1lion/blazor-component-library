@@ -2,5 +2,9 @@
   {
     "outputFile": "wwwroot/css/draganddrop.css",
     "inputFile": "DragAndDrop/Lib/draganddrop.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/typeahead.css",
+    "inputFile": "TypeAhead/TypeAhead.scss"
   }
 ]

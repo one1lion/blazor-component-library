@@ -1,0 +1,172 @@
+﻿@implements IDisposable
+@using System.Net.Http
+@using System.Timers
+
+@*
+  Adapted from: https://docs.microsoft.com/en-us/archive/msdn-magazine/2018/december/cutting-edge-blazor-custom-components
+  as well as .NET Conf Focus On Blazor, Dan Roth's Welcome to Blazor: https://youtu.be/KlngrOF6RPw
+*@
+
+<div class="typeahead-container">
+  <input type="text"
+         id="typeaheadinput-@id"
+         placeholder="Type a value..."
+         class="form-control"
+         @attributes="AdditionalAttributes"
+         @bind="TypeAheadInput"
+         @bind:event="oninput"
+         @ref="TypeAheadInputBox" />
+  <button type="button"
+          class="btn btn-sm btn-outline-secondary dropdown-toggle d-inline-block"
+          @onclick="ToggleDropDown"
+          @onkeypress="HandleKeyPress"></button>
+  <div class="input-group-append" @onkeypress="HandleKeyPress">
+    <div class="d-inline-block" style="width: 100%;@(!IsExpanded ? "display:none !important;" : "")border:solid 1px gray">
+      @if (startsWithItems is null && containsItems is null && allOtherItems is null) {
+        <h6>Loading...</h6>
+      } else {
+        var totLikelyMatches = (startsWithItems?.Count() ?? 0) + (containsItems?.Count() ?? 0);
+        if (startsWithItems is { } && containsItems is { }) {
+          <h6 class="dropdown-header">
+            @totLikelyMatches likely match@(totLikelyMatches != 1 ? "es" : ""))
+          </h6>
+        }
+        <div style="max-height:420px;overflow-y:auto;">
+          @if (startsWithItems is { } && startsWithItems.Count() > 0) {
+            foreach (var item in startsWithItems) {
+              <a class="dropdown-item" @onclick="@(async () => await TrySelect(item))" style="cursor:pointer;">
+                <span class="oi oi-star"></span> @((MarkupString)item.MenuText)
+              </a>
+            }
+          }
+          @if (containsItems is { } && containsItems.Count() > 0) {
+            if (startsWithItems is { } && startsWithItems.Count() > 0) {<hr /> }
+            foreach (var item in containsItems) {
+              <a class="dropdown-item" @onclick="@(async () => await TrySelect(item))" style="cursor:pointer;">
+                @((MarkupString)item.MenuText)
+              </a>
+            }
+          }
+          @if (allOtherItems != null && allOtherItems.Count() > 0) {
+            if ((startsWithItems is { } && startsWithItems.Count() > 0) || (containsItems is { } && containsItems.Count() > 0)) {<hr /> }
+            foreach (var item in allOtherItems) {
+              <a class="dropdown-item" @onclick="@(async () => await TrySelect(item))" style="cursor:pointer; color:gray;">
+                @((MarkupString)item.MenuText)
+              </a>
+            }
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+@code {
+  [Parameter(CaptureUnmatchedValues = true)]
+  public IDictionary<string, object> AdditionalAttributes { get; set; }
+  [Parameter] public int Debounce { get; set; } = 300;
+  [Parameter] public string SelectedText { get; set; }
+  [Parameter] public string SelectedValue { get; set; }
+  [Parameter] public bool SelectionOnly { get; set; }
+  [Parameter] public string HintsUrl { get; set; }
+  [Parameter] public EventCallback<string> OnInputChanged { get; set; }
+  [Parameter] public EventCallback<TypeAheadItem> OnSelectionMade { get; set; }
+  [Parameter] public List<TypeAheadItem> Items { get; set; }
+  [Parameter] public bool CaseSensitive { get; set; }
+  [Parameter] public bool IsExpanded { get; set; }
+  [Parameter] public HttpClient HttpClient { get; set; }
+
+  ElementReference TypeAheadInputBox;
+
+  string id = Guid.NewGuid().ToString();
+  List<TypeAheadItem> startsWithItems { get; set; }
+  List<TypeAheadItem> containsItems { get; set; } = new List<TypeAheadItem>();
+  List<TypeAheadItem> allOtherItems { get; set; } = new List<TypeAheadItem>() { new TypeAheadItem() { DisplayText = "Loading...", MenuText = "Loading..." } };
+  StringComparison strComp;
+
+  Timer debounceTimer;
+  string typeAheadInput;
+  string TypeAheadInput {
+    get => typeAheadInput;
+    set {
+      typeAheadInput = value;
+      debounceTimer.Stop();
+      debounceTimer.Start();
+    }
+  }
+
+  protected override void OnInitialized() {
+    debounceTimer = new Timer() {
+      Interval = Debounce,
+      AutoReset = false
+    };
+    debounceTimer.Elapsed += TryAutoComplete;
+  }
+
+  protected override void OnParametersSet() {
+    if ((!string.IsNullOrWhiteSpace(HintsUrl) && Items is { }) || (string.IsNullOrWhiteSpace(HintsUrl) && Items is null)) {
+      throw new ArgumentException("The TypeAhead component requires a HintsUrl parameter, or an Items parameter, but not both.");
+    }
+    if (!string.IsNullOrWhiteSpace(HintsUrl) && HttpClient is null) {
+      throw new ArgumentException("The TypeAhead component requires a reference to the HttpClient parameter when using the HintsUrl.");
+    }
+    if (string.IsNullOrWhiteSpace(typeAheadInput)) { typeAheadInput = SelectedText; }
+    strComp = CaseSensitive ? StringComparison.InvariantCulture : StringComparison.InvariantCultureIgnoreCase;
+  }
+
+  async void TryAutoComplete(Object source, ElapsedEventArgs e) {
+    if (string.IsNullOrWhiteSpace(TypeAheadInput)) {
+      startsWithItems.Clear();
+      IsExpanded = false;
+      await InvokeAsync(() => StateHasChanged());
+      return;
+    }
+
+    if (!string.IsNullOrWhiteSpace(HintsUrl)) {
+      var actualUrl = string.Concat(HintsUrl.TrimEnd('/'), "/", TypeAheadInput);
+      // TODO: Rig this up to a callback method to get hints from a web request
+      //startsWithItems = await HttpClient.GetJsonAsync<List<TypeAheadItem>>(actualUrl);
+    } else {
+      startsWithItems = Items.Where(i => i.DisplayText.StartsWith(TypeAheadInput, strComp)).ToList();
+      containsItems = Items.Where(i => ((CaseSensitive && i.DisplayText.Contains(TypeAheadInput)) || (!CaseSensitive && i.DisplayText.ToLower().Contains(TypeAheadInput.ToLower()))) && !i.DisplayText.StartsWith(TypeAheadInput, strComp)).ToList();
+      allOtherItems = null;
+    }
+    IsExpanded = startsWithItems.Count() + (containsItems?.Count() ?? 0) > 0;
+    await InvokeAsync(() => StateHasChanged());
+  }
+
+  void HandleKeyPress(KeyboardEventArgs e) {
+    // TODO: Handle keypresses when the dropdown button or list have the focus
+    // Look at https://docs.microsoft.com/en-us/aspnet/core/blazor/javascript-interop?view=aspnetcore-3.1
+    //  for information on how to use the ElementReference TypeAheadInputBox to set focus or update text
+  }
+
+  void ToggleDropDown(MouseEventArgs e) {
+    if (string.IsNullOrWhiteSpace(TypeAheadInput)) {
+      if (!string.IsNullOrWhiteSpace(HintsUrl)) {
+        // TODO: Pull the partial list from the HintsUrl
+      } else {
+        startsWithItems = null;
+        containsItems = null;
+        allOtherItems = Items;
+      }
+    } else {
+      startsWithItems = Items.Where(i => i.DisplayText.StartsWith(TypeAheadInput, strComp)).ToList();
+      containsItems = Items.Where(i => ((CaseSensitive && i.DisplayText.Contains(TypeAheadInput)) || (!CaseSensitive && i.DisplayText.ToLower().Contains(TypeAheadInput.ToLower()))) && !i.DisplayText.StartsWith(TypeAheadInput, strComp)).ToList();
+      containsItems = Items.Where(i => !((CaseSensitive && i.DisplayText.Contains(TypeAheadInput)) || (!CaseSensitive && i.DisplayText.ToLower().Contains(TypeAheadInput.ToLower()))) && !i.DisplayText.StartsWith(TypeAheadInput, strComp)).ToList();
+    }
+    IsExpanded = !IsExpanded;
+  }
+
+  async Task TrySelect(TypeAheadItem item) {
+    IsExpanded = false;
+    typeAheadInput = item.DisplayText;
+    SelectedValue = item.Value;
+    await OnSelectionMade.InvokeAsync(item);
+    await InvokeAsync(() => StateHasChanged());
+  }
+
+  public void Dispose() {
+    if (debounceTimer is { }) { debounceTimer.Dispose(); }
+  }
+}

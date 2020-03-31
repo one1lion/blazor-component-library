@@ -1,0 +1,18 @@
+﻿@using One1Lion.Samples.SharedLib.Generic
+
+@if (!EditMode) {
+  @Item.ItemContent
+} else if(Item is null) {
+  <p>Loading item...</p>
+} else {
+  <input type="text" @bind="Item.ItemContent" @bind:event="oninput" />
+}
+
+@code {
+  [Parameter] public IItem Item { get; set; }
+  [Parameter] public bool EditMode { get; set; }
+
+  void ToggleEditMode(MouseEventArgs e) {
+    EditMode = !EditMode;
+  }
+}

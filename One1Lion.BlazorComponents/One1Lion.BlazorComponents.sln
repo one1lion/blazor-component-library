@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.BlazorComponents", "One1Lion.BlazorComponents\One1Lion.BlazorComponents.csproj", "{A12C7AAA-AE87-4315-864C-2252AABA6C58}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.Samples", "One1Lion.Samples\One1Lion.Samples.csproj", "{2578075D-2F42-4848-9411-D29BF5CEB9F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.Samples.SharedLib", "One1Lion.Samples.SharedLib\One1Lion.Samples.SharedLib.csproj", "{E1412B55-60FA-4AAE-8A8F-321F9DFF3D9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{A12C7AAA-AE87-4315-864C-2252AABA6C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A12C7AAA-AE87-4315-864C-2252AABA6C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A12C7AAA-AE87-4315-864C-2252AABA6C58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2578075D-2F42-4848-9411-D29BF5CEB9F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2578075D-2F42-4848-9411-D29BF5CEB9F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2578075D-2F42-4848-9411-D29BF5CEB9F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2578075D-2F42-4848-9411-D29BF5CEB9F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1412B55-60FA-4AAE-8A8F-321F9DFF3D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1412B55-60FA-4AAE-8A8F-321F9DFF3D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1412B55-60FA-4AAE-8A8F-321F9DFF3D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1412B55-60FA-4AAE-8A8F-321F9DFF3D9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
