@@ -1,0 +1,15 @@
+﻿@typeparam TItem
+
+<div class="draganddrop-separator @(Position == SeparatorPosition.Before ? "separator-before" : "separator-after")">
+  @if (SeparatorTemplate is { }) {
+    @SeparatorTemplate(Item);
+  } else {
+    <hr />
+  }
+</div>
+
+@code {
+  [Parameter] public TItem Item { get; set; }
+  [Parameter] public RenderFragment<TItem> SeparatorTemplate { get; set; }
+  [Parameter] public SeparatorPosition Position { get; set; }
+}

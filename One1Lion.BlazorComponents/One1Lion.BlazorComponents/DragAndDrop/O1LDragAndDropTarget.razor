@@ -1,0 +1,37 @@
+﻿@typeparam TItem
+
+@implements IDnDElement<TItem>
+
+@if (DnDState?.NewItemPayload is { } && DnDState.NewItemPayload.WrappingElement?.Id == Id) {
+  @* if is drop after, then add a separator with the Item b...maybe *@
+  <O1LDragAndDropItem TItem="TItem"
+                  Parent="Parent"
+                  Item="DnDState.NewItem"
+                  IndexInParent="IndexInParent"
+                  EditTemplate="EditTemplate"
+                  IsNewItem="true" />
+
+} else {
+  <div class="draganddrop-target draganddrop-drop@(IsDropAfter ? "after" : "before") @(DnDState.Target?.WrappingElement?.Id == Id ? " drag-hover" : "")"
+       @onclick="((e) => { if(AllowNewItem) DnDState.ShowNewItem(Parent, IndexInParent, this); })"
+       @ondragenter="((e) => { DnDState.SetTarget(Parent, IndexInParent, this); StateHasChanged(); })"
+       @ondragenter:stopPropagation="true"
+       @ondrop="(() => DnDState.HandleDropPayload())"
+       @ondrop:stopPropagation="true"></div>
+}
+
+@code {
+  [CascadingParameter(Name = "State")] public DnDState<TItem> DnDState { get; set; } = new DnDState<TItem>();
+  [Parameter] public IDnDContainer<TItem> Parent { get; set; }
+  [Parameter] public int IndexInParent { get; set; }
+  [Parameter] public bool IsDropAfter { get; set; }
+  [Parameter] public bool AllowNewItem { get; set; }
+  [Parameter] public RenderFragment<TItem> EditTemplate { get; set; }
+
+  public string Id { get; } = Guid.NewGuid().ToString();
+  public string Address { get; private set; }
+
+  protected override void OnParametersSet() {
+    Address = $"{(Parent?.Address ?? Id)}.{IndexInParent}";
+  }
+}
