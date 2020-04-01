@@ -82,7 +82,7 @@
   [Parameter] public bool AllowNewItem { get; set; }
   [Parameter] public SeparatorDisplay SeparatorDisplay { get; set; } = SeparatorDisplay.None;
   [Parameter] public Func<TItem> NewGroupMethod { get; set; }
-  [Parameter] public Func<TItem> NewItemMethod { get; set; }
+  [Parameter] public Func<TItem, TItem> NewItemMethod { get; set; }
   [Parameter] public RenderFragment<TItem> DisplayTemplate { get; set; }
   [Parameter] public RenderFragment<TItem> EditTemplate { get; set; }
   [Parameter] public RenderFragment<TItem> SeparatorTemplate { get; set; }

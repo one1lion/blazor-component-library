@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace One1Lion.BlazorComponents.SharedLib {
   public class Utils {

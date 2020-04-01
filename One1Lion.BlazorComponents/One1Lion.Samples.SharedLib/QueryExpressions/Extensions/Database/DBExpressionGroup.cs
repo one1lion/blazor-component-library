@@ -49,7 +49,11 @@ namespace One1Lion.Samples.SharedLib.Search.DBExpressions {
       return FormattedDisplay();
     }
 
-    public static IQueryElement NewItem() {
+    public IQueryElement NewItem() {
+      return new DBExpressionItem();
+    }
+
+    public static IQueryElement NewItem<TParent>(TParent parent) where TParent : IQueryElement {
       return new DBExpressionItem();
     }
 

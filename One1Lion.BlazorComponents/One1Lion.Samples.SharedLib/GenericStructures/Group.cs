@@ -15,8 +15,12 @@ namespace One1Lion.Samples.SharedLib.Generic {
       toAdd.Parent = this;
     }
 
-    public static IElement NewChildItem() {
+    public IElement NewChildItem() {
       return new Item();
+    }
+
+    public static IElement NewChildItem<TParent>(TParent parent) where TParent : IElement {
+      return IGroup.NewChildItem(parent as IGroup);
     }
 
     public static IElement NewGroup() {

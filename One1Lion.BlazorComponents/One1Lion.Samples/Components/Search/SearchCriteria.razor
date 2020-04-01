@@ -10,13 +10,14 @@
   @Item.FormattedDisplay()
 } else {
   var dbeItem = Item as IDBExpressionItem;
+  
   <EditSearchCriteria QueryableFields="QueryableFields" Item="dbeItem" />
 }
 
 @code {
   [Parameter] public IQueryExpressionItem Item { get; set; } = new DBExpressionItem();
   [Parameter] public bool EditMode { get; set; }
-  [Parameter] public List<DbFieldViewModel> QueryableFields { get; set; }
+  [Parameter] public List<DbFieldViewModel> QueryableFields { get; set; } = new List<DbFieldViewModel>();
   bool IsFileRepoQuery => Item.GetType().GetInterface(nameof(IFileRepositoryExpressionItem)) is { };
 
   protected override void OnParametersSet() {

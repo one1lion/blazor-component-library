@@ -30,7 +30,7 @@
        @ondragend:stopPropagation="true"
        @ondrop="(() => DnDState.HandleDropPayload())"
        @ondrop:stopPropagation="true"
-       @ondblclick="(() => editMode = true)"
+       @ondblclick="BeginEdit"
        @ondragenter="((e) => { DnDState.SetTarget(Parent, IndexInParent, this); StateHasChanged(); })"
        @ondragenter:stopPropagation="true">
 
@@ -79,7 +79,8 @@
   }
 
   void BeginEdit(MouseEventArgs e) {
-    editItem = DnDState.NewItemMethod.Invoke();
+    var parentObj = Parent is null || Parent == DnDState.BaseContainer ? default : Parent.Parent.Children[Parent.IndexInParent];
+    editItem = DnDState.NewItemMethod.Invoke(parentObj);
     Utils.CopyValues<TItem>(Item, ref editItem);
     editMode = true;
   }

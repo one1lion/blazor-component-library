@@ -48,8 +48,12 @@ namespace One1Lion.Samples.SharedLib.Search.FileRepositoryExpressions {
       return FormattedDisplay();
     }
 
-    public static IQueryElement NewItem() {
+    public IQueryElement NewItem() {
       return new FileRepositoryExpressionItem();
+    }
+
+    public static IQueryElement NewItem<TParent>(TParent parent) where TParent : IQueryElement {
+      return IQueryExpressionGroup.NewItem(parent as IQueryExpressionGroup);
     }
 
     public static IQueryElement NewGroup() {

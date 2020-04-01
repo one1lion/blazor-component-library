@@ -15,7 +15,7 @@ namespace One1Lion.BlazorComponents.DragAndDrop {
     public DnDPayload<TItem> Target { get; set; }
     public DnDPayload<TItem> NewItemPayload { get; set; }
     public Func<TItem> NewGroupMethod { get; set; }
-    public Func<TItem> NewItemMethod { get; set; }
+    public Func<TItem, TItem> NewItemMethod { get; set; }
     public TItem NewItem { get; set; }
 
     public string ChildrenPropertyName { get; set; }
@@ -71,7 +71,9 @@ namespace One1Lion.BlazorComponents.DragAndDrop {
         IndexInParent = indexInParent,
         WrappingElement = wrappingElement
       };
-      NewItem = NewItemMethod is { } ? NewItemMethod.Invoke() : default;
+
+      var parentObj = parent is null || parent == BaseContainer ? default : parent.Parent.Children[parent.IndexInParent];
+      NewItem = NewItemMethod is { } ? NewItemMethod.Invoke(parentObj) : default;
       NotifyStateChanged();
     }
 

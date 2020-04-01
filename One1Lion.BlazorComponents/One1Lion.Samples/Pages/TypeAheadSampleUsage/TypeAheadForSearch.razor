@@ -1,0 +1,219 @@
+﻿@using One1Lion.BlazorComponents.TypeAhead
+@using One1Lion.Samples.SharedLib.DbInfo
+@using One1Lion.Samples.SharedLib.Search.DBExpressions
+@using One1Lion.Samples.SharedLib.Search.QueryExpressions
+@inject HttpClient httpClient
+<h3>Type Ahead used in a Search Criteria Builder</h3>
+
+<div class="draganddrop" ondragover="event.preventDefault();">
+  <div class="draganddrop-header">
+    <div class="draganddrop-title">
+      <h3>Building up Drag and Drop</h3>
+    </div>
+  </div>
+  <div class="draganddrop-body main-body">
+    <div class="draganddrop-target draganddrop-dropbefore "></div>
+    <div class="draganddrop-container  " draggable="true">
+      <div class="draganddrop-body">
+        <div class="draganddrop-target draganddrop-dropbefore "></div>
+        <div class="draganddrop-item " draggable="true">
+          <div class="queryparameter edit">
+            <TypeAhead Items="DbFieldTypeAheadItems"
+                       SelectionOnly="true"
+                       OnSelectionMade="HandleFieldSelectionMade"
+                       SelectedText="@item.QueryField"
+                       SelectedValue="@item.QueryField"
+                       placeholder="Type or select a field" />
+            @if (!string.IsNullOrWhiteSpace(item.QueryField)) {
+              <TypeAhead Items="ExprTypeTypeAheadItems"
+                         SelectionOnly="true"
+                         OnSelectionMade="HandleExpressionSelectionMade"
+                         SelectedText="@ExpressionTypeDisplay.GetDisplayText(item.ExpressionType)"
+                         placeholder="Type or select an expression" />
+              if (item.ExpressionType != ExpressionType.NotSet) {
+                var qf = queryableFields.First(qf => qf.QueryableFieldInfo.DisplayName == item.QueryField);
+                var fieldType = Type.GetType(qf.TypeName);
+                if (fieldType is null) {
+                  fieldType = typeof(object);
+                } else {
+                  fieldType = Nullable.GetUnderlyingType(fieldType) ?? fieldType;
+                }
+                TypeCode fieldTypeCode;
+                try {
+                  fieldTypeCode = Type.GetTypeCode(fieldType);
+                } catch {
+                  fieldTypeCode = TypeCode.Object;
+                }
+                if (qf.QueryableFieldInfo.IsLookup) {
+                  // TODO: Handle is lookup
+                  <span class="oi oi-list">Lookup Values Placeholder</span>
+                } else {
+                  switch (fieldTypeCode) {
+                    case TypeCode.String:
+                      <input type="text" class="form-control" @bind-Value="inputString" @bind-Value:event="oninput" placeholder="Values" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e))" />
+                      break;
+                    case TypeCode.DateTime:
+                      <input type="date" class="form-control" @bind-Value="inputDate" @bind-Value:event="oninput" placeholder="MM/dd/yyyy" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e))" />
+                      break;
+                    case TypeCode.Byte:
+                    case TypeCode.Decimal:
+                    case TypeCode.Double:
+                    case TypeCode.Int16:
+                    case TypeCode.Int32:
+                    case TypeCode.Int64:
+                    case TypeCode.SByte:
+                    case TypeCode.Single:
+                    case TypeCode.UInt16:
+                    case TypeCode.UInt32:
+                    case TypeCode.UInt64:
+                      <input type="number" class="form-control" @bind-Value="inputNumber" @bind-Value:event="oninput" placeholder="Values" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e))" />
+                      break;
+                    case TypeCode.Boolean:
+                      <input type="checkbox" class="form-control" @bind-Value="inputBool" @bind-Value:event="oninput" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e))" />
+                      break;
+                  }
+                  if (item.ExpressionType == ExpressionType.Between) {
+                    <span> and </span>
+                    switch (fieldTypeCode) {
+                      case TypeCode.String:
+                        <input type="text" class="form-control" @bind-Value="inputStringTo" @bind-Value:event="oninput" placeholder="Values" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e, false))" />
+                        break;
+                      case TypeCode.DateTime:
+                        <input type="date" class="form-control" @bind-Value="inputDateTo" @bind-Value:event="oninput" placeholder="MM/dd/yyyy" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e, false))" />
+                        break;
+                      case TypeCode.Byte:
+                      case TypeCode.Decimal:
+                      case TypeCode.Double:
+                      case TypeCode.Int16:
+                      case TypeCode.Int32:
+                      case TypeCode.Int64:
+                      case TypeCode.SByte:
+                      case TypeCode.Single:
+                      case TypeCode.UInt16:
+                      case TypeCode.UInt32:
+                      case TypeCode.UInt64:
+                        <input type="number" class="form-control" @bind-Value="inputNumberTo" @bind-Value:event="oninput" placeholder="Values" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e, false))" />
+                        break;
+                    }
+                  }
+                }
+              }
+            }
+          </div>
+          <div class="dragondrop-controlbox">
+            <button type="button" class="oi oi-check text-success" title="Save"></button>
+            <button type="button" class="oi oi-trash text-danger" title="Cancel"></button>
+          </div>
+        </div>
+        <div class="draganddrop-target draganddrop-dropafter "></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@code {
+  IDBExpressionItem item { get; set; } = new DBExpressionItem();
+  List<DbFieldViewModel> queryableFields { get; set; }
+
+  bool loading = true;
+
+  bool inputBool;
+  string inputString;
+  DateTime inputDate;
+  double inputNumber;
+  string inputStringTo;
+  DateTime inputDateTo;
+  double inputNumberTo;
+
+  List<ExpressionType> ExpressionTypes = new List<ExpressionType>();
+  List<TypeAheadItem> DbFieldTypeAheadItems = new List<TypeAheadItem>();
+  List<TypeAheadItem> ExprTypeTypeAheadItems = new List<TypeAheadItem>();
+
+  protected async override Task OnInitializedAsync() {
+    loading = true;
+    StateHasChanged();
+
+    queryableFields = await One1Lion.Samples.Data.QueryDataSampleGenerator.GenerateQueryableFields(httpClient);
+    if (queryableFields is { }) {
+      // Since we have asked specifically for fields that are queryable, the QueryableFieldInfo object will not be null
+      DbFieldTypeAheadItems = queryableFields.GroupBy(qf => new {
+        qf.QueryableFieldInfo.DisplayName,
+        qf.DbField.Id
+      }).Select(qfg => new TypeAheadItem() {
+        MenuText = qfg.Key.DisplayName,
+        DisplayText = qfg.Key.DisplayName,
+        Value = qfg.Key.Id.ToString(),
+        Item = qfg.ToList()
+      }).Distinct().OrderBy(ta => ta.DisplayText).ToList();
+    }
+
+    if (!string.IsNullOrWhiteSpace(item?.QueryField)) {
+      // Pre-populate the expression types for this field
+      ExpressionTypes = ExpressionTypeDisplay.GetExpressionTypes(queryableFields.FirstOrDefault(qf => qf.QueryableFieldInfo.DisplayName == item.QueryField)?.TypeName).Where(et => et != ExpressionType.NotSet).ToList();
+
+      // TODO: also perform any operations that have to do with the selected expression type
+      if (item.Values != null && item.Values.Count() > 0) {
+        inputString = item.Values[0].ToString();
+        bool.TryParse(inputString, out inputBool);
+        DateTime.TryParse(inputString, out inputDate);
+        double.TryParse(inputString, out inputNumber);
+
+        if (item.Values.Count() > 1) {
+          inputStringTo = item.Values[1].ToString();
+          DateTime.TryParse(inputStringTo, out inputDateTo);
+          double.TryParse(inputStringTo, out inputNumberTo);
+        }
+      }
+    }
+
+    loading = false;
+  }
+
+  void HandleEditValueChanged(ChangeEventArgs e, bool firstVal = true) {
+    Console.WriteLine($"Value changed.  Item.Values is null: {item.Values is null}");
+    if (item.Values is null) {
+      item.Values = new List<object>() { null };
+      Console.WriteLine($"After newing Item.Values, its count is now : {item.Values.Count}");
+    }
+
+    if (!firstVal) {
+      if (item.Values.Count == 1) {
+        item.Values.Add(e.Value);
+      } else {
+        item.Values[1] = e.Value;
+      }
+    } else {
+      item.Values[0] = e.Value;
+    }
+
+    Console.WriteLine($"Item.Value: {string.Join(", ", item.Values)}");
+  }
+
+  void HandleFieldSelectionMade(TypeAheadItem selectedItem) {
+    var qf = ((List<DbFieldViewModel>)selectedItem.Item);
+    item.QueryField = qf.First().DbField.FieldName;
+
+    Console.WriteLine($"Item.QueryField: {item.QueryField}");
+    if (!string.IsNullOrWhiteSpace(item.QueryField)) {
+      ExpressionTypes = ExpressionTypeDisplay.GetExpressionTypes(qf.First().TypeName).Where(et => et != ExpressionType.NotSet).ToList();
+    } else {
+      ExpressionTypes = new List<ExpressionType>();
+    }
+
+    if (!ExpressionTypes.Contains(item.ExpressionType)) { item.ExpressionType = ExpressionType.NotSet; }
+
+    if (ExpressionTypes is { }) {
+      ExprTypeTypeAheadItems = ExpressionTypes.Select(et => new TypeAheadItem() {
+        MenuText = ExpressionTypeDisplay.GetDisplayText(et),
+        DisplayText = ExpressionTypeDisplay.GetDisplayText(et),
+        Value = et.ToString(),
+        Item = et
+      }).ToList();
+    }
+  }
+
+  void HandleExpressionSelectionMade(TypeAheadItem selectedItem) {
+    item.ExpressionType = (ExpressionType)selectedItem.Item;
+    Console.WriteLine($"Item.ExpressionType: {item.ExpressionType}");
+  }
+}

@@ -1,6 +1,7 @@
 ﻿@implements IDisposable
 @using System.Net.Http
 @using System.Timers
+@using System.Text.RegularExpressions;
 
 @*
   Adapted from: https://docs.microsoft.com/en-us/archive/msdn-magazine/2018/december/cutting-edge-blazor-custom-components
@@ -8,57 +9,59 @@
 *@
 
 <div class="typeahead-container">
-  <input type="text"
-         id="typeaheadinput-@id"
-         placeholder="Type a value..."
-         class="form-control"
-         @attributes="AdditionalAttributes"
-         @bind="TypeAheadInput"
-         @bind:event="oninput"
-         @ref="TypeAheadInputBox" />
+  <div class="input-group">
+    <input type="text"
+           id="typeaheadinput-@id"
+           placeholder="Type a value..."
+           class="form-control"
+           @attributes="AdditionalAttributes"
+           @bind="TypeAheadInput"
+           @bind:event="oninput"
+           @ref="TypeAheadInputBox" />
+    <div class="input-group-append@(!IsExpanded ? "" : " show")" @onkeypress="HandleKeyPress">
+      <div class="suggest-list">
+        @if (startsWithItems is null && containsItems is null && allOtherItems is null) {
+          <h6>Loading...</h6>
+        } else {
+          var totLikelyMatches = (startsWithItems?.Count() ?? 0) + (containsItems?.Count() ?? 0);
+          if (startsWithItems is { } && containsItems is { }) {
+            <h6 class="dropdown-header">
+              @totLikelyMatches likely match@(totLikelyMatches != 1 ? "es" : ""))
+            </h6>
+          }
+          <div style="max-height:420px;overflow-y:auto;">
+            @if (startsWithItems is { } && startsWithItems.Count() > 0) {
+              foreach (var item in startsWithItems) {
+                <a class="dropdown-item" @onclick="@(async () => await TrySelect(item))" style="cursor:pointer;color: gray;">
+                  <span class="oi oi-star"></span> @((MarkupString)Boldify(item.MenuText))
+                </a>
+              }
+            }
+            @if (containsItems is { } && containsItems.Count() > 0) {
+              if (startsWithItems is { } && startsWithItems.Count() > 0) {<hr /> }
+              foreach (var item in containsItems) {
+                <a class="dropdown-item" @onclick="@(async () => await TrySelect(item))" style="cursor:pointer;color: gray;">
+                  @((MarkupString)Boldify(item.MenuText))
+                </a>
+              }
+            }
+            @if (allOtherItems != null && allOtherItems.Count() > 0) {
+              if ((startsWithItems is { } && startsWithItems.Count() > 0) || (containsItems is { } && containsItems.Count() > 0)) {<hr /> }
+              foreach (var item in allOtherItems) {
+                <a class="dropdown-item" @onclick="@(async () => await TrySelect(item))" style="cursor:pointer; color:gray;">
+                  @((MarkupString)item.MenuText)
+                </a>
+              }
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
   <button type="button"
           class="btn btn-sm btn-outline-secondary dropdown-toggle d-inline-block"
           @onclick="ToggleDropDown"
           @onkeypress="HandleKeyPress"></button>
-  <div class="input-group-append" @onkeypress="HandleKeyPress">
-    <div class="d-inline-block" style="width: 100%;@(!IsExpanded ? "display:none !important;" : "")border:solid 1px gray">
-      @if (startsWithItems is null && containsItems is null && allOtherItems is null) {
-        <h6>Loading...</h6>
-      } else {
-        var totLikelyMatches = (startsWithItems?.Count() ?? 0) + (containsItems?.Count() ?? 0);
-        if (startsWithItems is { } && containsItems is { }) {
-          <h6 class="dropdown-header">
-            @totLikelyMatches likely match@(totLikelyMatches != 1 ? "es" : ""))
-          </h6>
-        }
-        <div style="max-height:420px;overflow-y:auto;">
-          @if (startsWithItems is { } && startsWithItems.Count() > 0) {
-            foreach (var item in startsWithItems) {
-              <a class="dropdown-item" @onclick="@(async () => await TrySelect(item))" style="cursor:pointer;">
-                <span class="oi oi-star"></span> @((MarkupString)item.MenuText)
-              </a>
-            }
-          }
-          @if (containsItems is { } && containsItems.Count() > 0) {
-            if (startsWithItems is { } && startsWithItems.Count() > 0) {<hr /> }
-            foreach (var item in containsItems) {
-              <a class="dropdown-item" @onclick="@(async () => await TrySelect(item))" style="cursor:pointer;">
-                @((MarkupString)item.MenuText)
-              </a>
-            }
-          }
-          @if (allOtherItems != null && allOtherItems.Count() > 0) {
-            if ((startsWithItems is { } && startsWithItems.Count() > 0) || (containsItems is { } && containsItems.Count() > 0)) {<hr /> }
-            foreach (var item in allOtherItems) {
-              <a class="dropdown-item" @onclick="@(async () => await TrySelect(item))" style="cursor:pointer; color:gray;">
-                @((MarkupString)item.MenuText)
-              </a>
-            }
-          }
-        </div>
-      }
-    </div>
-  </div>
 </div>
 
 @code {
@@ -156,6 +159,13 @@
       containsItems = Items.Where(i => !((CaseSensitive && i.DisplayText.Contains(TypeAheadInput)) || (!CaseSensitive && i.DisplayText.ToLower().Contains(TypeAheadInput.ToLower()))) && !i.DisplayText.StartsWith(TypeAheadInput, strComp)).ToList();
     }
     IsExpanded = !IsExpanded;
+  }
+
+  string Boldify(string menuText) {
+    if (!string.IsNullOrWhiteSpace(TypeAheadInput)) {
+      return Regex.Replace(menuText, @$"(?<myGroup>{TypeAheadInput})", "<strong style=\"color:black;\">${myGroup}</strong>", strComp == StringComparison.InvariantCultureIgnoreCase ? RegexOptions.IgnoreCase : RegexOptions.None);
+    }
+    return menuText;
   }
 
   async Task TrySelect(TypeAheadItem item) {

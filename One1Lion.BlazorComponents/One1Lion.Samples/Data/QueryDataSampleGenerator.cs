@@ -1,8 +1,12 @@
-﻿using One1Lion.Samples.SharedLib.Search.DBExpressions;
+﻿using Microsoft.AspNetCore.Components;
+using One1Lion.Samples.SharedLib.DbInfo;
+using One1Lion.Samples.SharedLib.Search.DBExpressions;
 using One1Lion.Samples.SharedLib.Search.FileRepositoryExpressions;
 using One1Lion.Samples.SharedLib.Search.QueryExpressions;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace One1Lion.Samples.Data {
   public class QueryDataSampleGenerator {
@@ -90,6 +94,10 @@ namespace One1Lion.Samples.Data {
       group2_1.AddChild(dtSearchGroup);
 
       return baseGroup;
+    }
+
+    public async static Task<List<DbFieldViewModel>> GenerateQueryableFields(HttpClient httpClient) {
+      return await httpClient.GetJsonAsync<List<DbFieldViewModel>>("SampleData/QueryableFields.json");
     }
   }
 }

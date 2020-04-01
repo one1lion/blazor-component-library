@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.BlazorComponents", "One1Lion.BlazorComponents\One1Lion.BlazorComponents.csproj", "{A12C7AAA-AE87-4315-864C-2252AABA6C58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.BlazorComponents", "One1Lion.BlazorComponents\One1Lion.BlazorComponents.csproj", "{A12C7AAA-AE87-4315-864C-2252AABA6C58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.Samples", "One1Lion.Samples\One1Lion.Samples.csproj", "{2578075D-2F42-4848-9411-D29BF5CEB9F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Samples", "One1Lion.Samples\One1Lion.Samples.csproj", "{2578075D-2F42-4848-9411-D29BF5CEB9F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.Samples.SharedLib", "One1Lion.Samples.SharedLib\One1Lion.Samples.SharedLib.csproj", "{E1412B55-60FA-4AAE-8A8F-321F9DFF3D9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Samples.SharedLib", "One1Lion.Samples.SharedLib\One1Lion.Samples.SharedLib.csproj", "{E1412B55-60FA-4AAE-8A8F-321F9DFF3D9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -23,8 +23,10 @@ namespace One1Lion.Samples.SharedLib.Search.QueryExpressions {
 
     void AddChild(IQueryElement toAdd, int atIndex = -1);
 
-    public static IQueryElement NewItem() {
-      throw new NotImplementedException("This method must be defined in the implementing class.");
+    IQueryElement NewItem();
+
+    public static IQueryElement NewItem<TParent>(TParent parent) where TParent : IQueryElement, IQueryExpressionGroup {
+      return parent.NewItem();
     }
     public static IQueryElement NewGroup() {
       throw new NotImplementedException("This method must be defined in the implementing class.");

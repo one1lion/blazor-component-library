@@ -1,8 +1,38 @@
 ﻿.typeahead-container {
-  display: inline-block;
+  display: flex;
+
+  .input-group {
+    position: relative;
+    height: calc(1.5em + .75rem + 2px);
+    overflow-y: visible;
+    width: 100%;
+
+    input {
+      display: block !important;
+      z-index: 1;
+    }
+
+    .input-group-append {
+      position: absolute;
+      top: calc(1.5em + .75rem + 4px);
+      display: none;
+      padding-left: 4px;
+      z-index: 2;
+
+      .suggest-list {
+        background-color: #fff;
+        border: solid 1px gray;
+      }
+
+      &.show {
+        display: block !important;
+      }
+    }
+  }
 
   input {
     margin: 0;
+    width: 100%;
   }
 
   button {

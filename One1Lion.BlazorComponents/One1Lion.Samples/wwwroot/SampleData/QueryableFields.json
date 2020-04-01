@@ -1,0 +1,4149 @@
+[
+  {
+    "collectionTableFieldId": 1,
+    "dbField": {
+      "id": 30,
+      "fieldName": "DBID",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 1,
+      "displayName": "DBID",
+      "collectionTableFieldId": 1,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 2,
+    "dbField": {
+      "id": 31,
+      "fieldName": "DBNumbAtt",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 2,
+      "displayName": "Tier #",
+      "collectionTableFieldId": 2,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 3,
+    "dbField": {
+      "id": 32,
+      "fieldName": "DBNumber",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 3,
+      "displayName": "DB #",
+      "collectionTableFieldId": 3,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 4,
+    "dbField": {
+      "id": 33,
+      "fieldName": "DbType",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 4,
+      "displayName": "DB",
+      "collectionTableFieldId": 4,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 5,
+    "dbField": {
+      "id": 40,
+      "fieldName": "DocID",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 5,
+      "displayName": "DocID",
+      "collectionTableFieldId": 5,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 6,
+    "dbField": {
+      "id": 90,
+      "fieldName": "Original",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 6,
+      "displayName": "Original",
+      "collectionTableFieldId": 6,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 7,
+    "dbField": {
+      "id": 95,
+      "fieldName": "ParentDocDate",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 7,
+      "displayName": "Parent Doc Date",
+      "collectionTableFieldId": 7,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 8,
+    "dbField": {
+      "id": 108,
+      "fieldName": "RecCount",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 8,
+      "displayName": "Tier Count",
+      "collectionTableFieldId": 8,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 9,
+    "dbField": {
+      "id": 1,
+      "fieldName": "Abstract",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 9,
+      "displayName": "Abstract",
+      "collectionTableFieldId": 9,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 10,
+    "dbField": {
+      "id": 4,
+      "fieldName": "ARecordCode",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 10,
+      "displayName": "AR Code",
+      "collectionTableFieldId": 10,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 11,
+    "dbField": {
+      "id": 6,
+      "fieldName": "AttorneyComments",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 11,
+      "displayName": "Attorney Comments",
+      "collectionTableFieldId": 11,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 12,
+    "dbField": {
+      "id": 14,
+      "fieldName": "BoxNumber",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 12,
+      "displayName": "Box #",
+      "collectionTableFieldId": 12,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 18,
+    "dbField": {
+      "id": 63,
+      "fieldName": "FileNumber",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 18,
+      "displayName": "File #",
+      "collectionTableFieldId": 18,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 19,
+    "dbField": {
+      "id": 68,
+      "fieldName": "InqReel",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 19,
+      "displayName": "Reel Name",
+      "collectionTableFieldId": 19,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 20,
+    "dbField": {
+      "id": 69,
+      "fieldName": "InqReelBegFrame",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 20,
+      "displayName": "Beginning Frame #",
+      "collectionTableFieldId": 20,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 21,
+    "dbField": {
+      "id": 70,
+      "fieldName": "InqReelEndFrame",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 21,
+      "displayName": "End Frame #",
+      "collectionTableFieldId": 21,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 22,
+    "dbField": {
+      "id": 71,
+      "fieldName": "InqReelNumb",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 22,
+      "displayName": "Reel #",
+      "collectionTableFieldId": 22,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 23,
+    "dbField": {
+      "id": 77,
+      "fieldName": "Keywords",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 23,
+      "displayName": "Keywords",
+      "collectionTableFieldId": 23,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 24,
+    "dbField": {
+      "id": 86,
+      "fieldName": "Notes",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 24,
+      "displayName": "Notes",
+      "collectionTableFieldId": 24,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 25,
+    "dbField": {
+      "id": 87,
+      "fieldName": "NumbOfPages",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 25,
+      "displayName": "Extent",
+      "collectionTableFieldId": 25,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 26,
+    "dbField": {
+      "id": 94,
+      "fieldName": "ParalegalComments",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 26,
+      "displayName": "Paralegal Comments",
+      "collectionTableFieldId": 26,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 28,
+    "dbField": {
+      "id": 104,
+      "fieldName": "Publisher",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 28,
+      "displayName": "Publisher",
+      "collectionTableFieldId": 28,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 30,
+    "dbField": {
+      "id": 116,
+      "fieldName": "ReportNumb",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 30,
+      "displayName": "Report #",
+      "collectionTableFieldId": 30,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 31,
+    "dbField": {
+      "id": 136,
+      "fieldName": "StockNumb",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 31,
+      "displayName": "Stock #",
+      "collectionTableFieldId": 31,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 32,
+    "dbField": {
+      "id": 8,
+      "fieldName": "Batch",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 32,
+      "displayName": "Batch",
+      "collectionTableFieldId": 32,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 33,
+    "dbField": {
+      "id": 11,
+      "fieldName": "BoxID",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 33,
+      "displayName": "Box #",
+      "collectionTableFieldId": 33,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 34,
+    "dbField": {
+      "id": 15,
+      "fieldName": "Category",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 34,
+      "displayName": "Category",
+      "collectionTableFieldId": 34,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 35,
+    "dbField": {
+      "id": 20,
+      "fieldName": "Comments",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 35,
+      "displayName": "Comments",
+      "collectionTableFieldId": 35,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 36,
+    "dbField": {
+      "id": 25,
+      "fieldName": "DateEntered",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 36,
+      "displayName": "Date Entered",
+      "collectionTableFieldId": 36,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 37,
+    "dbField": {
+      "id": 26,
+      "fieldName": "DatePlaced",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 37,
+      "displayName": "Date Placed",
+      "collectionTableFieldId": 37,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 38,
+    "dbField": {
+      "id": 27,
+      "fieldName": "DateReceived",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 38,
+      "displayName": "Date Received",
+      "collectionTableFieldId": 38,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 39,
+    "dbField": {
+      "id": 28,
+      "fieldName": "DateRemoved",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 39,
+      "displayName": "Date Removed",
+      "collectionTableFieldId": 39,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 40,
+    "dbField": {
+      "id": 29,
+      "fieldName": "DB",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 40,
+      "displayName": "DB",
+      "collectionTableFieldId": 40,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 41,
+    "dbField": {
+      "id": 39,
+      "fieldName": "DocDate",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 41,
+      "displayName": "Date",
+      "collectionTableFieldId": 41,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 43,
+    "dbField": {
+      "id": 41,
+      "fieldName": "DocLoc",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 43,
+      "displayName": "Folder Name",
+      "collectionTableFieldId": 43,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 44,
+    "dbField": {
+      "id": 43,
+      "fieldName": "DocNumber",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 44,
+      "displayName": "Doc #",
+      "collectionTableFieldId": 44,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 45,
+    "dbField": {
+      "id": 44,
+      "fieldName": "DocStatus",
+      "defaultFieldTypeId": 8,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 8,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Byte",
+        "cSharpTypeCode": 6,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Byte",
+    "typeCode": 6,
+    "queryableFieldInfo": {
+      "id": 45,
+      "displayName": "Classification",
+      "collectionTableFieldId": 45,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 46,
+    "dbField": {
+      "id": 45,
+      "fieldName": "DocTitle",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 46,
+      "displayName": "Title",
+      "collectionTableFieldId": 46,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 47,
+    "dbField": {
+      "id": 47,
+      "fieldName": "DocType",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Byte",
+    "typeCode": 6,
+    "queryableFieldInfo": {
+      "id": 47,
+      "displayName": "Doc Type",
+      "collectionTableFieldId": 47,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 48,
+    "dbField": {
+      "id": 58,
+      "fieldName": "EnteredBy",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 48,
+      "displayName": "Entered By",
+      "collectionTableFieldId": 48,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 49,
+    "dbField": {
+      "id": 66,
+      "fieldName": "FolderSet",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 49,
+      "displayName": "Folder Set #",
+      "collectionTableFieldId": 49,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 50,
+    "dbField": {
+      "id": 73,
+      "fieldName": "Intranet",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 50,
+      "displayName": "Intranet",
+      "collectionTableFieldId": 50,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 51,
+    "dbField": {
+      "id": 82,
+      "fieldName": "MarkDeletion",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 51,
+      "displayName": "Mark Deletion",
+      "collectionTableFieldId": 51,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 52,
+    "dbField": {
+      "id": 92,
+      "fieldName": "PageCount",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 52,
+      "displayName": "Page Count",
+      "collectionTableFieldId": 52,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 53,
+    "dbField": {
+      "id": 109,
+      "fieldName": "ReceivedBy",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 53,
+      "displayName": "Received By",
+      "collectionTableFieldId": 53,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 54,
+    "dbField": {
+      "id": 115,
+      "fieldName": "ReplaceDocNum",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 54,
+      "displayName": "Replace Doc #",
+      "collectionTableFieldId": 54,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 55,
+    "dbField": {
+      "id": 121,
+      "fieldName": "RTICNumb",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 55,
+      "displayName": "RTIC #",
+      "collectionTableFieldId": 55,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 56,
+    "dbField": {
+      "id": 142,
+      "fieldName": "UsageCount",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 56,
+      "displayName": "Usage Count",
+      "collectionTableFieldId": 56,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 57,
+    "dbField": {
+      "id": 2,
+      "fieldName": "Active",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 57,
+      "displayName": "Active",
+      "collectionTableFieldId": 57,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 58,
+    "dbField": {
+      "id": 7,
+      "fieldName": "AvailCode",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 58,
+      "displayName": "Available Code",
+      "collectionTableFieldId": 58,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 64,
+    "dbField": {
+      "id": 50,
+      "fieldName": "DrawClass",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 64,
+      "displayName": "Drawing Class",
+      "collectionTableFieldId": 64,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 65,
+    "dbField": {
+      "id": 52,
+      "fieldName": "Drawer",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 65,
+      "displayName": "Drawer",
+      "collectionTableFieldId": 65,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 66,
+    "dbField": {
+      "id": 53,
+      "fieldName": "DrawSize",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 66,
+      "displayName": "Drawing Size",
+      "collectionTableFieldId": 66,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 67,
+    "dbField": {
+      "id": 93,
+      "fieldName": "PaperType",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 67,
+      "displayName": "Paper Type",
+      "collectionTableFieldId": 67,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 70,
+    "dbField": {
+      "id": 111,
+      "fieldName": "Redline",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 70,
+      "displayName": "Redline",
+      "collectionTableFieldId": 70,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 71,
+    "dbField": {
+      "id": 119,
+      "fieldName": "RevisionDate",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 71,
+      "displayName": "Revision Date",
+      "collectionTableFieldId": 71,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 72,
+    "dbField": {
+      "id": 120,
+      "fieldName": "RevisionNumber",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 72,
+      "displayName": "Revision #",
+      "collectionTableFieldId": 72,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 73,
+    "dbField": {
+      "id": 127,
+      "fieldName": "SheetNumber",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 73,
+      "displayName": "Sheet #",
+      "collectionTableFieldId": 73,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 80,
+    "dbField": {
+      "id": 48,
+      "fieldName": "DOJNotified",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 80,
+      "displayName": "DOJ Notified",
+      "collectionTableFieldId": 80,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 81,
+    "dbField": {
+      "id": 49,
+      "fieldName": "Draft",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 81,
+      "displayName": "Draft",
+      "collectionTableFieldId": 81,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 82,
+    "dbField": {
+      "id": 65,
+      "fieldName": "Final",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 82,
+      "displayName": "Final",
+      "collectionTableFieldId": 82,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 83,
+    "dbField": {
+      "id": 75,
+      "fieldName": "JARDFDate",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 83,
+      "displayName": "JARDF Date",
+      "collectionTableFieldId": 83,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 84,
+    "dbField": {
+      "id": 76,
+      "fieldName": "JARDFReason",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 84,
+      "displayName": "JARDF Reason",
+      "collectionTableFieldId": 84,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 85,
+    "dbField": {
+      "id": 79,
+      "fieldName": "LibNotified",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 85,
+      "displayName": "Library Notified",
+      "collectionTableFieldId": 85,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 86,
+    "dbField": {
+      "id": 85,
+      "fieldName": "NoSuspenseDate",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 86,
+      "displayName": "No Suspense Date",
+      "collectionTableFieldId": 86,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 87,
+    "dbField": {
+      "id": 88,
+      "fieldName": "OldDTSNumb",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 87,
+      "displayName": "Old DTS #",
+      "collectionTableFieldId": 87,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 89,
+    "dbField": {
+      "id": 91,
+      "fieldName": "OtherReason",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 89,
+      "displayName": "Other Reason",
+      "collectionTableFieldId": 89,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 91,
+    "dbField": {
+      "id": 103,
+      "fieldName": "PublicNotice",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 91,
+      "displayName": "Public Notice",
+      "collectionTableFieldId": 91,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 92,
+    "dbField": {
+      "id": 105,
+      "fieldName": "PubNotDocNumb",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 92,
+      "displayName": "Public Notice Doc #",
+      "collectionTableFieldId": 92,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 93,
+    "dbField": {
+      "id": 106,
+      "fieldName": "PubNoticeDate",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 93,
+      "displayName": "Public Notice Date",
+      "collectionTableFieldId": 93,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 95,
+    "dbField": {
+      "id": 125,
+      "fieldName": "SharedTier",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 95,
+      "displayName": "Shared Tier",
+      "collectionTableFieldId": 95,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 96,
+    "dbField": {
+      "id": 129,
+      "fieldName": "SiteExcluded",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 96,
+      "displayName": "Site Excluded",
+      "collectionTableFieldId": 96,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 97,
+    "dbField": {
+      "id": 130,
+      "fieldName": "SiteIDBck",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 97,
+      "displayName": "Site ID",
+      "collectionTableFieldId": 97,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 98,
+    "dbField": {
+      "id": 131,
+      "fieldName": "SiteJARDF",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 98,
+      "displayName": "At JARDF",
+      "collectionTableFieldId": 98,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 99,
+    "dbField": {
+      "id": 138,
+      "fieldName": "SuspenseDate",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 99,
+      "displayName": "Suspense Date",
+      "collectionTableFieldId": 99,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 100,
+    "dbField": {
+      "id": 140,
+      "fieldName": "TransferCode",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 100,
+      "displayName": "Transfer Code",
+      "collectionTableFieldId": 100,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 101,
+    "dbField": {
+      "id": 9,
+      "fieldName": "BegFrameNum",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 101,
+      "displayName": "Beginning Frame #",
+      "collectionTableFieldId": 101,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 104,
+    "dbField": {
+      "id": 34,
+      "fieldName": "Depexh",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 104,
+      "displayName": "Deposition Exhibit",
+      "collectionTableFieldId": 104,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 109,
+    "dbField": {
+      "id": 57,
+      "fieldName": "EndFrameNum",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 109,
+      "displayName": "End Frame #",
+      "collectionTableFieldId": 109,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 110,
+    "dbField": {
+      "id": 112,
+      "fieldName": "ReelName",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 110,
+      "displayName": "Reel Name",
+      "collectionTableFieldId": 110,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 111,
+    "dbField": {
+      "id": 113,
+      "fieldName": "ReelNumber",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 111,
+      "displayName": "Reel #",
+      "collectionTableFieldId": 111,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 116,
+    "dbField": {
+      "id": 36,
+      "fieldName": "Discussion",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 116,
+      "displayName": "Discussion",
+      "collectionTableFieldId": 116,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 117,
+    "dbField": {
+      "id": 37,
+      "fieldName": "DistributionType",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 117,
+      "displayName": "Distribution Type",
+      "collectionTableFieldId": 117,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 119,
+    "dbField": {
+      "id": 67,
+      "fieldName": "FWDocNumber",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 119,
+      "displayName": "OMC #",
+      "collectionTableFieldId": 119,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 120,
+    "dbField": {
+      "id": 74,
+      "fieldName": "IssuedDate",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 120,
+      "displayName": "Issue Date",
+      "collectionTableFieldId": 120,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 121,
+    "dbField": {
+      "id": 81,
+      "fieldName": "LibRevCopy",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 121,
+      "displayName": "Library Review Copy",
+      "collectionTableFieldId": 121,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 124,
+    "dbField": {
+      "id": 107,
+      "fieldName": "RecCopy",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 124,
+      "displayName": "Record Copy",
+      "collectionTableFieldId": 124,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 128,
+    "dbField": {
+      "id": 139,
+      "fieldName": "TechReview",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 128,
+      "displayName": "Tech Review",
+      "collectionTableFieldId": 128,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 129,
+    "dbField": {
+      "id": 10,
+      "fieldName": "BoxCount",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 129,
+      "displayName": "Box Count",
+      "collectionTableFieldId": 129,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 130,
+    "dbField": {
+      "id": 12,
+      "fieldName": "BoxIndex",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 130,
+      "displayName": "Box Index",
+      "collectionTableFieldId": 130,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 131,
+    "dbField": {
+      "id": 13,
+      "fieldName": "BoxNum",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 131,
+      "displayName": "Box #",
+      "collectionTableFieldId": 131,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 134,
+    "dbField": {
+      "id": 56,
+      "fieldName": "Dt",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 134,
+      "displayName": "dt",
+      "collectionTableFieldId": 134,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 136,
+    "dbField": {
+      "id": 143,
+      "fieldName": "UserName",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 136,
+      "displayName": "Username",
+      "collectionTableFieldId": 136,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 137,
+    "dbField": {
+      "id": 21,
+      "fieldName": "CommIssuedDate",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 137,
+      "displayName": "Issue Date",
+      "collectionTableFieldId": 137,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 138,
+    "dbField": {
+      "id": 23,
+      "fieldName": "ControlCopyDate",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 138,
+      "displayName": "Control Copy Date",
+      "collectionTableFieldId": 138,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 147,
+    "dbField": {
+      "id": 84,
+      "fieldName": "NoActionIssueDate",
+      "defaultFieldTypeId": 6,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 6,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.DateTime",
+        "cSharpTypeCode": 16,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.DateTime",
+    "typeCode": 16,
+    "queryableFieldInfo": {
+      "id": 147,
+      "displayName": "Issue Date",
+      "collectionTableFieldId": 147,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 149,
+    "dbField": {
+      "id": 98,
+      "fieldName": "PlanProgOrder",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 149,
+      "displayName": "Plan Program Order",
+      "collectionTableFieldId": 149,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 150,
+    "dbField": {
+      "id": 99,
+      "fieldName": "PlanProgParent",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 150,
+      "displayName": "Plan Program Parent",
+      "collectionTableFieldId": 150,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 151,
+    "dbField": {
+      "id": 100,
+      "fieldName": "PlanProgram",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 151,
+      "displayName": "Plan Program",
+      "collectionTableFieldId": 151,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 154,
+    "dbField": {
+      "id": 118,
+      "fieldName": "RevisedDate",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 154,
+      "displayName": "Revised Date",
+      "collectionTableFieldId": 154,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 155,
+    "dbField": {
+      "id": 123,
+      "fieldName": "RVOAccessible",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 155,
+      "displayName": "RVO Accessible",
+      "collectionTableFieldId": 155,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 156,
+    "dbField": {
+      "id": 132,
+      "fieldName": "SOPDraftRevision",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 156,
+      "displayName": "SOP Draft Revision #",
+      "collectionTableFieldId": 156,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 157,
+    "dbField": {
+      "id": 133,
+      "fieldName": "SOPNumb",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 157,
+      "displayName": "SOP #",
+      "collectionTableFieldId": 157,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 158,
+    "dbField": {
+      "id": 134,
+      "fieldName": "SOPPrefix",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 158,
+      "displayName": "SOP Prefix",
+      "collectionTableFieldId": 158,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 159,
+    "dbField": {
+      "id": 135,
+      "fieldName": "SOPRevNumb",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 159,
+      "displayName": "SOP Revision #",
+      "collectionTableFieldId": 159,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 166,
+    "dbField": {
+      "id": 42,
+      "fieldName": "DocNum",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 166,
+      "displayName": "Doc #",
+      "collectionTableFieldId": 166,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 167,
+    "dbField": {
+      "id": 62,
+      "fieldName": "FileNum",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 167,
+      "displayName": "File #",
+      "collectionTableFieldId": 167,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 175,
+    "dbField": {
+      "id": 60,
+      "fieldName": "FileID",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 175,
+      "displayName": "Folder Description",
+      "collectionTableFieldId": 175,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 176,
+    "dbField": {
+      "id": 61,
+      "fieldName": "FileName",
+      "defaultFieldTypeId": 5,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 5,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 176,
+      "displayName": "File Path",
+      "collectionTableFieldId": 176,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 177,
+    "dbField": {
+      "id": 64,
+      "fieldName": "FileSize",
+      "defaultFieldTypeId": 1,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 1,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int64",
+        "cSharpTypeCode": 11,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int64",
+    "typeCode": 11,
+    "queryableFieldInfo": {
+      "id": 177,
+      "displayName": "File Size",
+      "collectionTableFieldId": 177,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 200,
+    "dbField": {
+      "id": 3,
+      "fieldName": "AnalyticalMethod",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 200,
+      "displayName": "Analytical Method",
+      "collectionTableFieldId": 200,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 203,
+    "dbField": {
+      "id": 17,
+      "fieldName": "CD",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 203,
+      "displayName": "CD",
+      "collectionTableFieldId": 203,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 205,
+    "dbField": {
+      "id": 22,
+      "fieldName": "Common",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 205,
+      "displayName": "Common",
+      "collectionTableFieldId": 205,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 217,
+    "dbField": {
+      "id": 59,
+      "fieldName": "Export",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 217,
+      "displayName": "Exported",
+      "collectionTableFieldId": 217,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 222,
+    "dbField": {
+      "id": 97,
+      "fieldName": "PII",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 222,
+      "displayName": "PII",
+      "collectionTableFieldId": 222,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 223,
+    "dbField": {
+      "id": 102,
+      "fieldName": "Private",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 223,
+      "displayName": "Private",
+      "collectionTableFieldId": 223,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 251,
+    "dbField": {
+      "id": 83,
+      "fieldName": "NEPA",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 251,
+      "displayName": "NEPA",
+      "collectionTableFieldId": 251,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 284,
+    "dbField": {
+      "id": 18,
+      "fieldName": "CertifiedMailNumber",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 284,
+      "displayName": "Certified Mail #",
+      "collectionTableFieldId": 284,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 285,
+    "dbField": {
+      "id": 19,
+      "fieldName": "Collection",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 285,
+      "displayName": "Collection",
+      "collectionTableFieldId": 285,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 286,
+    "dbField": {
+      "id": 24,
+      "fieldName": "CrossReference",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 286,
+      "displayName": "Cross Reference",
+      "collectionTableFieldId": 286,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 292,
+    "dbField": {
+      "id": 35,
+      "fieldName": "Descrip",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 292,
+      "displayName": "Folder",
+      "collectionTableFieldId": 292,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 297,
+    "dbField": {
+      "id": 78,
+      "fieldName": "LandscapeImage",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 297,
+      "displayName": "Landscape Image",
+      "collectionTableFieldId": 297,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 298,
+    "dbField": {
+      "id": 80,
+      "fieldName": "LibraryCopy",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 298,
+      "displayName": "Library Copy",
+      "collectionTableFieldId": 298,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 299,
+    "dbField": {
+      "id": 89,
+      "fieldName": "OperatingRecord",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 299,
+      "displayName": "Operating Record",
+      "collectionTableFieldId": 299,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 301,
+    "dbField": {
+      "id": 101,
+      "fieldName": "PossiblyPrivileged",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 301,
+      "displayName": "Possibly Privileged",
+      "collectionTableFieldId": 301,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 303,
+    "dbField": {
+      "id": 117,
+      "fieldName": "Rescan",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 303,
+      "displayName": "Rescan",
+      "collectionTableFieldId": 303,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 304,
+    "dbField": {
+      "id": 122,
+      "fieldName": "RUSTSerialNumber",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 304,
+      "displayName": "RUST #",
+      "collectionTableFieldId": 304,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 305,
+    "dbField": {
+      "id": 124,
+      "fieldName": "ScanComments",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 305,
+      "displayName": "Scan Comments",
+      "collectionTableFieldId": 305,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 319,
+    "dbField": {
+      "id": 16,
+      "fieldName": "CategoryID",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 319,
+      "displayName": "Category",
+      "collectionTableFieldId": 319,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 324,
+    "dbField": {
+      "id": 38,
+      "fieldName": "Doc",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 324,
+      "displayName": "Doc #",
+      "collectionTableFieldId": 324,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 330,
+    "dbField": {
+      "id": 110,
+      "fieldName": "RecTypeID",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 330,
+      "displayName": "Record Type",
+      "collectionTableFieldId": 330,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 331,
+    "dbField": {
+      "id": 114,
+      "fieldName": "RelationID",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 331,
+      "displayName": "Relationship",
+      "collectionTableFieldId": 331,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 332,
+    "dbField": {
+      "id": 141,
+      "fieldName": "UName",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 332,
+      "displayName": "Username",
+      "collectionTableFieldId": 332,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 347,
+    "dbField": {
+      "id": 5,
+      "fieldName": "ARIMS_Export",
+      "defaultFieldTypeId": 2,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 2,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Boolean",
+        "cSharpTypeCode": 3,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Boolean",
+    "typeCode": 3,
+    "queryableFieldInfo": {
+      "id": 347,
+      "displayName": "ARIMS",
+      "collectionTableFieldId": 347,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 356,
+    "dbField": {
+      "id": 46,
+      "fieldName": "DocTitle2",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 356,
+      "displayName": "Comments",
+      "collectionTableFieldId": 356,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 359,
+    "dbField": {
+      "id": 72,
+      "fieldName": "InspectionTypeID",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 359,
+      "displayName": "Inspection Type",
+      "collectionTableFieldId": 359,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 362,
+    "dbField": {
+      "id": 96,
+      "fieldName": "Personnel",
+      "defaultFieldTypeId": 3,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 3,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 362,
+      "displayName": "Personnel",
+      "collectionTableFieldId": 362,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 364,
+    "dbField": {
+      "id": 128,
+      "fieldName": "Site",
+      "defaultFieldTypeId": 4,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 4,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int32",
+        "cSharpTypeCode": 9,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int32",
+    "typeCode": 9,
+    "queryableFieldInfo": {
+      "id": 364,
+      "displayName": "Storage Site",
+      "collectionTableFieldId": 364,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 365,
+    "dbField": {
+      "id": 137,
+      "fieldName": "SuretyYear",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 365,
+      "displayName": "Surety Year",
+      "collectionTableFieldId": 365,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 385,
+    "dbField": {
+      "id": 51,
+      "fieldName": "DrawClassID",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 385,
+      "displayName": "Drawing Class",
+      "collectionTableFieldId": 385,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 386,
+    "dbField": {
+      "id": 54,
+      "fieldName": "DrawSizeID",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 386,
+      "displayName": "Drawing Size",
+      "collectionTableFieldId": 386,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 387,
+    "dbField": {
+      "id": 55,
+      "fieldName": "DrawTypeID",
+      "defaultFieldTypeId": 7,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 7,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.Int16",
+        "cSharpTypeCode": 7,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.Int16",
+    "typeCode": 7,
+    "queryableFieldInfo": {
+      "id": 387,
+      "displayName": "Drawing Type",
+      "collectionTableFieldId": 387,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  },
+  {
+    "collectionTableFieldId": 394,
+    "dbField": {
+      "id": 126,
+      "fieldName": "Sheet",
+      "defaultFieldTypeId": 9,
+      "description": "",
+      "collectionTableFields": null,
+      "defaultFieldType": {
+        "id": 9,
+        "dbTypeName": null,
+        "friendlyName": null,
+        "cSharpTypeName": "System.String",
+        "cSharpTypeCode": 18,
+        "collectionTableFields": null,
+        "dbFields": null
+      }
+    },
+    "typeName": "System.String",
+    "typeCode": 18,
+    "queryableFieldInfo": {
+      "id": 551,
+      "displayName": "Sheet #",
+      "collectionTableFieldId": 394,
+      "isLookup": false,
+      "collectionTableField": null
+    },
+    "isQueryable": true
+  }
+]

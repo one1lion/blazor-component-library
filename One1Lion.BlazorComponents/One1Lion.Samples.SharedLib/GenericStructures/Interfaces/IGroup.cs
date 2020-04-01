@@ -7,8 +7,11 @@ namespace One1Lion.Samples.SharedLib.Generic {
     List<IElement> Children { get; set; }
 
     void AddChild(IElement toAdd, int atIndex = -1);
-    static IElement NewChildItem() {
-      throw new NotImplementedException("This method must be defined in the Implementing Class.");
+
+    IElement NewChildItem();
+
+    static IElement NewChildItem<TParent>(TParent parent) where TParent : IElement, IGroup {
+      return parent.NewChildItem();
     }
     static IElement NewGroup() {
       throw new NotImplementedException("This method must be defined in the Implementing Class.");

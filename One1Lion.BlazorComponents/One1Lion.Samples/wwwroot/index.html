@@ -7,6 +7,7 @@
   <title>One1Lion.Samples</title>
   <base href="/" />
   <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+  <link href="_content/One1Lion.BlazorComponents/css/typeahead.min.css" rel="stylesheet" />
   <link href="_content/One1Lion.BlazorComponents/css/draganddrop.min.css" rel="stylesheet" />
   <link href="css/site.min.css" rel="stylesheet" />
 </head>
@@ -20,6 +21,16 @@
     <a class="dismiss">🗙</a>
   </div>
   <script src="_framework/blazor.webassembly.js"></script>
+  <script>
+    function toggleSuggestion() {
+      let input = document.getElementById("typeaheadinput-1");
+      if (input && input.classList().contains("show")) {
+        input.classList().remove("show");
+      } else {
+        input.classList().add("show");
+      }
+    }
+  </script>
 </body>
 
 </html>
