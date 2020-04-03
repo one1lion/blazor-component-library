@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace One1Lion.BlazorComponents.DragAndDrop {
+namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
   public class DnDState<TItem> {
     public DnDState() {
       Id = Guid.NewGuid().ToString();
@@ -17,6 +17,8 @@ namespace One1Lion.BlazorComponents.DragAndDrop {
     public Func<TItem> NewGroupMethod { get; set; }
     public Func<TItem, TItem> NewItemMethod { get; set; }
     public TItem NewItem { get; set; }
+
+    public List<string> EditItemAddresses { get; set; } = new List<string>();
 
     public string ChildrenPropertyName { get; set; }
 
@@ -71,7 +73,7 @@ namespace One1Lion.BlazorComponents.DragAndDrop {
         IndexInParent = indexInParent,
         WrappingElement = wrappingElement
       };
-
+      // TODO: Need to figure out how to add a new item when we are not supplying a parent
       var parentObj = parent is null || parent == BaseContainer ? default : parent.Parent.Children[parent.IndexInParent];
       NewItem = NewItemMethod is { } ? NewItemMethod.Invoke(parentObj) : default;
       NotifyStateChanged();

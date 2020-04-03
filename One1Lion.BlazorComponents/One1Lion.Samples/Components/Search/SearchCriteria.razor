@@ -4,23 +4,24 @@
 @using One1Lion.Samples.SharedLib.DbInfo
 
 @if (IsFileRepoQuery) {
-  var frItem = Item as IFileRepositoryExpressionItem;
-  <FileRepoSearchCriteria Item="frItem" />
+  <FileRepoSearchCriteria Item="Item as IFileRepositoryExpressionItem" />
 } else if (!EditMode) {
   @Item.FormattedDisplay()
 } else {
-  var dbeItem = Item as IDBExpressionItem;
-  
-  <EditSearchCriteria QueryableFields="QueryableFields" Item="dbeItem" />
+  <EditSearchCriteria QueryableFields="QueryableFields" Item="Item as IDBExpressionItem" />
 }
 
 @code {
   [Parameter] public IQueryExpressionItem Item { get; set; } = new DBExpressionItem();
   [Parameter] public bool EditMode { get; set; }
-  [Parameter] public List<DbFieldViewModel> QueryableFields { get; set; } = new List<DbFieldViewModel>();
+  [Parameter] public List<DbFieldViewModel> QueryableFields { get; set; }
   bool IsFileRepoQuery => Item.GetType().GetInterface(nameof(IFileRepositoryExpressionItem)) is { };
 
   protected override void OnParametersSet() {
-
+    if (Item is { }) {
+      if (EditMode && (Item as IDBExpressionItem) is null && (Item as IFileRepositoryExpressionItem) is null) {
+        Item = new DBExpressionItem();
+      }
+    }
   }
 }

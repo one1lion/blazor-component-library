@@ -1,10 +1,10 @@
 ﻿@using One1Lion.BlazorComponents.DragAndDrop
 
 <h4>With no display template</h4>
-<O1LDragAndDrop Children="items" />
+<DragAndDrop Children="items" />
 
 <h4>With a display template</h4>
-<O1LDragAndDrop Children="items">
+<DragAndDrop Children="items">
   @* TODO: figure out how to use grouping when the properties are not what determines the groups
     - we might need an internal structure for grouping things when we are using flat lists like List<string> as TItem
   *@
@@ -14,7 +14,7 @@
   <EditTemplate Context="curItem">
     <label>Type what you would like here: <input type="text" @bind="curItem" @bind:event="oninput" /></label>
   </EditTemplate>
-</O1LDragAndDrop>
+</DragAndDrop>
 
 @code {
   List<string> items = new List<string>();

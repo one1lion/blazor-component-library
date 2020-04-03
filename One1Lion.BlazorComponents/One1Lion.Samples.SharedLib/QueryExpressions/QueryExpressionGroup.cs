@@ -11,7 +11,7 @@ namespace One1Lion.Samples.SharedLib.Search.QueryExpressions {
     public string Name { get; set; }
     public bool NotGroup { get; set; }
 
-    public List<IQueryElement> Children { get; set; }
+    public IList<IQueryElement> Children { get; set; }
 
     public override string FormattedDisplay() {
       if (Children is null || Children.Count == 0) { return string.Empty; }
@@ -44,7 +44,7 @@ namespace One1Lion.Samples.SharedLib.Search.QueryExpressions {
     }
 
     public static IQueryElement NewItem<TParent>(TParent parent) where TParent : IQueryElement {
-      return IQueryExpressionGroup.NewItem(parent as IQueryExpressionGroup);
+      return parent is null ? new QueryExpressionItem() : IQueryExpressionGroup.NewItem(parent as IQueryExpressionGroup);
     }
 
     public static IQueryElement NewGroup() {

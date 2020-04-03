@@ -1,53 +1,59 @@
 ﻿@using One1Lion.BlazorComponents.DragAndDrop
+@using One1Lion.BlazorComponents.DragAndDrop.Lib
 @using One1Lion.Samples.Components.Search
 @using One1Lion.Samples.Data
+@using One1Lion.Samples.SharedLib.DbInfo
 @using One1Lion.Samples.SharedLib.Search.QueryExpressions
 @using One1Lion.Samples.SharedLib.Search.DBExpressions
+
+@inject HttpClient httpClient
 
 @implements IDisposable
 
 <h3>Drag And Drop Query Builder</h3>
-<O1LDragAndDrop Children="baseGroup.Children"
-                ChildrenPropertyName="@nameof(IQueryExpressionGroup.Children)"
-                AllowGrouping="true"
-                NewGroupMethod="QueryExpressionGroup.NewGroup"
-                AllowNewItem="true"
-                NewItemMethod="QueryExpressionGroup.NewItem"
-                SeparatorDisplay="SeparatorDisplay.Between">
-  <DisplayTemplate Context="curItem">
-    <SearchCriteria Item="curItem as IQueryExpressionItem" EditMode="false" />
-  </DisplayTemplate>
-  <EditTemplate Context="curItem">
-    <SearchCriteria Item="curItem as IQueryExpressionItem" EditMode="true" />
-  </EditTemplate>
-  <SeparatorTemplate Context="curItem">
-    <div class="and-or-toggle" onselect="preventDefault();">
-      <div class="@(curItem.AndWithNext ? "selected" : "")"
-           onselect="preventDefault();"
-           @onclick="(async (e) => { if (!curItem.AndWithNext) {curItem.AndWithNext = !curItem.AndWithNext; } })">
-        And
+<CascadingValue Value=dndState Name="State">
+  <DragAndDrop Children="baseGroup.Children as List<IQueryElement>"
+               ChildrenPropertyName="@nameof(IQueryExpressionGroup.Children)"
+               AllowGrouping="true"
+               NewGroupMethod="QueryExpressionGroup.NewGroup"
+               AllowNewItem="true"
+               NewItemMethod="QueryExpressionGroup.NewItem"
+               SeparatorDisplay="SeparatorDisplay.Between">
+    <DisplayTemplate Context="curItem">
+      <SearchCriteria Item="curItem as IQueryExpressionItem" EditMode="false" QueryableFields="dbFields" />
+    </DisplayTemplate>
+    <EditTemplate Context="curItem">
+      <SearchCriteria Item="curItem as IQueryExpressionItem" EditMode="true" QueryableFields="dbFields" />
+    </EditTemplate>
+    <SeparatorTemplate Context="curItem">
+      <div class="and-or-toggle" onselect="preventDefault();">
+        <div class="@(curItem.AndWithNext ? "selected" : "")"
+             onselect="preventDefault();"
+             @onclick="(async (e) => { if (!curItem.AndWithNext) {curItem.AndWithNext = !curItem.AndWithNext; } })">
+          And
+        </div>
+        <div class="@(curItem.AndWithNext ? "" : "selected")"
+             onselect="preventDefault();"
+             @onclick="(async (e) => { if (curItem.AndWithNext) { curItem.AndWithNext = !curItem.AndWithNext; } })">
+          Or
+        </div>
       </div>
-      <div class="@(curItem.AndWithNext ? "" : "selected")"
-           onselect="preventDefault();"
-           @onclick="(async (e) => { if (curItem.AndWithNext) { curItem.AndWithNext = !curItem.AndWithNext; } })">
-        Or
-      </div>
-    </div>
-  </SeparatorTemplate>
-</O1LDragAndDrop>
+    </SeparatorTemplate>
+  </DragAndDrop>
+</CascadingValue>
 
 <h4>Live output</h4>
 <p>@baseGroup.FormattedDisplay()</p>
 
 @code {
   IQueryExpressionGroup baseGroup = new QueryExpressionGroup();
+  DnDState<IQueryElement> dndState = new DnDState<IQueryElement>();
+  List<DbFieldViewModel> dbFields { get; set; } = new List<DbFieldViewModel>();
 
-  DnDState<IQueryElement> DnDState = new DnDState<IQueryElement>();
-
-  protected override void OnInitialized() {
+  protected override async Task OnInitializedAsync() {
     baseGroup = QueryDataSampleGenerator.GenerateQueryExpressionGroup();
-
-    DnDState.OnNotifyStateChanged += StateHasChanged;
+    dbFields = await QueryDataSampleGenerator.GenerateQueryableFields(httpClient);
+    dndState.OnNotifyStateChanged += StateHasChanged;
   }
 
   async Task ToggleAndOr(MouseEventArgs e, IQueryElement curElem) {
@@ -56,6 +62,6 @@
   }
 
   void IDisposable.Dispose() {
-    DnDState.OnNotifyStateChanged -= StateHasChanged;
+    dndState.OnNotifyStateChanged -= StateHasChanged;
   }
 }

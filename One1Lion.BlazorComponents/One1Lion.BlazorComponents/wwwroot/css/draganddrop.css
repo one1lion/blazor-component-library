@@ -174,7 +174,9 @@
       border: dashed .1em transparent;
       overflow-y: hidden; }
       .draganddrop .draganddrop-body .draganddrop-target:hover:not(.drag-hover) {
-        background-color: rgba(255, 255, 255, 0.4); }
+        background-color: rgba(127, 127, 127, 0.4);
+        border-radius: 2px;
+        outline: 2px dashed rgba(127, 127, 127, 0.8); }
     .draganddrop .draganddrop-body .draganddrop-grouphovering {
       background: none;
       background-color: #eee;

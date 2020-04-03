@@ -4,12 +4,11 @@
 
 @if (DnDState?.NewItemPayload is { } && DnDState.NewItemPayload.WrappingElement?.Id == Id) {
   @* if is drop after, then add a separator with the Item b...maybe *@
-  <O1LDragAndDropItem TItem="TItem"
-                  Parent="Parent"
-                  Item="DnDState.NewItem"
-                  IndexInParent="IndexInParent"
-                  EditTemplate="EditTemplate"
-                  IsNewItem="true" />
+  <DragAndDropItem Parent="Parent"
+                   Item="DnDState.NewItem"
+                   IndexInParent="IndexInParent"
+                   EditTemplate="EditTemplate"
+                   IsNewItem="true" />
 
 } else {
   <div class="draganddrop-target draganddrop-drop@(IsDropAfter ? "after" : "before") @(DnDState.Target?.WrappingElement?.Id == Id ? " drag-hover" : "")"

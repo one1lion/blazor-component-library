@@ -23,7 +23,7 @@
   </div>
 } else {
   <div class="draganddrop-item@(DnDState.Payload?.WrappingElement?.Id == Id ? " picked-up" : "") @(DnDState.Target?.WrappingElement?.Id == Id ? " drag-hover" : "")"
-       draggable="@((!editMode && !IsNewItem).ToString(System.Globalization.CultureInfo.CurrentCulture).ToLower(System.Globalization.CultureInfo.CurrentCulture))"
+       draggable="@((!editMode && !IsNewItem).ToString())"
        @ondragstart="((e) => { DnDState.SetPayload(Parent, IndexInParent, this); StateHasChanged(); })"
        @ondragstart:stopPropagation="true"
        @ondragend="((e) => { DnDState.ClearPayload(); StateHasChanged(); })"
@@ -79,10 +79,13 @@
   }
 
   void BeginEdit(MouseEventArgs e) {
+    if (DnDState.EditItemAddresses is null) { DnDState.EditItemAddresses = new List<string>(); }
+    if (!DnDState.EditItemAddresses.Contains(Address)) { DnDState.EditItemAddresses.Add(Address); }
     var parentObj = Parent is null || Parent == DnDState.BaseContainer ? default : Parent.Parent.Children[Parent.IndexInParent];
     editItem = DnDState.NewItemMethod.Invoke(parentObj);
     Utils.CopyValues<TItem>(Item, ref editItem);
     editMode = true;
+    DnDState.NotifyStateChanged();
   }
 
   void ConfirmSave(MouseEventArgs e) {
@@ -93,8 +96,10 @@
     } else {
       var holdForRef = Item;
       Utils.CopyValues<TItem>(editItem, ref holdForRef);
+      Item = holdForRef;
       editItem = default;
     }
+    if (DnDState.EditItemAddresses.Contains(Address)) { DnDState.EditItemAddresses.Remove(Address); }
     editMode = false;
     DnDState.NotifyStateChanged();
   }
@@ -105,6 +110,7 @@
     } else {
       editItem = default;
     }
+    if (DnDState.EditItemAddresses.Contains(Address)) { DnDState.EditItemAddresses.Remove(Address); }
     editMode = false;
   }
 

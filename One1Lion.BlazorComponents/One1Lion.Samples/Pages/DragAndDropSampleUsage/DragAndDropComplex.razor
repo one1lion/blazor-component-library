@@ -1,7 +1,7 @@
 ﻿@using One1Lion.BlazorComponents.DragAndDrop
 @using One1Lion.Samples.SharedLib.Generic
 
-<O1LDragAndDrop Children="itemToWrapGroup.Children"
+<DragAndDrop Children="itemToWrapGroup.Children"
                 ChildrenPropertyName="@nameof(Group.Children)"
                 AllowGrouping="true"
                 NewGroupMethod="Group.NewGroup"
@@ -28,7 +28,7 @@
       </div>
     </div>
   </SeparatorTemplate>
-</O1LDragAndDrop>
+</DragAndDrop>
 
 @code {
   Group itemToWrapGroup;

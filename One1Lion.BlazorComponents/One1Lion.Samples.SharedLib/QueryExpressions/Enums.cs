@@ -109,6 +109,7 @@ namespace One1Lion.Samples.SharedLib.Search.QueryExpressions {
     }
 
     public static List<ExpressionType> GetExpressionTypes(string forType) {
+      if (string.IsNullOrWhiteSpace(forType)) { return new List<ExpressionType>() { ExpressionType.NotSet }; }
       return GetExpressionTypes(Type.GetType(forType));
     }
 

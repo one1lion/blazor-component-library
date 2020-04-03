@@ -3,7 +3,95 @@
 @using One1Lion.Samples.SharedLib.Search.DBExpressions
 @using One1Lion.Samples.SharedLib.Search.QueryExpressions
 
-<span>TODO: Fill in logic for Edit Search Criteria</span>
+<div class="queryparameter edit" @ondrag:stopPropagation="true">
+  @if (Item is null) {
+    <span>Loading...</span>
+  } else {
+
+    <TypeAhead Items="DbFieldTypeAheadItems"
+               SelectionOnly="true"
+               OnSelectionMade="HandleFieldSelectionMade"
+               SelectedText="@Item.QueryField"
+               SelectedValue="@Item.QueryField"
+               placeholder="Type or select a field" />
+    @if (!string.IsNullOrWhiteSpace(Item.QueryField)) {
+      <TypeAhead Items="ExprTypeTypeAheadItems"
+                 SelectionOnly="true"
+                 OnSelectionMade="HandleExpressionSelectionMade"
+                 SelectedText="@ExpressionTypeDisplay.GetDisplayText(Item.ExpressionType)"
+                 placeholder="Type or select an expression" />
+      if (Item.ExpressionType != ExpressionType.NotSet) {
+        var qf = QueryableFields.FirstOrDefault(qf => qf.QueryableFieldInfo.DisplayName == Item.QueryField || qf.DbField.FieldName == Item.QueryField);
+        var fieldType = Type.GetType(qf.TypeName);
+        if (fieldType is null) {
+          fieldType = typeof(object);
+        } else {
+          fieldType = Nullable.GetUnderlyingType(fieldType) ?? fieldType;
+        }
+        TypeCode fieldTypeCode;
+        try {
+          fieldTypeCode = Type.GetTypeCode(fieldType);
+        } catch {
+          fieldTypeCode = TypeCode.Object;
+        }
+        if (qf.QueryableFieldInfo.IsLookup) {
+          // TODO: Handle is lookup
+          <span class="oi oi-list">Lookup Values Placeholder</span>
+        } else {
+          switch (fieldTypeCode) {
+            case TypeCode.String:
+              <input type="text" class="form-control" @bind-Value="inputString" @bind-Value:event="oninput" placeholder="Values" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e))" />
+              break;
+            case TypeCode.DateTime:
+              <input type="date" class="form-control" @bind-Value="inputDate" @bind-Value:event="oninput" placeholder="MM/dd/yyyy" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e))" />
+              break;
+            case TypeCode.Byte:
+            case TypeCode.Decimal:
+            case TypeCode.Double:
+            case TypeCode.Int16:
+            case TypeCode.Int32:
+            case TypeCode.Int64:
+            case TypeCode.SByte:
+            case TypeCode.Single:
+            case TypeCode.UInt16:
+            case TypeCode.UInt32:
+            case TypeCode.UInt64:
+              <input type="number" class="form-control" @bind-Value="inputNumber" @bind-Value:event="oninput" placeholder="Values" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e))" />
+              break;
+            case TypeCode.Boolean:
+              <input type="checkbox" class="form-control" @bind-Value="inputBool" @bind-Value:event="oninput" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e))" />
+              break;
+          }
+
+          if (Item.ExpressionType == ExpressionType.Between) {
+            <span> and </span>
+            switch (fieldTypeCode) {
+              case TypeCode.String:
+                <input type="text" class="form-control" @bind-Value="inputStringTo" @bind-Value:event="oninput" placeholder="Values" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e, false))" />
+                break;
+              case TypeCode.DateTime:
+                <input type="date" class="form-control" @bind-Value="inputDateTo" @bind-Value:event="oninput" placeholder="MM/dd/yyyy" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e, false))" />
+                break;
+              case TypeCode.Byte:
+              case TypeCode.Decimal:
+              case TypeCode.Double:
+              case TypeCode.Int16:
+              case TypeCode.Int32:
+              case TypeCode.Int64:
+              case TypeCode.SByte:
+              case TypeCode.Single:
+              case TypeCode.UInt16:
+              case TypeCode.UInt32:
+              case TypeCode.UInt64:
+                <input type="number" class="form-control" @bind-Value="inputNumberTo" @bind-Value:event="oninput" placeholder="Values" disabled="@(loading)" @onchange="@((e) => HandleEditValueChanged(e, false))" />
+                break;
+            }
+          }
+        }
+      }
+    }
+  }
+</div>
 
 @code {
   [Parameter] public IDBExpressionItem Item { get; set; } = new DBExpressionItem();
@@ -30,18 +118,17 @@
     if (QueryableFields is { }) {
       // Since we have asked specifically for fields that are queryable, the QueryableFieldInfo object will not be null
       DbFieldTypeAheadItems = QueryableFields.GroupBy(qf => new {
-        qf.QueryableFieldInfo.DisplayName,
-        qf.DbField.Id
+        qf.QueryableFieldInfo.DisplayName
       }).Select(qfg => new TypeAheadItem() {
         MenuText = qfg.Key.DisplayName,
         DisplayText = qfg.Key.DisplayName,
-        Value = qfg.Key.Id.ToString(),
+        Value = qfg.Key.DisplayName.ToString(),
         Item = qfg.ToList()
       }).Distinct().OrderBy(ta => ta.DisplayText).ToList();
     }
     if (!string.IsNullOrWhiteSpace(Item?.QueryField)) {
       // Pre-populate the expression types for this field
-      ExpressionTypes = ExpressionTypeDisplay.GetExpressionTypes(QueryableFields.FirstOrDefault(qf => qf.QueryableFieldInfo.DisplayName == Item.QueryField)?.TypeName).Where(et => et != ExpressionType.NotSet).ToList();
+      ExpressionTypes = ExpressionTypeDisplay.GetExpressionTypes(QueryableFields.FirstOrDefault(qf => qf.QueryableFieldInfo.DisplayName == Item.QueryField || qf.DbField.FieldName == Item.QueryField)?.TypeName).Where(et => et != ExpressionType.NotSet).ToList();
       // TODO: also perform any operations that have to do with the selected expression type
       if (Item.Values != null && Item.Values.Count() > 0) {
         inputString = Item.Values[0].ToString();
@@ -58,10 +145,8 @@
   }
 
   void HandleEditValueChanged(ChangeEventArgs e, bool firstVal = true) {
-    Console.WriteLine($"Value changed.  Item.Values is null: {Item.Values is null}");
     if (Item.Values is null) {
       Item.Values = new List<object>() { null };
-      Console.WriteLine($"After newing Item.Values, its count is now : {Item.Values.Count}");
     }
 
     if (!firstVal) {
@@ -74,13 +159,11 @@
       Item.Values[0] = e.Value;
     }
 
-    Console.WriteLine($"Item.Value: {string.Join(", ", Item.Values)}");
   }
 
   void HandleFieldSelectionMade(TypeAheadItem selectedItem) {
     var qf = ((List<DbFieldViewModel>)selectedItem.Item);
-    Item.QueryField = qf.First().DbField.FieldName;
-    Console.WriteLine($"Item.QueryField: {Item.QueryField}");
+    Item.QueryField = qf.First().QueryableFieldInfo.DisplayName;
     if (!string.IsNullOrWhiteSpace(Item.QueryField)) {
       ExpressionTypes = ExpressionTypeDisplay.GetExpressionTypes(qf.First().TypeName).Where(et => et != ExpressionType.NotSet).ToList();
     } else {
@@ -88,17 +171,16 @@
     }
     if (!ExpressionTypes.Contains(Item.ExpressionType)) { Item.ExpressionType = ExpressionType.NotSet; }
     if (ExpressionTypes is { }) {
-      ExprTypeTypeAheadItems = ExpressionTypes.Select(qf => new TypeAheadItem() {
-        MenuText = ExpressionTypeDisplay.GetDisplayText(qf),
-        DisplayText = ExpressionTypeDisplay.GetDisplayText(qf),
-        Value = qf.ToString(),
-        Item = qf
+      ExprTypeTypeAheadItems = ExpressionTypes.Select(et => new TypeAheadItem() {
+        MenuText = ExpressionTypeDisplay.GetDisplayText(et),
+        DisplayText = ExpressionTypeDisplay.GetDisplayText(et),
+        Value = et.ToString(),
+        Item = et
       }).ToList();
     }
   }
 
   void HandleExpressionSelectionMade(TypeAheadItem selectedItem) {
     Item.ExpressionType = (ExpressionType)selectedItem.Item;
-    Console.WriteLine($"Item.ExpressionType: {Item.ExpressionType}");
   }
 }

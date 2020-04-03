@@ -242,11 +242,12 @@
       overflow-y: hidden;
 
       &:hover:not(.drag-hover) {
-        background-color: rgba(255,255,255,.4);
+        background-color: rgba(127,127,127,.4);
+        border-radius: 2px;
+        outline: 2px dashed rgba(127,127,127,.8);
       }
     }
     /* Group display */
-    // TODO: Update styles for new component
     .draganddrop-grouphovering {
       background: none;
       background-color: #eee;

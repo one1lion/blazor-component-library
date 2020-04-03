@@ -19,17 +19,18 @@ namespace One1Lion.Samples.SharedLib.Search.QueryExpressions {
     /// The <see cref="IQueryElement" />s 
     /// nested within this element
     /// </summary>
-    List<IQueryElement> Children { get; set; }
+    IList<IQueryElement> Children { get; set; }
 
     void AddChild(IQueryElement toAdd, int atIndex = -1);
 
-    IQueryElement NewItem();
+    public IQueryElement NewItem();
 
     public static IQueryElement NewItem<TParent>(TParent parent) where TParent : IQueryElement, IQueryExpressionGroup {
       return parent.NewItem();
     }
+
     public static IQueryElement NewGroup() {
-      throw new NotImplementedException("This method must be defined in the implementing class.");
+      throw new NotImplementedException("This method must be defined in the implementing type.");
     }
   }
 }

@@ -15,56 +15,56 @@
         for (var i = 0; i < Children.Count; i++) {
           if (Children[i] is { }) {
             if (new[] { SeparatorDisplay.BeforeOnly, SeparatorDisplay.BeforeAndAfter }.Contains(SeparatorDisplay) && SeparatorTemplate is { }) {
-              <O1LDragAndDropSeparator Item="Children[i]" SeparatorTemplate="SeparatorTemplate" Position="SeparatorPosition.Before" />
+              <DragAndDropSeparator Item="Children[i]" SeparatorTemplate="SeparatorTemplate" Position="SeparatorPosition.Before" />
             }
             if (AllowNewItem && EditTemplate is { }) {
-              <O1LDragAndDropTarget TItem="TItem"
-                                AllowNewItem="AllowNewItem"
-                                EditTemplate="EditTemplate"
-                                IndexInParent="i"
-                                Parent="this"
-                                IsDropAfter="false" />
+              <DragAndDropTarget TItem="TItem"
+                                 AllowNewItem="AllowNewItem"
+                                 EditTemplate="EditTemplate"
+                                 IndexInParent="i"
+                                 Parent="this"
+                                 IsDropAfter="false" />
             } else {
-              <O1LDragAndDropTarget TItem="TItem"
-                                IndexInParent="i"
-                                Parent="this"
-                                IsDropAfter="false" />
+              <DragAndDropTarget TItem="TItem"
+                                 IndexInParent="i"
+                                 Parent="this"
+                                 IsDropAfter="false" />
             }
             var childProp = string.IsNullOrWhiteSpace(ChildrenPropertyName) ? null : Children[i].GetType().GetProperty(ChildrenPropertyName);
             if (childProp is { }) {
-              <O1LDragAndDropGroup Children="(List<TItem>)childProp.GetValue(Children[i])"
-                               ChildrenPropertyName="@ChildrenPropertyName"
+              <DragAndDropGroup Children="(List<TItem>)childProp.GetValue(Children[i])"
+                                ChildrenPropertyName="@ChildrenPropertyName"
+                                AllowGrouping="AllowGrouping"
+                                AllowNewItem="AllowNewItem"
+                                DisplayTemplate="DisplayTemplate"
+                                EditTemplate="EditTemplate"
+                                SeparatorTemplate="SeparatorTemplate"
+                                SeparatorDisplay="SeparatorDisplay"
+                                Parent="this"
+                                IndexInParent="i" />
+            } else {
+              <DragAndDropItem Item="Children[i]"
                                AllowGrouping="AllowGrouping"
-                               AllowNewItem="AllowNewItem"
                                DisplayTemplate="DisplayTemplate"
                                EditTemplate="EditTemplate"
-                               SeparatorTemplate="SeparatorTemplate"
-                               SeparatorDisplay="SeparatorDisplay"
                                Parent="this"
                                IndexInParent="i" />
-            } else {
-              <O1LDragAndDropItem Item="Children[i]"
-                              AllowGrouping="AllowGrouping"
-                              DisplayTemplate="DisplayTemplate"
-                              EditTemplate="EditTemplate"
-                              Parent="this"
-                              IndexInParent="i" />
             }
             if (AllowNewItem && EditTemplate is { }) {
-              <O1LDragAndDropTarget TItem="TItem"
-                                AllowNewItem="AllowNewItem"
-                                EditTemplate="EditTemplate"
-                                IndexInParent="i + 1"
-                                Parent="this"
-                                IsDropAfter="true" />
+              <DragAndDropTarget TItem="TItem"
+                                 AllowNewItem="AllowNewItem"
+                                 EditTemplate="EditTemplate"
+                                 IndexInParent="i + 1"
+                                 Parent="this"
+                                 IsDropAfter="true" />
             } else {
-              <O1LDragAndDropTarget TItem="TItem"
-                                IndexInParent="i + 1"
-                                Parent="this"
-                                IsDropAfter="true" />
+              <DragAndDropTarget TItem="TItem"
+                                 IndexInParent="i + 1"
+                                 Parent="this"
+                                 IsDropAfter="true" />
             }
             if (new[] { SeparatorDisplay.AfterOnly, SeparatorDisplay.Between, SeparatorDisplay.BeforeAndAfter }.Contains(SeparatorDisplay) && SeparatorTemplate is { } && (SeparatorDisplay != SeparatorDisplay.Between || i < Children.Count - 1)) {
-              <O1LDragAndDropSeparator Item="Children[i]" SeparatorTemplate="SeparatorTemplate" Position="SeparatorPosition.After" />
+              <DragAndDropSeparator Item="Children[i]" SeparatorTemplate="SeparatorTemplate" Position="SeparatorPosition.After" />
             }
           } else {
             // TODO: Handle null item
@@ -87,6 +87,7 @@
   [Parameter] public RenderFragment<TItem> EditTemplate { get; set; }
   [Parameter] public RenderFragment<TItem> SeparatorTemplate { get; set; }
 
+  [CascadingParameter(Name = "State")]
   public DnDState<TItem> DnDState { get; set; } = new DnDState<TItem>();
   public string Id { get; } = Guid.NewGuid().ToString();
   public IDnDContainer<TItem> Parent { get; set; } = null;
