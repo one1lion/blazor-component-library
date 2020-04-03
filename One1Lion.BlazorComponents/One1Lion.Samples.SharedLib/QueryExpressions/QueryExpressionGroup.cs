@@ -1,4 +1,5 @@
-﻿using System;
+﻿using One1Lion.Samples.SharedLib.Search.DBExpressions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -44,7 +45,7 @@ namespace One1Lion.Samples.SharedLib.Search.QueryExpressions {
     }
 
     public static IQueryElement NewItem<TParent>(TParent parent) where TParent : IQueryElement {
-      return parent is null ? new QueryExpressionItem() : IQueryExpressionGroup.NewItem(parent as IQueryExpressionGroup);
+      return parent is null ? new DBExpressionItem() : IQueryExpressionGroup.NewItem(parent as IQueryExpressionGroup);
     }
 
     public static IQueryElement NewGroup() {
