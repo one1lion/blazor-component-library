@@ -13,20 +13,26 @@
        @ondrop:stopPropagation="true"
        @ondragenter="((e) => { DnDState.SetTarget(Parent, IndexInParent, this); StateHasChanged(); })"
        @ondragenter:stopPropagation="true">
-    @* TODO: Header with title and control box *@
+
+    @if (DnDState.BaseContainer.GroupTitleTemplate is { } || DnDState.BaseContainer.GroupControlBoxTemplate is { }) {
+      <DragAndDropHeader Model="Item"
+                         Parent="this"
+                         IndexInParent="IndexInParent" />
+    }
     <div class="draganddrop-body">
       @if (Children is null) {
         <p>Loading...</p>
       } else {
         for (var i = 0; i < Children.Count; i++) {
           if (Children[i] is { }) {
-            if (new[] { SeparatorDisplay.BeforeOnly, SeparatorDisplay.BeforeAndAfter }.Contains(SeparatorDisplay) && SeparatorTemplate is { }) {
-              <DragAndDropSeparator Item="Children[i]" SeparatorTemplate="SeparatorTemplate" Position="SeparatorPosition.Before" />
+            if (new[] { SeparatorDisplay.BeforeOnly, SeparatorDisplay.BeforeAndAfter }.Contains(DnDState.BaseContainer.SeparatorDisplay) && DnDState.BaseContainer.SeparatorTemplate is { }) {
+              <DragAndDropSeparator Item="Children[i]"
+                                    Position="SeparatorPosition.Before"
+                                    Parent="this"
+                                    IndexInParent="i" />
             }
-            if (AllowNewItem && EditTemplate is { }) {
+            if (DnDState.BaseContainer.AllowNewItem && DnDState.BaseContainer.EditTemplate is { }) {
               <DragAndDropTarget TItem="TItem"
-                                 AllowNewItem="AllowNewItem"
-                                 EditTemplate="EditTemplate"
                                  IndexInParent="i"
                                  Parent="this"
                                  IsDropAfter="false" />
@@ -36,30 +42,19 @@
                                  Parent="this"
                                  IsDropAfter="false" />
             }
-            var childProp = string.IsNullOrWhiteSpace(ChildrenPropertyName) ? null : Children[i].GetType().GetProperty(ChildrenPropertyName);
+            var childProp = string.IsNullOrWhiteSpace(DnDState.BaseContainer.ChildrenPropertyName) ? null : Children[i].GetType().GetProperty(DnDState.BaseContainer.ChildrenPropertyName);
             if (childProp is { }) {
-              <DragAndDropGroup Children="(List<TItem>)childProp.GetValue(Children[i])"
-                                ChildrenPropertyName="@ChildrenPropertyName"
-                                AllowGrouping="AllowGrouping"
-                                AllowNewItem="AllowNewItem"
-                                DisplayTemplate="DisplayTemplate"
-                                EditTemplate="EditTemplate"
-                                SeparatorTemplate="SeparatorTemplate"
-                                SeparatorDisplay="SeparatorDisplay"
+              <DragAndDropGroup Item="Children[i]"
+                                Children="(List<TItem>)childProp.GetValue(Children[i])"
                                 Parent="this"
                                 IndexInParent="i" />
             } else {
               <DragAndDropItem Item="Children[i]"
-                               AllowGrouping="AllowGrouping"
-                               DisplayTemplate="DisplayTemplate"
-                               EditTemplate="EditTemplate"
                                Parent="this"
                                IndexInParent="i" />
             }
-            if (AllowNewItem && EditTemplate is { }) {
+            if (DnDState.BaseContainer.AllowNewItem && DnDState.BaseContainer.EditTemplate is { }) {
               <DragAndDropTarget TItem="TItem"
-                                 AllowNewItem="AllowNewItem"
-                                 EditTemplate="EditTemplate"
                                  IndexInParent="i + 1"
                                  Parent="this"
                                  IsDropAfter="true" />
@@ -69,8 +64,11 @@
                                  Parent="this"
                                  IsDropAfter="true" />
             }
-            if (new[] { SeparatorDisplay.AfterOnly, SeparatorDisplay.Between, SeparatorDisplay.BeforeAndAfter }.Contains(SeparatorDisplay) && SeparatorTemplate is { } && (SeparatorDisplay != SeparatorDisplay.Between || i < Children.Count - 1)) {
-              <DragAndDropSeparator Item="Children[i]" SeparatorTemplate="SeparatorTemplate" Position="SeparatorPosition.After" />
+            if (new[] { SeparatorDisplay.AfterOnly, SeparatorDisplay.Between, SeparatorDisplay.BeforeAndAfter }.Contains(DnDState.BaseContainer.SeparatorDisplay) && DnDState.BaseContainer.SeparatorTemplate is { } && (DnDState.BaseContainer.SeparatorDisplay != SeparatorDisplay.Between || i < Children.Count - 1)) {
+              <DragAndDropSeparator Item="Children[i]"
+                                    Position="SeparatorPosition.After"
+                                    Parent="this"
+                                    IndexInParent="i + 1" />
             }
           } else {
             // TODO: Handle null item
@@ -83,16 +81,10 @@
 
 @code {
   [CascadingParameter(Name = "State")] public DnDState<TItem> DnDState { get; set; } = new DnDState<TItem>();
+  [Parameter] public TItem Item { get; set; }
   [Parameter] public List<TItem> Children { get; set; }
-  [Parameter] public string ChildrenPropertyName { get; set; }
   [Parameter] public IDnDContainer<TItem> Parent { get; set; }
   [Parameter] public int IndexInParent { get; set; }
-  [Parameter] public bool AllowGrouping { get; set; }
-  [Parameter] public bool AllowNewItem { get; set; }
-  [Parameter] public RenderFragment<TItem> DisplayTemplate { get; set; }
-  [Parameter] public RenderFragment<TItem> EditTemplate { get; set; }
-  [Parameter] public RenderFragment<TItem> SeparatorTemplate { get; set; }
-  [Parameter] public SeparatorDisplay SeparatorDisplay { get; set; } = SeparatorDisplay.None;
 
   public string Id { get; } = Guid.NewGuid().ToString();
   public string Address { get; private set; }

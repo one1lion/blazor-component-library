@@ -9,21 +9,21 @@
                 NewItemMethod="Group.NewChildItem"
                 SeparatorDisplay="SeparatorDisplay.Between">
   <DisplayTemplate Context="curItem">
-    <WrappedItemTemplate Item="curItem as IItem" />
+    <WrappedItemTemplate Item="curItem.Item as IItem" />
   </DisplayTemplate>
   <EditTemplate Context="curItem">
-    <WrappedItemTemplate Item="curItem as IItem" EditMode="true" />
+    <WrappedItemTemplate Item="curItem.Item as IItem" EditMode="true" />
   </EditTemplate>
   <SeparatorTemplate Context="curItem">
     <div class="and-or-toggle" onselect="preventDefault();">
-      <div class="@(curItem.AndWithNext ? "selected" : "")"
+      <div class="@(curItem.Item.AndWithNext ? "selected" : "")"
            onselect="preventDefault();"
-           @onclick="(async (e) => { if (!curItem.AndWithNext) {curItem.AndWithNext = !curItem.AndWithNext; } })">
+           @onclick="(async (e) => { if (!curItem.Item.AndWithNext) {curItem.Item.AndWithNext = !curItem.Item.AndWithNext; } })">
         And
       </div>
-      <div class="@(curItem.AndWithNext ? "" : "selected")"
+      <div class="@(curItem.Item.AndWithNext ? "" : "selected")"
            onselect="preventDefault();"
-           @onclick="(async (e) => { if (curItem.AndWithNext) { curItem.AndWithNext = !curItem.AndWithNext; } })">
+           @onclick="(async (e) => { if (curItem.Item.AndWithNext) { curItem.Item.AndWithNext = !curItem.Item.AndWithNext; } })">
         Or
       </div>
     </div>

@@ -1,0 +1,60 @@
+﻿@typeparam TItem
+
+<div class="draganddrop-controlbox">
+  @if (!IsItem && DisplayContent is { }) {
+    @DisplayContent
+  } else if (IsItem) {
+    @* TODO: remove dependence on bootstrap and open iconic *@
+    @if (EditMode || IsNewItem) {
+      if (EditContent is { }) {
+        @EditContent
+      } else {
+        <button type="button" class="oi oi-check text-success" title="Save" @onclick="ConfirmSave"></button>
+        <button type="button" class="oi oi-trash text-danger" title="Cancel" @onclick="CancelSave"></button>
+      }
+    } else {
+      if (DisplayContent is { }) {
+        @DisplayContent
+      } else {
+        <button type="button" class="oi oi-pencil text-warning" title="Edit" @onclick="BeginEdit"></button>
+        <button type="button" class="oi oi-x text-danger" title="Delete" @onclick="DeleteItem"></button>
+      }
+    }
+  }
+</div>
+
+@code {
+  [CascadingParameter(Name = "State")]
+  public DnDState<TItem> DnDState { get; set; }
+
+  [Parameter] public RenderFragment DisplayContent { get; set; }
+  [Parameter] public RenderFragment EditContent { get; set; }
+  [Parameter] public bool IsItem { get; set; } = true;
+  [Parameter] public bool EditMode { get; set; }
+  [Parameter] public bool IsNewItem { get; set; }
+  [Parameter] public IDnDContainer<TItem> Parent { get; set; }
+  [Parameter] public int IndexInParent { get; set; }
+
+  public string Id { get; } = Guid.NewGuid().ToString();
+  public string Address { get; private set; }
+
+  protected override void OnParametersSet() {
+    Address = $"{(Parent?.Address ?? Id)}.{IndexInParent}";
+  }
+
+  async Task BeginEdit(MouseEventArgs e) {
+    if (DnDState.BaseContainer.OnItemEditClicked.HasDelegate) { await DnDState.BaseContainer.OnItemEditClicked.InvokeAsync(null); }
+  }
+
+  async Task ConfirmSave(MouseEventArgs e) {
+    if (DnDState.BaseContainer.OnItemEditClicked.HasDelegate) { await DnDState.BaseContainer.OnItemSaveClicked.InvokeAsync(null); }
+  }
+
+  async Task CancelSave(MouseEventArgs e) {
+    if (DnDState.BaseContainer.OnItemEditClicked.HasDelegate) { await DnDState.BaseContainer.OnItemCancelClicked.InvokeAsync(null); }
+  }
+
+  async Task DeleteItem(MouseEventArgs e) {
+    if (DnDState.BaseContainer.OnItemEditClicked.HasDelegate) { await DnDState.BaseContainer.OnItemDeleteClicked.InvokeAsync(null); }
+  }
+}

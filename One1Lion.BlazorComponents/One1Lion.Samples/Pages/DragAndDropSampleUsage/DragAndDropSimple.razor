@@ -1,20 +1,25 @@
 ﻿@using One1Lion.BlazorComponents.DragAndDrop
 
 <h4>With no display template</h4>
-<DragAndDrop Children="items" />
 
-<h4>With a display template</h4>
-<DragAndDrop Children="items">
-  @* TODO: figure out how to use grouping when the properties are not what determines the groups
-    - we might need an internal structure for grouping things when we are using flat lists like List<string> as TItem
-  *@
-  <DisplayTemplate Context="curItem">
-    This is text padding the item: @curItem
-  </DisplayTemplate>
-  <EditTemplate Context="curItem">
-    <label>Type what you would like here: <input type="text" @bind="curItem" @bind:event="oninput" /></label>
-  </EditTemplate>
-</DragAndDrop>
+@if (items is null || items.Count == 0) {
+  <p>Loading...</p>
+} else {
+  <DragAndDrop Children="items" />
+
+  <h4>With a display template</h4>
+  <DragAndDrop Children="items">
+    @* TODO: figure out how to use grouping when the properties are not what determines the groups
+      - we might need an internal structure for grouping things when we are using flat lists like List<string> as TItem
+    *@
+    <DisplayTemplate Context="curItem">
+      This is text padding the item: @curItem.Item
+    </DisplayTemplate>
+    <EditTemplate Context="curItem">
+      <label>Type what you would like here: <input type="text" @bind="curItem.Item" @bind:event="oninput" /></label>
+    </EditTemplate>
+  </DragAndDrop>
+}
 
 @code {
   List<string> items = new List<string>();

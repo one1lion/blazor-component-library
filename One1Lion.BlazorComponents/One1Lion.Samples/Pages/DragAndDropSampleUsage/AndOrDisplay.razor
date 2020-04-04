@@ -1,0 +1,35 @@
+﻿@using One1Lion.Samples.SharedLib.Search.QueryExpressions
+
+<div class="and-or-toggle" onselect="preventDefault();">
+  @if (Item is null) {
+    <div onselect="preventDefault();"
+         @onclick="(async (e) => { await ChangeValue(true); })">
+      And
+    </div>
+    <div onselect="preventDefault();"
+         @onclick="(async (e) => { await ChangeValue(false); })">
+      Or
+    </div>
+  } else {
+    <div class="@(Item.AndWithNext ? "selected" : "")"
+         onselect="preventDefault();"
+         @onclick="(async (e) => { await ChangeValue(true); })">
+      And
+    </div>
+    <div class="@(Item.AndWithNext ? "" : "selected")"
+         onselect="preventDefault();"
+         @onclick="(async (e) => { await ChangeValue(false); })">
+      Or
+    </div>
+  }
+</div>
+
+@code {
+  [Parameter] public IQueryElement Item { get; set; }
+  [Parameter] public EventCallback<bool> OnChange { get; set; }
+
+  async Task ChangeValue(bool andWithNext) {
+    Item.AndWithNext = andWithNext;
+    if(OnChange.HasDelegate) { await OnChange.InvokeAsync(andWithNext); }
+  }
+}

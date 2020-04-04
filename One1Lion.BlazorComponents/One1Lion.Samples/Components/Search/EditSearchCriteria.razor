@@ -145,6 +145,7 @@
   }
 
   void HandleEditValueChanged(ChangeEventArgs e, bool firstVal = true) {
+    Console.WriteLine($"Value changed.  Item.Values is null: {Item.Values is null}");
     if (Item.Values is null) {
       Item.Values = new List<object>() { null };
     }
@@ -159,6 +160,7 @@
       Item.Values[0] = e.Value;
     }
 
+    Console.WriteLine($"Item.Value: {string.Join(", ", Item.Values)}");
   }
 
   void HandleFieldSelectionMade(TypeAheadItem selectedItem) {

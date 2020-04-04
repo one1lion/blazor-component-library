@@ -9,20 +9,19 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
       Id = Guid.NewGuid().ToString();
     }
 
+    #region Drag And Drop State specific properties
     public string Id { get; set; }
-    public IDnDContainer<TItem> BaseContainer { get; set; }
+    public DragAndDrop<TItem> BaseContainer { get; set; }
     public DnDPayload<TItem> Payload { get; set; }
     public DnDPayload<TItem> Target { get; set; }
-    public DnDPayload<TItem> NewItemPayload { get; set; }
-    public Func<TItem> NewGroupMethod { get; set; }
-    public Func<TItem, TItem> NewItemMethod { get; set; }
     public TItem NewItem { get; set; }
-
+    public DnDPayload<TItem> NewItemPayload { get; set; }
     public List<string> EditItemAddresses { get; set; } = new List<string>();
 
-    public string ChildrenPropertyName { get; set; }
-
+    #region and Event
     public event Action OnNotifyStateChanged;
+    #endregion
+    #endregion
 
     public void SetPayload(IDnDContainer<TItem> parent, TItem item, IDnDElement<TItem> wrappingElement) {
       SetPayload(parent, parent?.Children?.IndexOf(item) ?? -1, wrappingElement);
@@ -75,7 +74,7 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
       };
       // TODO: Need to figure out how to add a new item when we are not supplying a parent
       var parentObj = parent is null || parent == BaseContainer ? default : parent.Parent.Children[parent.IndexInParent];
-      NewItem = NewItemMethod is { } ? NewItemMethod.Invoke(parentObj) : default;
+      NewItem = BaseContainer.NewItemMethod is { } ? BaseContainer.NewItemMethod.Invoke(parentObj) : default;
       NotifyStateChanged();
     }
 
@@ -106,14 +105,14 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
       // Get the Payload item in the original parent
       var payloadItem = Payload.Item;
       // TODO: Verify group is allowed if the dropToGroup argument is true
-      if (dropToGroup && NewGroupMethod is { }) {
+      if (dropToGroup && BaseContainer.NewGroupMethod is { }) {
         // Target Item is only relevant when grouping
         var targetItem = Target.Item;
-        var newGroup = NewGroupMethod.Invoke();
-        var childProp = string.IsNullOrWhiteSpace(ChildrenPropertyName) ? null : newGroup.GetType().GetProperty(ChildrenPropertyName);
+        var newGroup = BaseContainer.NewGroupMethod.Invoke();
+        var childProp = string.IsNullOrWhiteSpace(BaseContainer.ChildrenPropertyName) ? null : newGroup.GetType().GetProperty(BaseContainer.ChildrenPropertyName);
         if (childProp is null) {
           // TODO: Handle null child property of new group
-          throw new MissingMemberException($"The specified NewGroupMethod produced an object that does not have a Children property with the specified ChildrenPropertyName ({ChildrenPropertyName})");
+          throw new MissingMemberException($"The specified NewGroupMethod produced an object that does not have a Children property with the specified ChildrenPropertyName ({BaseContainer.ChildrenPropertyName})");
         }
         var children = new List<TItem>();
         children.Add(Target.GroupAsFirst ? payloadItem : targetItem);

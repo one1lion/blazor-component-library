@@ -1,21 +1,15 @@
 ﻿@typeparam TItem
-
-<div class="draganddrop-separator @(Position == SeparatorPosition.Before ? "separator-before" : "separator-after")">
-  @if (DnDState.BaseContainer.SeparatorTemplate is { }) {
-    @DnDState.BaseContainer.SeparatorTemplate(this)
-  } else {
-    <hr />
-  }
+<div class="draganddrop-title">
+  @ChildContent
 </div>
 
 @code {
   [CascadingParameter(Name = "State")]
   public DnDState<TItem> DnDState { get; set; }
+  [Parameter] public RenderFragment ChildContent { get; set; }
 
-  [Parameter] public TItem Item { get; set; }
   [Parameter] public IDnDContainer<TItem> Parent { get; set; }
   [Parameter] public int IndexInParent { get; set; }
-  [Parameter] public SeparatorPosition Position { get; set; }
 
   public string Id { get; } = Guid.NewGuid().ToString();
   public string Address { get; private set; }
