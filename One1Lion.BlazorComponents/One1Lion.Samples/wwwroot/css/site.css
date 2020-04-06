@@ -158,3 +158,6 @@ app {
       color: #fff; }
     .and-or-toggle div:not(.selected) {
       cursor: pointer; }
+
+.queryparameter.edit {
+  display: flex; }
