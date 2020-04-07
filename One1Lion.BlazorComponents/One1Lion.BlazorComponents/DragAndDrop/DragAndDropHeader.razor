@@ -2,17 +2,35 @@
 
 <CascadingValue Value=DnDState Name="State">
   <div class="draganddrop-header">
-    @if (DnDState.BaseContainer.GroupTitleTemplate is { }) {
-      <DragAndDropTitle TItem="TItem" Parent="Parent" IndexInParent="IndexInParent">
-        @DnDState.BaseContainer.GroupTitleTemplate(Model)
-      </DragAndDropTitle>
-    }
-    @if (DnDState.BaseContainer.GroupControlBoxTemplate is { }) {
-      <DragAndDropControlBox TItem="TItem" Parent="Parent" IndexInParent="IndexInParent">
-        <DisplayContent>
-          @DnDState.BaseContainer.GroupControlBoxTemplate(Model)
-        </DisplayContent>
-      </DragAndDropControlBox>
+    @if (parentType == typeof(DragAndDrop<TItem>)) {
+      // This is the main container
+      // This is a header for a nested group
+      if (DnDState.BaseContainer.MainTitle is { }) {
+        <DragAndDropTitle TItem="TItem" Parent="Parent" IndexInParent="IndexInParent">
+          @DnDState.BaseContainer.MainTitle(this)
+        </DragAndDropTitle>
+      }
+      if (DnDState.BaseContainer.MainControlBox is { }) {
+        <DragAndDropControlBox TItem="TItem" Parent="Parent" IndexInParent="IndexInParent">
+          <DisplayContent>
+            @DnDState.BaseContainer.MainControlBox(this)
+          </DisplayContent>
+        </DragAndDropControlBox>
+      }
+    } else if (parentType == typeof(DragAndDropGroup<TItem>)) {
+      // This is a header for a nested group
+      if (DnDState.BaseContainer.GroupTitleTemplate is { }) {
+        <DragAndDropTitle TItem="TItem" Parent="Parent" IndexInParent="IndexInParent">
+          @DnDState.BaseContainer.GroupTitleTemplate(this)
+        </DragAndDropTitle>
+      }
+      if (DnDState.BaseContainer.GroupControlBoxTemplate is { }) {
+        <DragAndDropControlBox TItem="TItem" Parent="Parent" IndexInParent="IndexInParent">
+          <DisplayContent>
+            @DnDState.BaseContainer.GroupControlBoxTemplate(this)
+          </DisplayContent>
+        </DragAndDropControlBox>
+      }
     }
   </div>
 </CascadingValue>
@@ -29,7 +47,10 @@
   public string Id { get; } = Guid.NewGuid().ToString();
   public string Address { get; private set; }
 
+  Type parentType = null;
+
   protected override void OnParametersSet() {
     Address = $"{(Parent?.Address ?? Id)}.{IndexInParent}";
+    parentType = Parent?.GetType();
   }
 }

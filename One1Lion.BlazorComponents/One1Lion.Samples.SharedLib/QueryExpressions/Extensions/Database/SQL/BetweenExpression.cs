@@ -7,7 +7,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL range expression,
   /// e.g. [QueryField] BETWEEN @startValue AND @endValue
   /// </summary>
-  public class BetweenExpression : DBExpressions.BetweenExpression, ISQLElement {
+  public class BetweenExpression : DBExpressions.BetweenExpression, ISQLExpressionItem {
     public BetweenExpression() : base() { }
 
     public BetweenExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

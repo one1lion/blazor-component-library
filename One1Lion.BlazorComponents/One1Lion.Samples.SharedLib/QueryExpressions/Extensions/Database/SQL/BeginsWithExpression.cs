@@ -7,7 +7,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL Like expression using the entered value with the wildcard (%) token at the end,
   /// e.g. [QueryField] Like 'some_value%'
   /// </summary>
-  public class BeginsWithExpression : DBExpressions.BeginsWithExpression, ISQLElement {
+  public class BeginsWithExpression : DBExpressions.BeginsWithExpression, ISQLExpressionItem {
     public BeginsWithExpression() : base() { }
 
     public BeginsWithExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

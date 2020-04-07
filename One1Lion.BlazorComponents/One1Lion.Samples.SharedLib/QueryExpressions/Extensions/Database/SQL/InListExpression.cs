@@ -8,7 +8,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL in list expression,
   /// e.g. [QueryField] IN (_comma_separated_list_of_values_)
   /// </summary>
-  public class InListExpression : DBExpressions.InListExpression, ISQLElement {
+  public class InListExpression : DBExpressions.InListExpression, ISQLExpressionItem {
     public InListExpression() : base() { }
 
     public InListExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

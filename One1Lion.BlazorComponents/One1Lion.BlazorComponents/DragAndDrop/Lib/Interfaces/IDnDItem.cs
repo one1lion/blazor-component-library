@@ -10,5 +10,4 @@ namespace One1Lion.BlazorComponents.DragAndDrop {
   public interface IDnDItem<TItem> : IDnDElement<TItem> {
     TItem WrappedItem { get; set; }
   }
-
 }

@@ -8,7 +8,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL not in list expression,
   /// e.g. [QueryField] NOT IN (_comma_separated_list_of_values_)
   /// </summary>
-  public class NotInListExpression : DBExpressions.NotInListExpression, ISQLElement {
+  public class NotInListExpression : DBExpressions.NotInListExpression, ISQLExpressionItem {
     public NotInListExpression() : base() { }
 
     public NotInListExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

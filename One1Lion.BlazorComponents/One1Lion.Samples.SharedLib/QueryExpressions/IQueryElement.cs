@@ -12,7 +12,7 @@ namespace One1Lion.Samples.SharedLib.Search.QueryExpressions {
     /// <summary>
     /// A Unique Identifier for this Expression
     /// </summary>
-    string Id { get; }
+    string Id { get; set; }
     /// <summary>
     /// Whether or not to AND this expression with the next expression if there is one
     /// </summary>

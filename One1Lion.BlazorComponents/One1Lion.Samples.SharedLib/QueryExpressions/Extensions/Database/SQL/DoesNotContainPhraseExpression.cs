@@ -8,7 +8,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// e.g. [QueryField] Not Like '_expression_with_like_pattern_'
   /// </summary>
   /// <remarks>If there is only one value, this is the same as the LikeExpression</remarks>
-  public class DoesNotContainPhraseExpression : DBExpressions.DoesNotContainPhraseExpression, ISQLElement {
+  public class DoesNotContainPhraseExpression : DBExpressions.DoesNotContainPhraseExpression, ISQLExpressionItem {
     public DoesNotContainPhraseExpression() : base() { }
 
     public DoesNotContainPhraseExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

@@ -32,7 +32,7 @@
   [Parameter] public bool IsItem { get; set; } = true;
   [Parameter] public bool EditMode { get; set; }
   [Parameter] public bool IsNewItem { get; set; }
-  [Parameter] public IDnDContainer<TItem> Parent { get; set; }
+  [Parameter] public IDnDElement<TItem> Parent { get; set; }
   [Parameter] public int IndexInParent { get; set; }
 
   public string Id { get; } = Guid.NewGuid().ToString();
@@ -43,18 +43,18 @@
   }
 
   async Task BeginEdit(MouseEventArgs e) {
-    if (DnDState.BaseContainer.OnItemEditClicked.HasDelegate) { await DnDState.BaseContainer.OnItemEditClicked.InvokeAsync(null); }
+    await DnDState.BeginEditItem(Parent as DragAndDropItem<TItem>);
   }
 
   async Task ConfirmSave(MouseEventArgs e) {
-    if (DnDState.BaseContainer.OnItemEditClicked.HasDelegate) { await DnDState.BaseContainer.OnItemSaveClicked.InvokeAsync(null); }
+    await DnDState.ConfirmSaveItem(Parent as DragAndDropItem<TItem>);
   }
 
   async Task CancelSave(MouseEventArgs e) {
-    if (DnDState.BaseContainer.OnItemEditClicked.HasDelegate) { await DnDState.BaseContainer.OnItemCancelClicked.InvokeAsync(null); }
+    await DnDState.CancelSaveItem(Parent as DragAndDropItem<TItem>);
   }
 
   async Task DeleteItem(MouseEventArgs e) {
-    if (DnDState.BaseContainer.OnItemEditClicked.HasDelegate) { await DnDState.BaseContainer.OnItemDeleteClicked.InvokeAsync(null); }
+    await DnDState.DeleteItem(Parent as DragAndDropItem<TItem>);
   }
 }

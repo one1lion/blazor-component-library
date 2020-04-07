@@ -11,6 +11,7 @@ namespace One1Lion.Samples.SharedLib.Search.DBExpressions {
   /// <see cref="DBElement"/>s
   /// </summary>
   public interface IDBExpressionGroup : IDBElement, IQueryExpressionGroup {
+
     void AddChild(DBElement toAdd, int atIndex = -1);
   }
 }

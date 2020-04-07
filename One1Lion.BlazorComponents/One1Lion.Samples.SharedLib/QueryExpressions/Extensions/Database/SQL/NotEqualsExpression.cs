@@ -11,7 +11,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// If the list of values is null or has no items, this represents the [QueryField] Is Not Null expression.
   /// It also only uses the first value in the list regardless of how many elements it holds.
   /// </remarks>
-  public class NotEqualsExpression : DBExpressions.NotEqualsExpression, ISQLElement {
+  public class NotEqualsExpression : DBExpressions.NotEqualsExpression, ISQLExpressionItem {
     public NotEqualsExpression() : base() { }
 
     public NotEqualsExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

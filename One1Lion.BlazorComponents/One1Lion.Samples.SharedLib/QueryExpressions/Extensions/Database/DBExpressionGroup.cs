@@ -31,15 +31,15 @@ namespace One1Lion.Samples.SharedLib.Search.DBExpressions {
 
     public void AddChild(DBElement toAdd, int atIndex = -1) {
       if (Children is null) { Children = new List<IQueryElement>(); }
-      if (atIndex < 0) { atIndex = Children.Count; }
+      if(atIndex < 0) { atIndex = Children.Count; }
       atIndex = Math.Min(Children.Count, Math.Max(0, atIndex));
       Children.Insert(atIndex, toAdd);
       toAdd.Parent = this;
     }
-
+    
     public void AddChild(IQueryElement toAdd, int atIndex = -1) {
       if (Children is null) { Children = new List<IQueryElement>(); }
-      if (atIndex < 0) { atIndex = Children.Count; }
+      if(atIndex < 0) { atIndex = Children.Count; }
       atIndex = Math.Min(Children.Count, Math.Max(0, atIndex));
       Children.Insert(atIndex, toAdd);
       toAdd.Parent = this;
@@ -54,7 +54,7 @@ namespace One1Lion.Samples.SharedLib.Search.DBExpressions {
     }
 
     public static IQueryElement NewItem<TParent>(TParent parent) where TParent : IQueryElement {
-      return parent is null ? new DBExpressionItem() : IQueryExpressionGroup.NewItem(parent as IQueryExpressionGroup);
+      return parent is null ? new DBExpressionItem() : IQueryExpressionGroup.NewItem(parent as IQueryExpressionGroup); 
     }
 
     public static IQueryElement NewGroup() {

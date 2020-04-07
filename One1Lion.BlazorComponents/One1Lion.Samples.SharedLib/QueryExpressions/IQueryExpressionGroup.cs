@@ -15,6 +15,7 @@ namespace One1Lion.Samples.SharedLib.Search.QueryExpressions {
     /// Whether or not this group should be "Not"ed
     /// </summary>
     bool NotGroup { get; set; }
+    string Name { get; set; }
 
     /// <summary>
     /// The <see cref="IQueryElement" />s 
@@ -24,7 +25,7 @@ namespace One1Lion.Samples.SharedLib.Search.QueryExpressions {
 
     void AddChild(IQueryElement toAdd, int atIndex = -1);
 
-    public IQueryElement NewItem();
+    IQueryElement NewItem();
 
     public static IQueryElement NewItem<TParent>(TParent parent) where TParent : IQueryElement, IQueryExpressionGroup {
       return parent is null ? new DBExpressionItem() : parent.NewItem();

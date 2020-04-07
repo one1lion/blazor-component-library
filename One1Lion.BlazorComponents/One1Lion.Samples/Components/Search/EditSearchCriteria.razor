@@ -22,7 +22,7 @@
                  placeholder="Type or select an expression" />
       if (Item.ExpressionType != ExpressionType.NotSet) {
         var qf = QueryableFields.FirstOrDefault(qf => qf.QueryableFieldInfo.DisplayName == Item.QueryField || qf.DbField.FieldName == Item.QueryField);
-        var fieldType = Type.GetType(qf.TypeName);
+        var fieldType = qf is null ? null : Type.GetType(qf.TypeName);
         if (fieldType is null) {
           fieldType = typeof(object);
         } else {
@@ -34,7 +34,7 @@
         } catch {
           fieldTypeCode = TypeCode.Object;
         }
-        if (qf.QueryableFieldInfo.IsLookup) {
+        if (qf?.QueryableFieldInfo?.IsLookup ?? false) {
           // TODO: Handle is lookup
           <span class="oi oi-list">Lookup Values Placeholder</span>
         } else {
@@ -145,7 +145,6 @@
   }
 
   void HandleEditValueChanged(ChangeEventArgs e, bool firstVal = true) {
-    Console.WriteLine($"Value changed.  Item.Values is null: {Item.Values is null}");
     if (Item.Values is null) {
       Item.Values = new List<object>() { null };
     }
@@ -159,8 +158,6 @@
     } else {
       Item.Values[0] = e.Value;
     }
-
-    Console.WriteLine($"Item.Value: {string.Join(", ", Item.Values)}");
   }
 
   void HandleFieldSelectionMade(TypeAheadItem selectedItem) {

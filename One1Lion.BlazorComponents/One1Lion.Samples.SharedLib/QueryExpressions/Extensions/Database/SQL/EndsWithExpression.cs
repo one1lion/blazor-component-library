@@ -7,7 +7,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL Like expression,
   /// e.g. [QueryField] Like '%some_value'
   /// </summary>
-  public class EndsWithExpression : DBExpressions.EndsWithExpression, ISQLElement {
+  public class EndsWithExpression : DBExpressions.EndsWithExpression, ISQLExpressionItem {
     public EndsWithExpression() : base() { }
 
     public EndsWithExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

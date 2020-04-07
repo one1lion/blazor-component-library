@@ -23,6 +23,19 @@
       @if (Children is null) {
         <p>Loading...</p>
       } else {
+        if (Children.Count == 0) {
+          if (DnDState.BaseContainer.AllowNewItem && DnDState.BaseContainer.EditTemplate is { }) {
+            <DragAndDropTarget TItem="TItem"
+                               IndexInParent="0"
+                               Parent="this"
+                               IsDropAfter="false" />
+          } else {
+            <DragAndDropTarget TItem="TItem"
+                               IndexInParent="0"
+                               Parent="this"
+                               IsDropAfter="false" />
+          }
+        }
         for (var i = 0; i < Children.Count; i++) {
           if (Children[i] is { }) {
             if (new[] { SeparatorDisplay.BeforeOnly, SeparatorDisplay.BeforeAndAfter }.Contains(DnDState.BaseContainer.SeparatorDisplay) && DnDState.BaseContainer.SeparatorTemplate is { }) {
@@ -85,6 +98,7 @@
   [Parameter] public List<TItem> Children { get; set; }
   [Parameter] public IDnDContainer<TItem> Parent { get; set; }
   [Parameter] public int IndexInParent { get; set; }
+  public TItem ParentObj => Parent is { } ? Parent.Children[IndexInParent] : default;
 
   public string Id { get; } = Guid.NewGuid().ToString();
   public string Address { get; private set; }

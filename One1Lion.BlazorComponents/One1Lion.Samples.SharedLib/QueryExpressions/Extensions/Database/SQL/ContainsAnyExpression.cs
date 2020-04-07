@@ -9,7 +9,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// e.g. [QueryField] Like '%val1%' Or [QueryField] Like '%val2%' Or [QueryField] Like ...
   /// </summary>
   /// <remarks>If there is only one value, this is the same as the LikeExpression</remarks>
-  public class ContainsAnyExpression : DBExpressions.ContainsAnyExpression, ISQLElement {
+  public class ContainsAnyExpression : DBExpressions.ContainsAnyExpression, ISQLExpressionItem {
     public ContainsAnyExpression() : base() { }
 
     public ContainsAnyExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

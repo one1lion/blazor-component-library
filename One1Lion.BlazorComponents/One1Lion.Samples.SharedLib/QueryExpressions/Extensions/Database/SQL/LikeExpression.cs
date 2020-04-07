@@ -7,7 +7,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL Like expression,
   /// e.g. [QueryField] Like '_expression_with_like_pattern_'
   /// </summary>
-  public class LikeExpression : DBExpressions.LikeExpression, ISQLElement {
+  public class LikeExpression : DBExpressions.LikeExpression, ISQLExpressionItem {
     public LikeExpression() : base() { }
 
     public LikeExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

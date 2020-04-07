@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 /// <summary>
 /// Defines the available Database Expressions for generating Where Clauses
 /// </summary>
@@ -46,6 +47,38 @@ namespace One1Lion.Samples.SharedLib.Search.QueryExpressions {
     OnOrBefore,
     OtherExtension,
     Default = NotSet
+  }
+
+  public class ExpressionTypeFunctions {
+    public static Type GetTypeFromExpressionType(ExpressionType expressionType) => expressionType switch
+    {
+      ExpressionType.After => typeof(DBExpressions.AfterExpression),
+      ExpressionType.Before => typeof(DBExpressions.BeforeExpression),
+      ExpressionType.BeginsWith => typeof(DBExpressions.BeginsWithExpression),
+      ExpressionType.Between => typeof(DBExpressions.BetweenExpression),
+      ExpressionType.ContainsAll => typeof(DBExpressions.ContainsAllExpression),
+      ExpressionType.ContainsAny => typeof(DBExpressions.ContainsAnyExpression),
+      ExpressionType.ContainsPhrase => typeof(DBExpressions.ContainsPhraseExpression),
+      ExpressionType.DoesNotContainPhrase => typeof(DBExpressions.DoesNotContainPhraseExpression),
+      ExpressionType.EndsWith => typeof(DBExpressions.EndsWithExpression),
+      ExpressionType.EqualTo => typeof(DBExpressions.EqualsExpression),
+      ExpressionType.GreaterThan => typeof(DBExpressions.GreaterThanExpression),
+      ExpressionType.GreaterThanOrEqualTo => typeof(DBExpressions.GreaterThanOrEqualToExpression),
+      ExpressionType.InList => typeof(DBExpressions.InListExpression),
+      ExpressionType.IsNotNull => typeof(DBExpressions.IsNotNullExpression),
+      ExpressionType.IsNull => typeof(DBExpressions.IsNullExpression),
+      ExpressionType.LessThan => typeof(DBExpressions.LessThanExpression),
+      ExpressionType.LessThanOrEqualTo => typeof(DBExpressions.LessThanOrEqualToExpression),
+      ExpressionType.Like => typeof(DBExpressions.LikeExpression),
+      ExpressionType.MissingAll => typeof(DBExpressions.MissingAllExpression),
+      ExpressionType.MissingAny => typeof(DBExpressions.MissingAnyExpression),
+      ExpressionType.NotEqualTo => typeof(DBExpressions.NotEqualsExpression),
+      ExpressionType.NotInList => typeof(DBExpressions.NotInListExpression),
+      ExpressionType.NotLike => typeof(DBExpressions.NotLikeExpression),
+      ExpressionType.OnOrAfter => typeof(DBExpressions.OnOrAfterExpression),
+      ExpressionType.OnOrBefore => typeof(DBExpressions.OnOrBeforeExpression),
+      _ => typeof(DBExpressions.DBExpressionItem)
+    };
   }
 
   public class ExpressionTypeDisplay {

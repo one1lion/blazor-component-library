@@ -7,7 +7,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL less than expression,
   /// e.g. [QueryField] < @value for non-dates
   /// </summary>
-  public class LessThanExpression : DBExpressions.LessThanExpression, ISQLElement {
+  public class LessThanExpression : DBExpressions.LessThanExpression, ISQLExpressionItem {
     public LessThanExpression() : base() { }
 
     public LessThanExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

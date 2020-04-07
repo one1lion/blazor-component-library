@@ -1,7 +1,10 @@
-﻿using System;
+﻿using One1Lion.BlazorComponents.SharedLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
   public class DnDState<TItem> {
@@ -186,6 +189,58 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
           parentsContainer.Children.RemoveAt(index);
         }
       }
+    }
+
+    // TODO: adding OnBeforeBeginEdit with possible preventDefault() to stop calling BeginEditItem
+
+    public async Task BeginEditItem(DragAndDropItem<TItem> item) {
+      if (EditItemAddresses is null) { EditItemAddresses = new List<string>(); }
+      if (!EditItemAddresses.Contains(item.Address)) { EditItemAddresses.Add(item.Address); }
+      var parentObj = item.Parent is null || item.Parent == BaseContainer ? default : item.Parent.ParentObj;
+      //item.EditItem = BaseContainer.NewItemMethod.Invoke(parentObj);
+      //// TODO: use the actual Parent property name for the supplied data structure
+      //Utils.CopyValues(item.Item, ref item.EditItem, new List<PropertyInfo>() { item.Item.GetType().GetProperty("Parent") });
+
+      item.EditItem = Utils.SimpleClone(item.Item);
+
+      item.EditMode = true;
+      NotifyStateChanged();
+      if (BaseContainer.OnItemEditClicked.HasDelegate) { await BaseContainer.OnItemEditClicked.InvokeAsync(null); }
+    }
+
+    public async Task ConfirmSaveItem(DragAndDropItem<TItem> item) {
+      if (item.IsNewItem) {
+        item.Parent.Children.Insert(item.IndexInParent, NewItem);
+        ClearNewItem();
+        item.ClearNewItemFlag();
+      } else {
+        //item.UpdateItem(item.EditItem);
+        var holdForRef = item.Item;
+        // TODO: use the actual Parent property name for the supplied data structure
+        Utils.CopyValues<TItem>(item.EditItem, ref holdForRef, new List<PropertyInfo>() { item.Item.GetType().GetProperty("Parent") });
+        item.UpdateItem(holdForRef);
+        item.EditItem = default;
+      }
+      if (EditItemAddresses.Contains(item.Address)) { EditItemAddresses.Remove(item.Address); }
+      item.EditMode = false;
+      NotifyStateChanged();
+      if (BaseContainer.OnItemSaveClicked.HasDelegate) { await BaseContainer.OnItemSaveClicked.InvokeAsync(null); }
+    }
+
+    public async Task CancelSaveItem(DragAndDropItem<TItem> item) {
+      if (item.IsNewItem) {
+        ClearNewItem();
+      } else {
+        item.EditItem = default;
+      }
+      if (EditItemAddresses.Contains(item.Address)) { EditItemAddresses.Remove(item.Address); }
+      item.EditMode = false;
+      if (BaseContainer.OnItemCancelClicked.HasDelegate) { await BaseContainer.OnItemCancelClicked.InvokeAsync(null); }
+    }
+
+    public async Task DeleteItem(DragAndDropItem<TItem> item) {
+      HandleDeleteItem(item);
+      if (BaseContainer.OnItemDeleteClicked.HasDelegate) { await BaseContainer.OnItemDeleteClicked.InvokeAsync(null); }
     }
 
     public void NotifyStateChanged() {

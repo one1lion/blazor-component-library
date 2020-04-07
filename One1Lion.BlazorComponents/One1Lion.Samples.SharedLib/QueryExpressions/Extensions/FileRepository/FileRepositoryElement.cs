@@ -8,11 +8,11 @@ namespace One1Lion.Samples.SharedLib.Search.FileRepositoryExpressions {
     public FileRepositoryElement() {
       Id = Guid.NewGuid().ToString();
     }
-    public string Id { get; private protected set; }
+    public string Id { get; set; }
 
     public bool AndWithNext { get; set; } = true;
     public IQueryExpressionGroup Parent { get; set; }
-    public FileRepositoryExpressionGroup FileRepositoryGroupParent => (FileRepositoryExpressionGroup)Parent;
+    public FileRepositoryExpressionGroup FileRepositoryGroupParent => Parent?.GetType()?.GetInterface(nameof(IFileRepositoryExpressionGroup)) is { } ? (FileRepositoryExpressionGroup)Parent : null;
 
     public virtual string FormattedDisplay() => "FileRepositoryElement";
 

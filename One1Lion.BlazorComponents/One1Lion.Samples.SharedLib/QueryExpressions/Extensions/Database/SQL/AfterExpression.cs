@@ -7,7 +7,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL greater than expression,
   /// e.g. [QueryField] > @value for dates
   /// </summary>
-  public class AfterExpression : DBExpressions.AfterExpression, ISQLElement {
+  public class AfterExpression : DBExpressions.AfterExpression, ISQLExpressionItem {
     public AfterExpression() : base() { }
 
     public AfterExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

@@ -7,7 +7,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL Like expression,
   /// e.g. [QueryField] Not Like '_expression_with_like_pattern_'
   /// </summary>
-  public class NotLikeExpression : DBExpressions.NotLikeExpression, ISQLElement {
+  public class NotLikeExpression : DBExpressions.NotLikeExpression, ISQLExpressionItem {
     public NotLikeExpression() : base() { }
 
     public NotLikeExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

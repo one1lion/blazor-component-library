@@ -7,7 +7,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL Like expression,
   /// e.g. [QueryField] Like '%some_value%'
   /// </summary>
-  public class ContainsPhraseExpression : DBExpressions.ContainsPhraseExpression, ISQLElement {
+  public class ContainsPhraseExpression : DBExpressions.ContainsPhraseExpression, ISQLExpressionItem {
     public ContainsPhraseExpression() : base() { }
 
     public ContainsPhraseExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

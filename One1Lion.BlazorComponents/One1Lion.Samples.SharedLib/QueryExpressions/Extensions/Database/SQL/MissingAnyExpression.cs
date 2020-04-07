@@ -9,7 +9,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// e.g. NOT ([QueryField] Like '%val1%' AND [QueryField] Like '%val2%' AND [QueryField] Like ...)
   /// </summary>
   /// <remarks>If there is only one value, this is the same as the LikeExpression</remarks>
-  public class MissingAnyExpression : DBExpressions.MissingAnyExpression, ISQLElement {
+  public class MissingAnyExpression : DBExpressions.MissingAnyExpression, ISQLExpressionItem {
     public MissingAnyExpression() : base() { }
 
     public MissingAnyExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

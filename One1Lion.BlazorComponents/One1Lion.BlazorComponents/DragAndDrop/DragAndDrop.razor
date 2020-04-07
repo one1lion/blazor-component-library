@@ -8,6 +8,19 @@
       @if (Children is null) {
         <p>Loading...</p>
       } else {
+        if (Children.Count == 0) {
+          if (AllowNewItem && EditTemplate is { }) {
+            <DragAndDropTarget TItem="TItem"
+                               IndexInParent="0"
+                               Parent="this"
+                               IsDropAfter="false" />
+          } else {
+            <DragAndDropTarget TItem="TItem"
+                               IndexInParent="0"
+                               Parent="this"
+                               IsDropAfter="false" />
+          }
+        }
         for (var i = 0; i < Children.Count; i++) {
           if (Children[i] is { }) {
             if (new[] { SeparatorDisplay.BeforeOnly, SeparatorDisplay.BeforeAndAfter }.Contains(SeparatorDisplay) && SeparatorTemplate is { }) {
@@ -77,12 +90,12 @@
   [Parameter] public RenderFragment<DragAndDropItem<TItem>> DisplayTemplate { get; set; }
   [Parameter] public RenderFragment<DragAndDropItem<TItem>> EditTemplate { get; set; }
   [Parameter] public RenderFragment<DragAndDropSeparator<TItem>> SeparatorTemplate { get; set; }
-  [Parameter] public RenderFragment<TItem> MainTitle { get; set; }
-  [Parameter] public RenderFragment<TItem> MainControlBox { get; set; }
-  [Parameter] public RenderFragment<TItem> GroupTitleTemplate { get; set; }
-  [Parameter] public RenderFragment<TItem> GroupControlBoxTemplate { get; set; }
-  [Parameter] public RenderFragment<TItem> ItemDisplayControlBoxTemplate { get; set; }
-  [Parameter] public RenderFragment<TItem> ItemEditControlBoxTemplate { get; set; }
+  [Parameter] public RenderFragment<DragAndDropHeader<TItem>> MainTitle { get; set; }
+  [Parameter] public RenderFragment<DragAndDropHeader<TItem>> MainControlBox { get; set; }
+  [Parameter] public RenderFragment<DragAndDropHeader<TItem>> GroupTitleTemplate { get; set; }
+  [Parameter] public RenderFragment<DragAndDropHeader<TItem>> GroupControlBoxTemplate { get; set; }
+  [Parameter] public RenderFragment<DragAndDropItem<TItem>> ItemDisplayControlBoxTemplate { get; set; }
+  [Parameter] public RenderFragment<DragAndDropItem<TItem>> ItemEditControlBoxTemplate { get; set; }
 
   [Parameter] public EventCallback OnItemSaveClicked { get; set; }
   [Parameter] public EventCallback OnItemCancelClicked { get; set; }
@@ -94,6 +107,7 @@
 
   public string Id { get; } = Guid.NewGuid().ToString();
   public IDnDContainer<TItem> Parent { get; set; } = null;
+  public TItem ParentObj => default;
   public int IndexInParent { get; set; } = -1;
   public string Address { get; private set; }
 

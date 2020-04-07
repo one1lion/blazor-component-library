@@ -7,7 +7,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL is null expression,
   /// e.g. [QueryField] is null
   /// </summary>
-  public class IsNullExpression : DBExpressions.IsNullExpression, ISQLElement {
+  public class IsNullExpression : DBExpressions.IsNullExpression, ISQLExpressionItem {
     public IsNullExpression() : base() { }
 
     public IsNullExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }

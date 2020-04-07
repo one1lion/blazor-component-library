@@ -7,7 +7,7 @@ namespace One1Lion.Samples.SharedLib.Search.SQLExpressions {
   /// Represents the SQL greater than or equal to expression,
   /// e.g. [QueryField] >= @value for non-dates
   /// </summary>
-  public class GreaterThanOrEqualToExpression : DBExpressions.GreaterThanOrEqualToExpression, ISQLElement {
+  public class GreaterThanOrEqualToExpression : DBExpressions.GreaterThanOrEqualToExpression, ISQLExpressionItem {
     public GreaterThanOrEqualToExpression() : base() { }
 
     public GreaterThanOrEqualToExpression(string id, int order, string field, List<object> vals) : base(id, order, field, vals) { }
