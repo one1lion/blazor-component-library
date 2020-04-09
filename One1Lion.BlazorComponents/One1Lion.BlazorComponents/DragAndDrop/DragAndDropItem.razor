@@ -108,8 +108,11 @@
   public string Id { get; } = Guid.NewGuid().ToString();
   public string Address { get; private set; }
 
-  protected override void OnParametersSet() {
+  protected override async Task OnParametersSetAsync() {
     Address = $"{(Parent?.Address ?? Id)}.{IndexInParent}";
+    if (!EditMode && (DnDState.EditItemAddresses?.Contains(Address) ?? false) && Item is { }) {
+      await DnDState.BeginEditItem(this);
+    }
   }
 
   public void ClearNewItemFlag() {

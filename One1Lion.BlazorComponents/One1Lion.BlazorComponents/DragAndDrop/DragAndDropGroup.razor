@@ -36,6 +36,7 @@
                                IsDropAfter="false" />
           }
         }
+        ChildElements.Clear();
         for (var i = 0; i < Children.Count; i++) {
           if (Children[i] is { }) {
             if (new[] { SeparatorDisplay.BeforeOnly, SeparatorDisplay.BeforeAndAfter }.Contains(DnDState.BaseContainer.SeparatorDisplay) && DnDState.BaseContainer.SeparatorTemplate is { }) {
@@ -56,6 +57,7 @@
                                  IsDropAfter="false" />
             }
             var childProp = string.IsNullOrWhiteSpace(DnDState.BaseContainer.ChildrenPropertyName) ? null : Children[i].GetType().GetProperty(DnDState.BaseContainer.ChildrenPropertyName);
+            IDnDElement<TItem> newChild = null;
             if (childProp is { }) {
               <DragAndDropGroup Item="Children[i]"
                                 Children="(List<TItem>)childProp.GetValue(Children[i])"
@@ -66,6 +68,7 @@
                                Parent="this"
                                IndexInParent="i" />
             }
+            if (newChild is { }) { ChildElements.Add(newChild); }
             if (DnDState.BaseContainer.AllowNewItem && DnDState.BaseContainer.EditTemplate is { }) {
               <DragAndDropTarget TItem="TItem"
                                  IndexInParent="i + 1"
@@ -98,7 +101,8 @@
   [Parameter] public List<TItem> Children { get; set; }
   [Parameter] public IDnDContainer<TItem> Parent { get; set; }
   [Parameter] public int IndexInParent { get; set; }
-  public TItem ParentObj => Parent is { } ? Parent.Children[IndexInParent] : default;
+  public TItem Model => Parent is { } && Parent.Children.Count > IndexInParent ? Parent.Children[IndexInParent] : default;
+  public List<IDnDElement<TItem>> ChildElements { get; private set; } = new List<IDnDElement<TItem>>();
 
   public string Id { get; } = Guid.NewGuid().ToString();
   public string Address { get; private set; }

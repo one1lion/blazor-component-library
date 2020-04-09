@@ -21,6 +21,7 @@
                                IsDropAfter="false" />
           }
         }
+        ChildElements.Clear();
         for (var i = 0; i < Children.Count; i++) {
           if (Children[i] is { }) {
             if (new[] { SeparatorDisplay.BeforeOnly, SeparatorDisplay.BeforeAndAfter }.Contains(SeparatorDisplay) && SeparatorTemplate is { }) {
@@ -41,16 +42,20 @@
                                  IsDropAfter="false" />
             }
             var childProp = string.IsNullOrWhiteSpace(ChildrenPropertyName) ? null : Children[i].GetType().GetProperty(ChildrenPropertyName);
+            IDnDElement<TItem> newChild = null;
             if (childProp is { }) {
               <DragAndDropGroup Item="Children[i]"
                                 Children="(List<TItem>)childProp.GetValue(Children[i])"
                                 Parent="this"
-                                IndexInParent="i" />
+                                IndexInParent="i"
+                                @ref="newChild" />
             } else {
               <DragAndDropItem Item="Children[i]"
                                Parent="this"
-                               IndexInParent="i" />
+                               IndexInParent="i"
+                               @ref="newChild" />
             }
+            if (newChild is { }) { ChildElements.Add(newChild); }
             if (AllowNewItem && EditTemplate is { }) {
               <DragAndDropTarget TItem="TItem"
                                  IndexInParent="i + 1"
@@ -78,6 +83,7 @@
 </CascadingValue>
 
 @code {
+  [Parameter] public TItem Model { get; set; }
   [Parameter] public List<TItem> Children { get; set; }
   [Parameter] public string ChildrenPropertyName { get; set; }
   [Parameter] public bool AllowGrouping { get; set; }
@@ -107,9 +113,11 @@
 
   public string Id { get; } = Guid.NewGuid().ToString();
   public IDnDContainer<TItem> Parent { get; set; } = null;
-  public TItem ParentObj => default;
   public int IndexInParent { get; set; } = -1;
   public string Address { get; private set; }
+  public List<IDnDElement<TItem>> ChildElements { get; private set; } = new List<IDnDElement<TItem>>();
+
+  bool parmsLoaded;
 
   protected override void OnInitialized() {
     DnDState.BaseContainer = this;
@@ -118,6 +126,18 @@
   }
 
   protected override void OnParametersSet() {
-
+    if (Model is { }) {
+      if (Children is { } && !parmsLoaded) {
+        throw new ArgumentException("Expected either the Model parameter or the Children parameter, but not both.");
+      } else if (string.IsNullOrWhiteSpace(ChildrenPropertyName)) {
+        throw new ArgumentException("When using the Model parameter, you must also specify the ChildrenPropertyName parameter to indicate which property of the Model's type should be used as the list of Children.");
+      }
+      var childProp = Model.GetType().GetProperty(ChildrenPropertyName);
+      if (childProp is null) {
+        throw new ArgumentException($"The specified ChildrenPropertyName '{ChildrenPropertyName}' could not be found in the Model's type ({Model.GetType()})");
+      }
+      Children = childProp.GetValue(Model) as List<TItem>;
+      parmsLoaded = true;
+    }
   }
 }

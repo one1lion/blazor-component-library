@@ -193,10 +193,15 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
 
     // TODO: adding OnBeforeBeginEdit with possible preventDefault() to stop calling BeginEditItem
 
+    public void SetEditMode(string forAddress) {
+      if (EditItemAddresses is null) { EditItemAddresses = new List<string>(); }
+      if (!EditItemAddresses.Contains(forAddress)) { EditItemAddresses.Add(forAddress); }
+    }
+
     public async Task BeginEditItem(DragAndDropItem<TItem> item) {
       if (EditItemAddresses is null) { EditItemAddresses = new List<string>(); }
       if (!EditItemAddresses.Contains(item.Address)) { EditItemAddresses.Add(item.Address); }
-      var parentObj = item.Parent is null || item.Parent == BaseContainer ? default : item.Parent.ParentObj;
+      var parentObj = item.Parent is null || item.Parent == BaseContainer ? default : item.Parent.Model;
       //item.EditItem = BaseContainer.NewItemMethod.Invoke(parentObj);
       //// TODO: use the actual Parent property name for the supplied data structure
       //Utils.CopyValues(item.Item, ref item.EditItem, new List<PropertyInfo>() { item.Item.GetType().GetProperty("Parent") });

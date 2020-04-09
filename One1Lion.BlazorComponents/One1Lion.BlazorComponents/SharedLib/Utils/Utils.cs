@@ -77,7 +77,7 @@ namespace One1Lion.BlazorComponents.SharedLib {
     }
 
     public static void CopyValues<T>(T fromObj, ref T toObj, List<PropertyInfo> ignoreProps = null) {
-      if (fromObj.GetType().GetTypeInfo().IsValueType) {
+      if (fromObj is null || fromObj.GetType().GetTypeInfo().IsValueType) {
         toObj = fromObj;
         return;
       }

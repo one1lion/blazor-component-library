@@ -34,3 +34,21 @@
 .queryparameter.edit {
   display: flex;
 }
+
+.group-type-changer {
+  border: none;
+  background: none;
+  font-size: .8em;
+  color: var(--light);
+}
+
+.draganddrop-body.main-body {
+  min-height: 768px !important;
+  height: 100%;
+}
+
+@media (max-height: 768px) {
+  .draganddrop-body.main-body {
+    min-height: 480px;
+  }
+}

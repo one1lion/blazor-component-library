@@ -4,6 +4,7 @@
 @using One1Lion.Samples.Data
 @using One1Lion.Samples.SharedLib.DbInfo
 @using One1Lion.Samples.SharedLib.Search.QueryExpressions
+@using One1Lion.Samples.SharedLib.Search.DBExpressions
 @using One1Lion.Samples.SharedLib.Search.FileRepositoryExpressions
 
 @inject HttpClient httpClient
@@ -16,36 +17,36 @@
 } else {
   <CascadingValue Value=dndState Name="State">
     <DragAndDrop Children="baseGroup.Children as List<IQueryElement>"
-                  ChildrenPropertyName="@nameof(IQueryExpressionGroup.Children)"
-                  AllowGrouping="true"
-                  NewGroupMethod="QueryExpressionGroup.NewGroup"
-                  AllowNewItem="true"
-                  NewItemMethod="QueryExpressionGroup.NewItem"
-                  SeparatorDisplay="SeparatorDisplay.Between">
+                 ChildrenPropertyName="@nameof(IQueryExpressionGroup.Children)"
+                 AllowGrouping="true"
+                 NewGroupMethod="QueryExpressionGroup.NewGroup"
+                 AllowNewItem="true"
+                 NewItemMethod="QueryExpressionGroup.NewItem"
+                 SeparatorDisplay="SeparatorDisplay.Between">
       <MainTitle Context="dndContainer">
         <h3>Search Criteria</h3>
       </MainTitle>
       <MainControlBox Context="dndContainer">
-        <button type="button" class="oi oi-aperture" title="Reset"></button>
+        <button type="button" class="oi oi-aperture" title="Reset" @onclick="ResetParameters"></button>
       </MainControlBox>
       <GroupTitleTemplate Context="curHeader">
         <h3>
           @(curHeader.Model?.GetType() is { } && curHeader.Model?.GetType().GetInterface(nameof(IFileRepositoryExpressionGroup)) is { } ? "File Repository" : "SQL Search")
-          @* TODO: Group Type Switcher *@
+          <button typeof="button" class="oi oi-aperture group-type-changer" title="Switch Type" @onclick="((e) => SwitchGroupType(e, curHeader.Parent))"></button>
         </h3>
       </GroupTitleTemplate>
       <GroupControlBoxTemplate Context="curHeader">
-        @if(curHeader.Model?.GetType() is { } && curHeader.Model?.GetType().GetInterface(nameof(IFileRepositoryExpressionGroup)) is { }) {
+        @if (curHeader.Model?.GetType() is { } && curHeader.Model?.GetType().GetInterface(nameof(IFileRepositoryExpressionGroup)) is { }) {
           // TODO: File Repository Group Control Box
         } else {
-          <button type="button" class="oi oi-aperture" title="Reset"></button>
-          <button type="button" class="oi oi-fullscreen-enter" title="Expand"></button>
-          <button type="button" class="oi oi-x text-danger" title="Remove"></button>
+          <button type="button" class="oi oi-aperture" title="Reset" @onclick="((e) => ResetGroup(e, curHeader.Parent))"></button>
+          <button type="button" class="oi oi-fullscreen-enter" title="Expand" @onclick="((e) => ExpandGroup(e, curHeader.Parent))"></button>
+          <button type="button" class="oi oi-x text-danger" title="Remove" @onclick="((e) => RemoveGroup(e, curHeader.Parent))"></button>
         }
       </GroupControlBoxTemplate>
       <ItemDisplayControlBoxTemplate Context="curItem">
         <button type="button" class="oi oi-pencil text-warning" title="Edit" @onclick="(async e => await dndState.BeginEditItem(curItem))"></button>
-        <button type="button" class="oi oi-x text-danger" title="Delete" @onclick="(async e => await dndState.DeleteItem(curItem))"></button>
+        <button type="button" class="oi oi-x text-danger" title="Delete" @onclick="(async e => { await dndState.DeleteItem(curItem); CheckForEmptyChildren(curItem.Parent); })"></button>
       </ItemDisplayControlBoxTemplate>
       <ItemEditControlBoxTemplate Context="curItem">
         <button type="button" class="oi oi-check text-success" title="Save" @onclick="(async e => await dndState.ConfirmSaveItem(curItem))"></button>
@@ -72,15 +73,97 @@
   DnDState<IQueryElement> dndState = new DnDState<IQueryElement>();
   List<DbFieldViewModel> dbFields { get; set; } = new List<DbFieldViewModel>();
 
+  bool displayNew;
+  bool editToggle;
+
   protected override async Task OnInitializedAsync() {
     baseGroup = QueryDataSampleGenerator.GenerateQueryExpressionGroup();
     dbFields = await QueryDataSampleGenerator.GenerateQueryableFields(httpClient);
     dndState.OnNotifyStateChanged += StateHasChanged;
   }
 
+  protected override void OnParametersSet() {
+    CheckForEmptyChildren();
+  }
+
+  #region Base Container Handlers
+  void ResetParameters(MouseEventArgs e) {
+    // TODO: Prompt for confirm reset
+    baseGroup.Children.Clear();
+    StateHasChanged();
+    CheckForEmptyChildren();
+  }
+  #endregion
+
+  #region Group Handlers
+  void SwitchGroupType(MouseEventArgs e, IDnDContainer<IQueryElement> group) {
+
+  }
+
+  void ResetGroup(MouseEventArgs e, IDnDContainer<IQueryElement> group) {
+    // TODO: Confirm reset group
+    var resetPar = group.Parent.Children[group.IndexInParent] as IQueryExpressionGroup;
+    resetPar.Children = new List<IQueryElement>();
+    if (resetPar.GetType() == typeof(FileRepositoryExpressionGroup)) {
+      resetPar.Children.Add(new FileRepositoryExpressionItem());
+    } else {
+      resetPar.Children.Add(new DBExpressionItem());
+    }
+  }
+
+  void ExpandGroup(MouseEventArgs e, IDnDContainer<IQueryElement> group) {
+
+  }
+
+  void RemoveGroup(MouseEventArgs e, IDnDContainer<IQueryElement> group) {
+    if ((group.Parent?.Children?.Count ?? 0) == 0) {
+      // TODO: Confirm delete group if it is not empty
+
+    }
+    var groupParent = group.Parent;
+    var groupIndexInParent = group.IndexInParent;
+    if (groupParent?.Children is { } && groupParent?.Children.Count > groupIndexInParent) {
+      groupParent.Children.RemoveAt(group.IndexInParent);
+      CheckForEmptyChildren();
+    }
+  }
+  #endregion
+
+  void CheckForEmptyChildren(IDnDContainer<IQueryElement> groupToCheck = null) {
+    if (groupToCheck is null) { groupToCheck = dndState.BaseContainer; }
+    if ((groupToCheck.Children?.Count ?? 0) == 0) {
+      if (groupToCheck == dndState.BaseContainer) {
+        baseGroup = new QueryExpressionGroup();
+        var sqlGroup = new DBExpressionGroup() {
+          Name = "SQL"
+        };
+        sqlGroup.AddChild(new DBExpressionItem());
+        baseGroup.AddChild(sqlGroup);
+        StateHasChanged();
+        dndState.SetEditMode($"{dndState.BaseContainer.Address}.0.0");
+      } else if (groupToCheck.Model?.GetType() == typeof(FileRepositoryExpressionItem)) {
+        groupToCheck.Children.Add(new FileRepositoryExpressionItem());
+      } else {
+        groupToCheck.Children.Add(new DBExpressionItem());
+      }
+      StateHasChanged();
+    }
+    // TODO: Possibly check each group for empty children
+  }
+
+  void ToggleDisplayNew() {
+    displayNew = !displayNew;
+    // TODO: Get the DragonDropState to update correctly when the DragonDropContainer parameter ShowGlobalAddNew value is changed
+    // Possibly make a method for toggling display global new in the container
+  }
+
   async Task ToggleAndOr(MouseEventArgs e, IQueryElement curElem) {
     curElem.AndWithNext = !curElem.AndWithNext;
     await InvokeAsync(() => StateHasChanged());
+  }
+
+  void ToggleEdit(MouseEventArgs e) {
+    editToggle = !editToggle;
   }
 
   void IDisposable.Dispose() {
