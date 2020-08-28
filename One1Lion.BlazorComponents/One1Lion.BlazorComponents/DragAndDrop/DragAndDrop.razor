@@ -88,6 +88,10 @@
   [Parameter] public string ChildrenPropertyName { get; set; }
   [Parameter] public bool AllowGrouping { get; set; }
   [Parameter] public bool AllowNewItem { get; set; }
+  /// <summary>Whether or not to automatically ungroup Groups when they have only one child</summary>
+  [Parameter] public bool AllowAutomaticUngroup { get; set; } = true;
+  /// <summary>Whether or not to automatically delete Groups when they become empty</summary>
+  [Parameter] public bool AllowAutomaticDeleteEmptyGroup { get; set; } = true;
   [Parameter] public SeparatorDisplay SeparatorDisplay { get; set; } = SeparatorDisplay.None;
 
   [Parameter] public Func<TItem> NewGroupMethod { get; set; }

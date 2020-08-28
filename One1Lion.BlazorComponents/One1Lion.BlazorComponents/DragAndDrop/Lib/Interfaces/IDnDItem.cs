@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace One1Lion.BlazorComponents.DragAndDrop {
+﻿namespace One1Lion.BlazorComponents.DragAndDrop {
   public interface IDnDItem : IDnDElement {
     object WrappedItem { get; set; }
   }

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
@@ -20,7 +19,6 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
     public TItem NewItem { get; set; }
     public DnDPayload<TItem> NewItemPayload { get; set; }
     public List<string> EditItemAddresses { get; set; } = new List<string>();
-
     #region and Event
     public event Action OnNotifyStateChanged;
     #endregion
@@ -176,13 +174,13 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
           // TODO: Handle invalid index in Parent's Parent container
           return;
         }
-        if (container.Children.Count == 1) {
+        if (container.Children.Count == 1 && (BaseContainer?.AllowAutomaticUngroup ?? true)) {
           // There is only one child, so it should be "ungrouped"
           // Remove the element at the index in the Payload's Parent's Parent (which is the Payload's previous Parent)
           parentsContainer.Children.RemoveAt(index);
           // Add the child to the Payload's Parent's Parent at the Payload's current/new Address
           parentsContainer.Children.Insert(index, container.Children[0]);
-        } else if (container.Children.Count == 0) {
+        } else if (container.Children.Count == 0 && (BaseContainer?.AllowAutomaticDeleteEmptyGroup ?? true)) {
           // Remove the element from its parent container
           // Use the address to get the index in the Parent 
           // -- NOTE: we might have an issue when the Target is in the same Parent as the Payload's Parent's Container
@@ -193,9 +191,13 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
 
     // TODO: adding OnBeforeBeginEdit with possible preventDefault() to stop calling BeginEditItem
 
-    public void SetEditMode(string forAddress) {
+    public void SetEditMode(string forAddress, bool editOn = true) {
       if (EditItemAddresses is null) { EditItemAddresses = new List<string>(); }
-      if (!EditItemAddresses.Contains(forAddress)) { EditItemAddresses.Add(forAddress); }
+      if (editOn) {
+        if (!EditItemAddresses.Contains(forAddress)) { EditItemAddresses.Add(forAddress); }
+      } else {
+        if (EditItemAddresses.Contains(forAddress)) { EditItemAddresses.Remove(forAddress); }
+      }
     }
 
     public async Task BeginEditItem(DragAndDropItem<TItem> item) {
@@ -207,8 +209,8 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
       //Utils.CopyValues(item.Item, ref item.EditItem, new List<PropertyInfo>() { item.Item.GetType().GetProperty("Parent") });
 
       item.EditItem = Utils.SimpleClone(item.Item);
-
       item.EditMode = true;
+      Console.WriteLine($"Edit mode set to true for {item.Address}");
       NotifyStateChanged();
       if (BaseContainer.OnItemEditClicked.HasDelegate) { await BaseContainer.OnItemEditClicked.InvokeAsync(null); }
     }
@@ -228,6 +230,7 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
       }
       if (EditItemAddresses.Contains(item.Address)) { EditItemAddresses.Remove(item.Address); }
       item.EditMode = false;
+      Console.WriteLine($"Edit mode set to false for {item.Address}");
       NotifyStateChanged();
       if (BaseContainer.OnItemSaveClicked.HasDelegate) { await BaseContainer.OnItemSaveClicked.InvokeAsync(null); }
     }
@@ -240,6 +243,7 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
       }
       if (EditItemAddresses.Contains(item.Address)) { EditItemAddresses.Remove(item.Address); }
       item.EditMode = false;
+      Console.WriteLine($"Edit mode set to false for {item.Address}");
       if (BaseContainer.OnItemCancelClicked.HasDelegate) { await BaseContainer.OnItemCancelClicked.InvokeAsync(null); }
     }
 

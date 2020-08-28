@@ -3,96 +3,98 @@
 @implements IDnDElement<TItem>
 
 <CascadingValue Value=DnDState Name="State">
-  @if (DnDState.BaseContainer.AllowGrouping && DnDState.Payload is { } // && !DnDState.Payload.IsContainer
+  <CascadingValue Value=Address Name="Address">
+    @if (DnDState.BaseContainer.AllowGrouping && DnDState.Payload is { } // && !DnDState.Payload.IsContainer
 && DnDState.Target is { } && !DnDState.Target.IsContainer && DnDState.Target.WrappingElement?.Id == Id
 && DnDState.Target.WrappingElement?.Id != DnDState.Payload.WrappingElement?.Id) {
-    // The payload is a DnDItem that is being dragged over another Item and grouping is allowed
-    <div class="draganddrop-item draganddrop-grouphovering"
-         @ondragenter:stopPropagation="true">
-      <div class="draganddrop-item draganddrop-dropfirst@(DnDState.Target.GroupAsFirst ? " target" : "")"
-           @ondragenter="((e) => { DnDState.SetTarget(Parent, IndexInParent, this, true); StateHasChanged(); })"
-           @ondragenter:stopPropagation="true"
-           @ondrop="(() => DnDState.HandleDropPayload(true))"
-           @ondrop:stopPropagation="true">
+      // The payload is a DnDItem that is being dragged over another Item and grouping is allowed
+      <div class="draganddrop-item draganddrop-grouphovering"
+           @ondragenter:stopPropagation="true">
+        <div class="draganddrop-item draganddrop-dropfirst@(DnDState.Target.GroupAsFirst ? " target" : "")"
+             @ondragenter="((e) => { DnDState.SetTarget(Parent, IndexInParent, this, true); StateHasChanged(); })"
+             @ondragenter:stopPropagation="true"
+             @ondrop="(() => DnDState.HandleDropPayload(true))"
+             @ondrop:stopPropagation="true">
+        </div>
+        <div class="draganddrop-item draganddrop-dropsecond@(!DnDState.Target.GroupAsFirst ? " target" : "")"
+             @ondragenter="((e) => { DnDState.SetTarget(Parent, IndexInParent, this, false); StateHasChanged(); })"
+             @ondragenter:stopPropagation="true"
+             @ondrop="(() => DnDState.HandleDropPayload(true))"
+             @ondrop:stopPropagation="true">
+        </div>
       </div>
-      <div class="draganddrop-item draganddrop-dropsecond@(!DnDState.Target.GroupAsFirst ? " target" : "")"
-           @ondragenter="((e) => { DnDState.SetTarget(Parent, IndexInParent, this, false); StateHasChanged(); })"
-           @ondragenter:stopPropagation="true"
-           @ondrop="(() => DnDState.HandleDropPayload(true))"
-           @ondrop:stopPropagation="true">
-      </div>
-    </div>
-  } else {
-    <div class="draganddrop-item@(DnDState.Payload?.WrappingElement?.Id == Id ? " picked-up" : "") @(DnDState.Target?.WrappingElement?.Id == Id ? " drag-hover" : "")"
-         draggable="@((!EditMode && !IsNewItem).ToString())"
-         @ondragstart="((e) => { DnDState.SetPayload(Parent, IndexInParent, this); StateHasChanged(); })"
-         @ondragstart:stopPropagation="true"
-         @ondragend="((e) => { DnDState.ClearPayload(); StateHasChanged(); })"
-         @ondragend:stopPropagation="true"
-         @ondrop="(() => DnDState.HandleDropPayload())"
-         @ondrop:stopPropagation="true"
-         @ondblclick="BeginEdit"
-         @ondragenter="((e) => { DnDState.SetTarget(Parent, IndexInParent, this); StateHasChanged(); })"
-         @ondragenter:stopPropagation="true">
+    } else {
+      <div class="draganddrop-item@(DnDState.Payload?.WrappingElement?.Id == Id ? " picked-up" : "") @(DnDState.Target?.WrappingElement?.Id == Id ? " drag-hover" : "")"
+           draggable="@((!EditMode && !IsNewItem && !DnDState.EditItemAddresses.Contains(Address)).ToString())"
+           @ondragstart="((e) => { DnDState.SetPayload(Parent, IndexInParent, this); StateHasChanged(); })"
+           @ondragstart:stopPropagation="true"
+           @ondragend="((e) => { DnDState.ClearPayload(); StateHasChanged(); })"
+           @ondragend:stopPropagation="true"
+           @ondrop="(() => DnDState.HandleDropPayload())"
+           @ondrop:stopPropagation="true"
+           @ondblclick="BeginEdit"
+           @ondragenter="((e) => { DnDState.SetTarget(Parent, IndexInParent, this); StateHasChanged(); })"
+           @ondragenter:stopPropagation="true">
 
-      @if (IsNewItem) {
-        // We should be guarenteed that the EditTemplate is something when IsNewItem is set
-        EditItem = Item;
-        @DnDState.BaseContainer.EditTemplate(this)
-      } else if (EditMode && DnDState.BaseContainer.EditTemplate is { }) {
-        @DnDState.BaseContainer.EditTemplate(this)
-      } else if (DnDState.BaseContainer.DisplayTemplate is { }) {
-        @DnDState.BaseContainer.DisplayTemplate(this)
-      } else {
-        @Item
-      }
+        @if (IsNewItem) {
+          // We should be guarenteed that the EditTemplate is something when IsNewItem is set
+          EditItem = Item;
+          @DnDState.BaseContainer.EditTemplate(this)
+        } else if (EditMode && DnDState.BaseContainer.EditTemplate is { }) {
+          @DnDState.BaseContainer.EditTemplate(this)
+        } else if (DnDState.BaseContainer.DisplayTemplate is { }) {
+          @DnDState.BaseContainer.DisplayTemplate(this)
+        } else {
+          @Item
+        }
 
-      @*
-        <DragAndDropControlBox TItem="TItem"
+        @*
+          <DragAndDropControlBox TItem="TItem"
+                                   Parent="Parent"
+                                   IndexInParent="IndexInParent"
+                                   EditMode="editMode"
+                                   IsItem="true"
+                                   IsNewItem="IsNewItem"
+                                   DisplayContent="DnDState.BaseContainer.ItemDisplayControlBoxTemplate is { } ? DnDState.BaseContainer.ItemDisplayControlBoxTemplate(this) : default"
+                                   EditContent="DnDState.BaseContainer.ItemEditControlBoxTemplate is { } ? DnDState.BaseContainer.ItemEditControlBoxTemplate(this) : default" />
+        *@
+
+        @if (DnDState.BaseContainer.ItemDisplayControlBoxTemplate is { } && DnDState.BaseContainer.ItemEditControlBoxTemplate is { }) {
+          <DragAndDropControlBox TItem="TItem"
                                  Parent="Parent"
                                  IndexInParent="IndexInParent"
-                                 EditMode="editMode"
+                                 EditMode="EditMode"
                                  IsItem="true"
                                  IsNewItem="IsNewItem"
-                                 DisplayContent="DnDState.BaseContainer.ItemDisplayControlBoxTemplate is { } ? DnDState.BaseContainer.ItemDisplayControlBoxTemplate(this) : default"
-                                 EditContent="DnDState.BaseContainer.ItemEditControlBoxTemplate is { } ? DnDState.BaseContainer.ItemEditControlBoxTemplate(this) : default" />
-      *@
-
-      @if (DnDState.BaseContainer.ItemDisplayControlBoxTemplate is { } && DnDState.BaseContainer.ItemEditControlBoxTemplate is { }) {
-        <DragAndDropControlBox TItem="TItem"
-                               Parent="Parent"
-                               IndexInParent="IndexInParent"
-                               EditMode="EditMode"
-                               IsItem="true"
-                               IsNewItem="IsNewItem"
-                               DisplayContent="DnDState.BaseContainer.ItemDisplayControlBoxTemplate(this)"
-                               EditContent="DnDState.BaseContainer.ItemEditControlBoxTemplate(this)" />
-      } else if (DnDState.BaseContainer.ItemDisplayControlBoxTemplate is { } && DnDState.BaseContainer.ItemEditControlBoxTemplate is null) {
-        <DragAndDropControlBox TItem="TItem"
-                               Parent="Parent"
-                               IndexInParent="IndexInParent"
-                               EditMode="EditMode"
-                               IsItem="true"
-                               IsNewItem="IsNewItem"
-                               DisplayContent="DnDState.BaseContainer.ItemDisplayControlBoxTemplate(this)" />
-      } else if (DnDState.BaseContainer.ItemDisplayControlBoxTemplate is null && DnDState.BaseContainer.ItemEditControlBoxTemplate is { }) {
-        <DragAndDropControlBox TItem="TItem"
-                               Parent="Parent"
-                               IndexInParent="IndexInParent"
-                               EditMode="EditMode"
-                               IsItem="true"
-                               IsNewItem="IsNewItem"
-                               EditContent="DnDState.BaseContainer.ItemEditControlBoxTemplate(this)" />
-      } else {
-        <DragAndDropControlBox TItem="TItem"
-                               Parent="Parent"
-                               IndexInParent="IndexInParent"
-                               EditMode="EditMode"
-                               IsItem="true"
-                               IsNewItem="IsNewItem" />
-      }
-    </div>
-  }
+                                 DisplayContent="DnDState.BaseContainer.ItemDisplayControlBoxTemplate(this)"
+                                 EditContent="DnDState.BaseContainer.ItemEditControlBoxTemplate(this)" />
+        } else if (DnDState.BaseContainer.ItemDisplayControlBoxTemplate is { } && DnDState.BaseContainer.ItemEditControlBoxTemplate is null) {
+          <DragAndDropControlBox TItem="TItem"
+                                 Parent="Parent"
+                                 IndexInParent="IndexInParent"
+                                 EditMode="EditMode"
+                                 IsItem="true"
+                                 IsNewItem="IsNewItem"
+                                 DisplayContent="DnDState.BaseContainer.ItemDisplayControlBoxTemplate(this)" />
+        } else if (DnDState.BaseContainer.ItemDisplayControlBoxTemplate is null && DnDState.BaseContainer.ItemEditControlBoxTemplate is { }) {
+          <DragAndDropControlBox TItem="TItem"
+                                 Parent="Parent"
+                                 IndexInParent="IndexInParent"
+                                 EditMode="EditMode"
+                                 IsItem="true"
+                                 IsNewItem="IsNewItem"
+                                 EditContent="DnDState.BaseContainer.ItemEditControlBoxTemplate(this)" />
+        } else {
+          <DragAndDropControlBox TItem="TItem"
+                                 Parent="Parent"
+                                 IndexInParent="IndexInParent"
+                                 EditMode="EditMode"
+                                 IsItem="true"
+                                 IsNewItem="IsNewItem" />
+        }
+      </div>
+    }
+  </CascadingValue>
 </CascadingValue>
 
 @code {
@@ -110,6 +112,7 @@
 
   protected override async Task OnParametersSetAsync() {
     Address = $"{(Parent?.Address ?? Id)}.{IndexInParent}";
+
     if (!EditMode && (DnDState.EditItemAddresses?.Contains(Address) ?? false) && Item is { }) {
       await DnDState.BeginEditItem(this);
     }

@@ -2,7 +2,7 @@
 
 @implements IDnDContainer<TItem>
 
-<CascadingValue Value="DnDState" Name="State">
+<CascadingValue Value=DnDState Name="State">
   <div class="draganddrop-container@(DnDState.Payload?.WrappingElement?.Id == Id ? " picked-up" : "")  @(DnDState.Target?.WrappingElement?.Id == Id ? " drag-hover" : "")"
        draggable="@((DnDState is { } && (!DnDState.EditItemAddresses?.Any(addr => addr.StartsWith(Address)) ?? true)).ToString())"
        @ondragstart="(() => { DnDState.SetPayload(Parent, IndexInParent, this); StateHasChanged(); })"

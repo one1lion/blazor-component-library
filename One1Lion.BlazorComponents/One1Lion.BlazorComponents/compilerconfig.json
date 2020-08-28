@@ -4,6 +4,14 @@
     "inputFile": "DragAndDrop/Lib/draganddrop.scss"
   },
   {
+    "outputFile": "wwwroot/css/split-button.css",
+    "inputFile": "SplitButton/SplitButton.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/threebox-loader.css",
+    "inputFile": "Loader/ThreeBoxLoader.scss"
+  },
+  {
     "outputFile": "wwwroot/css/typeahead.css",
     "inputFile": "TypeAhead/TypeAhead.scss"
   }

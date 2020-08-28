@@ -1,0 +1,50 @@
+﻿@*
+  This component is inspired by W3Schools example on split buttons
+  https://www.w3schools.com/howto/howto_css_button_split.asp
+*@
+
+@* Style a div as a button with a divider and a click handler *@
+<div class="split-button@(string.IsNullOrWhiteSpace(CssClass) ? "" : $" {CssClass}")">
+  <button type="button" class="btn main-button" @onclick="(e => HandleClicked(e, null))">
+    @if (ButtonInnerHtml is { }) {
+      @ButtonInnerHtml
+    }
+  </button>
+
+  <div class="dropdown@(overrideShowDropdown ? " show-list" : "")">
+    <button type="button" class="dropdown-button" @onclick="(e => overrideShowDropdown = !overrideShowDropdown)">
+      <i class="caret-bottom"></i>
+    </button>
+    <ul class="dropdown-content">
+      @foreach (var curItem in List) {
+        <li @onclick="(e => HandleClicked(e, curItem))">@curItem</li>
+      }
+    </ul>
+  </div>
+</div>
+
+@code {
+  [Parameter] public RenderFragment ButtonInnerHtml { get; set; }
+  /// <summary>
+  /// Additional CSS classes to add to the wrapper element
+  /// </summary>
+  [Parameter] public string CssClass { get; set; }
+  [Parameter] public List<string> List { get; set; }
+  /// <summary>
+  /// The callback for when an item is selected
+  /// </summary>
+  [Parameter] public EventCallback<string> OnItemClicked { get; set; }
+  [Parameter] public bool ExpandOnMainButtonClick { get; set; } = true;
+
+  public bool overrideShowDropdown;
+  protected override void OnParametersSet() {
+  }
+
+  async Task HandleClicked(MouseEventArgs e, string item) {
+    if (item is null && ExpandOnMainButtonClick) {
+      overrideShowDropdown = !overrideShowDropdown;
+      return;
+    }
+    if (OnItemClicked.HasDelegate) { await OnItemClicked.InvokeAsync(item); }
+  }
+}

@@ -5,7 +5,7 @@ namespace One1Lion.BlazorComponents.SharedLib {
 
     protected override void OnInitialized() {
       base.OnInitialized();
-      if(Parent is { }) {
+      if (Parent is { }) {
         Register(Parent);
       }
     }

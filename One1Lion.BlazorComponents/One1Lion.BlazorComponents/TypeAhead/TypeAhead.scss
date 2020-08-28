@@ -22,6 +22,30 @@
       .suggest-list {
         background-color: #fff;
         border: solid 1px gray;
+
+        .suggest-list-body {
+          max-height: 420px;
+          overflow-y: auto;
+          color: gray;
+
+          .dropdown-item {
+            cursor: pointer;
+
+            &.starts-with-item {
+            }
+
+            &.contains-item {
+            }
+
+            &.other-item {
+            }
+
+            &.pre-select {
+              background-color: rgba(0, 0, 0, .2);
+              outline: 2px rgba(0, 0, 0, .4) dashed;
+            }
+          }
+        }
       }
 
       &.show {
@@ -37,5 +61,6 @@
 
   button {
     margin: 0;
+    border-radius: 0 .2rem .2rem 0;
   }
 }

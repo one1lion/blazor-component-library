@@ -17,10 +17,20 @@
       .typeahead-container .input-group .input-group-append .suggest-list {
         background-color: #fff;
         border: solid 1px gray; }
+        .typeahead-container .input-group .input-group-append .suggest-list .suggest-list-body {
+          max-height: 420px;
+          overflow-y: auto;
+          color: gray; }
+          .typeahead-container .input-group .input-group-append .suggest-list .suggest-list-body .dropdown-item {
+            cursor: pointer; }
+            .typeahead-container .input-group .input-group-append .suggest-list .suggest-list-body .dropdown-item.pre-select {
+              background-color: rgba(0, 0, 0, 0.2);
+              outline: 2px rgba(0, 0, 0, 0.4) dashed; }
       .typeahead-container .input-group .input-group-append.show {
         display: block !important; }
   .typeahead-container input {
     margin: 0;
     width: 100%; }
   .typeahead-container button {
-    margin: 0; }
+    margin: 0;
+    border-radius: 0 .2rem .2rem 0; }

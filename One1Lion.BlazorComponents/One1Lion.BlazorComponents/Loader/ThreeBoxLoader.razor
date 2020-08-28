@@ -1,0 +1,21 @@
+﻿<div class="threebox-loader@(Vertical ? " vertical" : "") @AddContainerCssClass" @attributes="AdditionalAttributes">
+  @if (ShowLoadingText) {
+    <label>@(string.IsNullOrWhiteSpace(LoadingText) ? "Loading" : LoadingText)</label>
+  }
+  <div class="boxes @AddBoxesContainerCssClass">
+    <div class="box @AddBoxCssClass"></div>
+    <div class="box @AddBoxCssClass"></div>
+    <div class="box @AddBoxCssClass"></div>
+  </div>
+</div>
+
+@code {
+  [Parameter] public bool ShowLoadingText { get; set; }
+  [Parameter] public string LoadingText { get; set; } = "Loading";
+  [Parameter] public bool Vertical { get; set; }
+  [Parameter] public string AddContainerCssClass { get; set; }
+  [Parameter] public string AddBoxesContainerCssClass { get; set; }
+  [Parameter] public string AddBoxCssClass { get; set; }
+  [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> AdditionalAttributes { get; set; }
+
+}

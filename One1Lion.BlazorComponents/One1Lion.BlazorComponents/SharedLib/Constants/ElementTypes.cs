@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace One1Lion.BlazorComponents.SharedLib {
+﻿namespace One1Lion.BlazorComponents.SharedLib {
   public enum ElementType {
     Div,
     A,

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace One1Lion.BlazorComponents.DragAndDrop {
   public class DnDItemWrapper : IDnDItem {

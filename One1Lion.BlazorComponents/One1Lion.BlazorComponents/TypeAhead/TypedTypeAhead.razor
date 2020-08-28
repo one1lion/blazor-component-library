@@ -1,4 +1,5 @@
-﻿@implements IDisposable
+﻿@typeparam TItem
+@implements IDisposable
 @using System.Net.Http
 @using System.Timers
 @using System.Text.RegularExpressions;
@@ -72,8 +73,7 @@
   <button type="button"
           class="btn btn-sm btn-outline-secondary dropdown-toggle d-inline-block"
           @onclick="@(e => ToggleDropDown())"
-          @onkeypress="HandleKeyPress"
-          tabindex="-1"></button>
+          @onkeypress="HandleKeyPress"></button>
 </div>
 
 @code {
@@ -88,15 +88,14 @@
   [Parameter] public EventCallback<string> SelectedValueChanged { get; set; }
   //[Parameter] public EventCallback<string> OnInputChanged { get; set; }
   [Parameter] public EventCallback<string> OnTryAutoComplete { get; set; }
-  [Parameter] public EventCallback<TypeAheadItem> OnSelectionMade { get; set; }
-  [Parameter] public EventCallback OnNullSelection { get; set; }
+  [Parameter] public EventCallback<TypeAheadItem<TItem>> OnSelectionMade { get; set; }
   [Parameter] public EventCallback<bool> OnDropDownVisibleChanged { get; set; }
   /// <summary>
   /// Invoked when the enter key is pressed.  The parameter indicates whether the
   /// suggestion list was visible when the enter key was pressed
   /// </summary>
   [Parameter] public EventCallback<bool> OnEnterKeyPressed { get; set; }
-  [Parameter] public List<TypeAheadItem> Items { get; set; }
+  [Parameter] public List<TypeAheadItem<TItem>> Items { get; set; }
   [Parameter] public bool CaseSensitive { get; set; }
   bool _IsExpanded;
   [Parameter]
@@ -114,9 +113,9 @@
   ElementReference TypeAheadInputBox;
 
   string id = Guid.NewGuid().ToString();
-  List<TypeAheadItem> startsWithItems { get; set; } = new List<TypeAheadItem>();
-  List<TypeAheadItem> containsItems { get; set; } = new List<TypeAheadItem>();
-  List<TypeAheadItem> allOtherItems { get; set; } = new List<TypeAheadItem>() { new TypeAheadItem() { DisplayText = "Loading...", MenuText = "Loading..." } };
+  List<TypeAheadItem<TItem>> startsWithItems { get; set; } = new List<TypeAheadItem<TItem>>();
+  List<TypeAheadItem<TItem>> containsItems { get; set; } = new List<TypeAheadItem<TItem>>();
+  List<TypeAheadItem<TItem>> allOtherItems { get; set; } = new List<TypeAheadItem<TItem>>() { new TypeAheadItem<TItem>() { DisplayText = "Loading...", MenuText = "Loading..." } };
   StringComparison strComp;
 
   int curHoverIndex;
@@ -191,7 +190,7 @@
     }
     startsWithItems = Items.Where(i => i.MenuText.StartsWith(_TypeAheadInput, strComp)).ToList();
     containsItems = Items.Where(i => ((CaseSensitive && i.MenuText.Contains(_TypeAheadInput)) || (!CaseSensitive && i.MenuText.ToLower().Contains(_TypeAheadInput.ToLower()))) && !i.MenuText.StartsWith(_TypeAheadInput, strComp)).ToList();
-    allOtherItems = new List<TypeAheadItem>();
+    allOtherItems = new List<TypeAheadItem<TItem>>();
 
     await InvokeAsync(() => StateHasChanged());
   }
@@ -254,8 +253,8 @@
     collapseListTimer.Stop();
     curHoverIndex = 0;
     if (string.IsNullOrWhiteSpace(_TypeAheadInput)) {
-      startsWithItems = new List<TypeAheadItem>();
-      containsItems = new List<TypeAheadItem>();
+      startsWithItems = new List<TypeAheadItem<TItem>>();
+      containsItems = new List<TypeAheadItem<TItem>>();
       allOtherItems = Items;
     } else {
       startsWithItems = Items.Where(i => i.MenuText.StartsWith(_TypeAheadInput, strComp)).ToList();
@@ -272,11 +271,7 @@
     return menuText;
   }
 
-  public void ClearInput() {
-    TypeAheadInput = null;
-  }
-
-  async Task TrySelect(TypeAheadItem item) {
+  async Task TrySelect(TypeAheadItem<TItem> item) {
     collapseListTimer.Stop();
     IsExpanded = false;
     if (item is null && !string.IsNullOrWhiteSpace(_TypeAheadInput)) {
@@ -294,7 +289,7 @@
         item = Items.FirstOrDefault(tai => tai.MenuText == _TypeAheadInput);
 
         if (item is null) {
-          item = new TypeAheadItem() {
+          item = new TypeAheadItem<TItem>() {
             DisplayText = _TypeAheadInput,
             Value = _TypeAheadInput,
             MenuText = _TypeAheadInput
@@ -309,11 +304,7 @@
     curHoverIndex = 0;
     _TypeAheadInput = item?.DisplayText ?? "";
     SelectedValue = item?.Value ?? "";
-    if (OnNullSelection.HasDelegate && item is null) {
-      await OnNullSelection.InvokeAsync(null);
-    } else if (OnSelectionMade.HasDelegate && item is { }) {
-      await OnSelectionMade.InvokeAsync(item);
-    }
+    await OnSelectionMade.InvokeAsync(item);
     await InvokeAsync(() => StateHasChanged());
   }
 
