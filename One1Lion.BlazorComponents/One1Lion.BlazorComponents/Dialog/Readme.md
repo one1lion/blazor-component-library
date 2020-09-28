@@ -1,0 +1,1 @@
+﻿This library is a basic Templated Dialog component from one of the original Blazor tutorials.

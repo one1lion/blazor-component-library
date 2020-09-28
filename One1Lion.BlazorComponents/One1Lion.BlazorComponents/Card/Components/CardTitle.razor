@@ -1,0 +1,16 @@
+﻿@namespace One1Lion.BlazorComponents.Card
+
+@inherits FlexibleContainerChildElement<ICardBody>
+
+@code {
+  [Parameter] public string AddCssClasses { get; set; }
+
+  protected override void Register(ICardBody parent) {
+    parent.SetTitle(this);
+  }
+
+  protected override string ContainerCssClass => $"card-title{(string.IsNullOrWhiteSpace(AddCssClasses) ? "" : $" {AddCssClasses}")}";
+
+  public override ElementType ElementType { get; set; } = ElementType.H5;
+
+}

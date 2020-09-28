@@ -1,7 +1,20 @@
 ﻿using Microsoft.AspNetCore.Components;
 namespace One1Lion.BlazorComponents.SharedLib {
   public abstract class ChildElement<TParent> : ComponentBase {
-    [CascadingParameter] TParent Parent { get; set; }
+    [CascadingParameter] public TParent Parent { get; set; }
+    bool _Visible = true;
+    [Parameter]
+    public bool Visible {
+      get => _Visible;
+      set {
+        if (_Visible != value) {
+          _Visible = value;
+          if (VisibleChanged.HasDelegate) { VisibleChanged.InvokeAsync(_Visible); }
+          StateHasChanged();
+        }
+      }
+    }
+    [Parameter] public EventCallback<bool> VisibleChanged { get; set; }
 
     protected override void OnInitialized() {
       base.OnInitialized();

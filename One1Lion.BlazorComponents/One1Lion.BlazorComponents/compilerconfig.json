@@ -1,7 +1,15 @@
 ﻿[
   {
+    "outputFile": "wwwroot/css/dialog.css",
+    "inputFile": "Dialog/Dialog.scss"
+  },
+  {
     "outputFile": "wwwroot/css/draganddrop.css",
     "inputFile": "DragAndDrop/Lib/draganddrop.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/ivan-loaders.css",
+    "inputFile": "Loader/IvanLoaders.scss"
   },
   {
     "outputFile": "wwwroot/css/split-button.css",

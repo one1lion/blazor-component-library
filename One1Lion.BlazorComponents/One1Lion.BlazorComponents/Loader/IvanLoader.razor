@@ -1,0 +1,31 @@
+﻿@if (Show) {
+  <span style="@(styles)">
+    <span class="loader-@((int)Type) @AddCssClass" title="@Tooltip" @attributes="AdditionalAttributes"></span>
+  </span>
+}
+
+@code {
+  // The CSS for the loaders comes from the Pen at
+  // https://codepen.io/vank0/pen/mARwLg
+  bool _Show;
+  [Parameter]
+  public bool Show {
+    get => _Show;
+    set {
+      if (_Show != value) {
+        _Show = value;
+        if (ShowChanged.HasDelegate) { ShowChanged.InvokeAsync(_Show); }
+        InvokeAsync(() => StateHasChanged());
+      }
+    }
+  }
+  [Parameter] public EventCallback<bool> ShowChanged { get; set; }
+  [Parameter] public IvanLoaderType Type { get; set; }
+  [Parameter] public string Tooltip { get; set; }
+  [Parameter] public string AddCssClass { get; set; }
+  [Parameter] public string FontSize { get; set; }
+  [Parameter] public string ForeColor { get; set; }
+  [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> AdditionalAttributes { get; set; }
+
+  string styles => $"{(string.IsNullOrWhiteSpace(FontSize) ? "" : $"font-size:{FontSize};")}{(string.IsNullOrWhiteSpace(ForeColor) ? "" : $"color:{ForeColor};")}";
+}

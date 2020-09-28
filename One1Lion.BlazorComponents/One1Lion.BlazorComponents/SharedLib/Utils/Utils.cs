@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace One1Lion.BlazorComponents.SharedLib {
-  public class Utils {
+  public static class Utils {
     public static T SimpleClone<T>(T obj) {
       // If T is one of the known primitive (or primitive-like) types listed below, then simply assign the cloned object to the object to be cloned
       if (typeof(T).GetTypeInfo().IsValueType) { return obj; }

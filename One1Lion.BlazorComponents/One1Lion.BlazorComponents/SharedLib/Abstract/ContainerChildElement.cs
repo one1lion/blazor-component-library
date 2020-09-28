@@ -9,10 +9,12 @@ namespace One1Lion.BlazorComponents.SharedLib {
     protected virtual ElementType ContainerElementType => ElementType.Div;
 
     protected virtual void CreateRenderContent(RenderTreeBuilder builder) {
-      builder.OpenElement(0, ContainerElementType.ToString().ToLower());
-      builder.AddAttribute(1, "class", ContainerCssClass);
-      builder.AddContent(2, ChildContent);
-      builder.CloseElement();
+      if (Visible) {
+        builder.OpenElement(0, ContainerElementType.ToString().ToLower());
+        builder.AddAttribute(1, "class", ContainerCssClass);
+        builder.AddContent(2, ChildContent);
+        builder.CloseElement();
+      }
     }
 
     protected abstract string ContainerCssClass { get; }
