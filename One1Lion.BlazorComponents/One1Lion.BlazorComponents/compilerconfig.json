@@ -22,5 +22,9 @@
   {
     "outputFile": "wwwroot/css/typeahead.css",
     "inputFile": "TypeAhead/TypeAhead.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/one1lion-styles.css",
+    "inputFile": "SharedLib/ConsolidatedStyles/One1LionStyles.scss"
   }
 ]
