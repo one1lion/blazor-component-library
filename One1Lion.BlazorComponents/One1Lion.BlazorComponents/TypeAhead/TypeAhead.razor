@@ -9,8 +9,8 @@
 <div class="typeahead-container">
   <div class="input-group">
     <input type="text"
-           class="form-control typeahead-input@(invalidSelection ? " is-invalid" : "")"
-           id="typeaheadinput-@id"
+           class="form-control typeahead-input@(invalidSelection ? " is-invalid" : "") @(AddInputCss)"
+           id="@Id"
            placeholder="Type a value..."
            @bind="typeAheadInput"
            @bind:event="oninput"
@@ -23,7 +23,7 @@
            @onblur="HandleBlur"
            @ref="TypeAheadInputBox" />
     @if (IsExpanded) {
-      <div class="input-group-append show"
+      <div id="@Id-suggest" class="input-group-append show@(!string.IsNullOrWhiteSpace(AddSuggestListWrapperCss) ? $" {AddSuggestListWrapperCss}" : "")"
            @onkeypress="HandleKeyPress"
            @onmousedown="HandleOverrideClose"
            @onmouseup="HandleOverrideClose"
@@ -85,8 +85,3 @@
           @onclick="@(async _ => { ToggleDropDown(); await SetFocus(); })"
           @onkeydown="HandleKeyPress"></button>
 </div>
-
-@code {
-  string id = Guid.NewGuid().ToString();
-
-}

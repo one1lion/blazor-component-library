@@ -208,7 +208,7 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
       //// TODO: use the actual Parent property name for the supplied data structure
       //Utils.CopyValues(item.Item, ref item.EditItem, new List<PropertyInfo>() { item.Item.GetType().GetProperty("Parent") });
 
-      item.EditItem = Utils.SimpleClone(item.Item);
+      item.EditItem = One1LionUtils.SimpleClone(item.Item);
       item.EditMode = true;
       Console.WriteLine($"Edit mode set to true for {item.Address}");
       NotifyStateChanged();
@@ -224,7 +224,7 @@ namespace One1Lion.BlazorComponents.DragAndDrop.Lib {
         //item.UpdateItem(item.EditItem);
         var holdForRef = item.Item;
         // TODO: use the actual Parent property name for the supplied data structure
-        Utils.CopyValues<TItem>(item.EditItem, ref holdForRef, new List<PropertyInfo>() { item.Item.GetType().GetProperty("Parent") });
+        One1LionUtils.CopyValues<TItem>(item.EditItem, ref holdForRef, new List<PropertyInfo>() { item.Item.GetType().GetProperty("Parent") });
         item.UpdateItem(holdForRef);
         item.EditItem = default;
       }

@@ -27,16 +27,16 @@
   saveAsFile: function (filename, bytesBase64) {
     if (navigator.msSaveBlob) {
       //Download document in Edge browser
-      var data = window.atob(bytesBase64);
-      var bytes = new Uint8Array(data.length);
-      for (var i = 0; i < data.length; i++) {
+      let data = window.atob(bytesBase64);
+      let bytes = new Uint8Array(data.length);
+      for (let i = 0; i < data.length; i++) {
         bytes[i] = data.charCodeAt(i);
       }
-      var blob = new Blob([bytes.buffer], { type: "application/octet-stream" });
+      let blob = new Blob([bytes.buffer], { type: "application/octet-stream" });
       navigator.msSaveBlob(blob, filename);
     }
     else {
-      var link = document.createElement('a');
+      let link = document.createElement('a');
       link.download = filename;
       link.href = "data:application/octet-stream;base64," + bytesBase64;
       document.body.appendChild(link); // Needed for Firefox
@@ -61,10 +61,10 @@
     return one1lionJsFunctions.getUnits(document.getElementById(elementId), prop);
   },
   getUnits: function (target, prop) {
-    var baseline = 100;  // any number serves 
-    var item;  // generic iterator
+    let baseline = 100;  // any number serves 
+    let item;  // generic iterator
 
-    var map = {  // list of all units and their identifying string
+    let map = {  // list of all units and their identifying string
       pixel: "px",
       percent: "%",
       inch: "in",
@@ -76,21 +76,21 @@
       ex: "ex"
     };
 
-    var factors = {};  // holds ratios
-    var units = {};  // holds calculated values
+    let factors = {};  // holds ratios
+    let units = {};  // holds calculated values
 
-    var value = one1lionJsFunctions.getStyle(target, prop);  // get the computed style value
+    let value = one1lionJsFunctions.getStyle(target, prop);  // get the computed style value
 
-    var numeric = value.match(/\d+/);  // get the numeric component
+    let numeric = value.match(/\d+/);  // get the numeric component
     if (numeric === null) {  // if match returns null, throw error...  use === so 0 values are accepted
       throw "Invalid property value returned";
     }
     numeric = numeric[0];  // get the string
 
-    var unit = value.match(/\D+$/);  // get the existing unit
+    let unit = value.match(/\D+$/);  // get the existing unit
     unit = (unit == null) ? map.pixel : unit[0]; // if its not set, assume px - otherwise grab string
 
-    var activeMap;  // a reference to the map key for the existing unit
+    let activeMap;  // a reference to the map key for the existing unit
     for (item in map) {
       if (map[item] == unit) {
         activeMap = item;
@@ -101,7 +101,7 @@
       throw "Unit not found in map";
     }
 
-    var temp = document.createElement("div");  // create temporary element
+    let temp = document.createElement("div");  // create temporary element
     temp.style.overflow = "hidden";  // in case baseline is set too low
     temp.style.visibility = "hidden";  // no need to show it
 
@@ -139,6 +139,264 @@
 
     return element.getBoundingClientRect();
   },
+  getElement: function (elemOrId) {
+    let elem = (typeof elemOrId === 'string') ? document.getElementById(elemOrId) : elemOrId;
+
+    if (!elem.getAttribute && elem.id) {
+      // It is possible the passed in value is an ElementRef from c#
+      elem = document.getElementById(elem.id);
+    }
+    return elem;
+  },
+  moveElementIntoView: function (elemOrId) {
+    let targetElem = one1lionJsFunctions.getElement(elemOrId);
+    let elemBox = one1lionJsFunctions.getBoundingBox(targetElem);
+
+    // Provide a buffer for element wiggle room
+    let buffer = 2; //px
+    // Determine which ancestor would occlude the target element
+    // TODO: If the target element's position is set to fixed, then the only bounding parent
+    //       that should be used for visible bounds should be window
+    let elemParent = targetElem.parentElement;
+    let overflowXParent = [], overflowYParent = [], posRelContainer;
+    let overflowXParentBox = [], overflowYParentBox = [], posRelContainerBox;
+    while (elemParent.parentElement) {
+      elemParent = elemParent.parentElement;
+      let compStyle = window.getComputedStyle(elemParent);
+      let isRelPosition = compStyle.position === "absolute" || compStyle.position === "relative" || compStyle.position === "fixed";
+      if ((targetElem.style.position !== "fixed" && compStyle.overflowX !== "visible") || elemParent === document.body) {
+        let curObj = {
+          elem: elemParent,
+          bbox: one1lionJsFunctions.getBoundingBox(elemParent)
+        };
+        overflowXParent.push(curObj);
+      }
+      if ((targetElem.style.position !== "fixed" && compStyle.overflowY !== "visible") || elemParent === document.body) {
+        let curObj = {
+          elem: elemParent,
+          bbox: one1lionJsFunctions.getBoundingBox(elemParent)
+        };
+        overflowYParent.push(curObj);
+      }
+      // The nearest posRelContainer should be a .input-group which as position: relative;
+      if (!posRelContainer && (isRelPosition || elemParent === document.body)) {
+        posRelContainer = {
+          elem: elemParent,
+          bbox: one1lionJsFunctions.getBoundingBox(elemParent)
+        };
+      }
+    }
+
+    // Determine if there is an active element on the page to make sure it does not get covered by the element
+    let curFocusedElement = document.activeElement;
+    let focusedElemBox;
+    if (curFocusedElement) {
+      focusedElemBox = one1lionJsFunctions.getBoundingBox(curFocusedElement);
+    }
+
+    // Find the minimum bounds based on the parentX/Y (whose overflow-x/y is not set to visible)
+    // and the document body
+    let docWidth = document.body.clientWidth;
+    let docHeight = document.body.clientHeight;
+
+    let maxTop = 0, minBottom = 100_000;
+    let maxLeft = 0, minRight = 100_000;
+    overflowYParent.forEach((p, i) => {
+      if (p.bbox.top > maxTop) { maxTop = p.bbox.top; }
+      if (p.bbox.bottom < minBottom) { minBottom = p.bbox.bottom; }
+    });
+    overflowXParent.forEach((p, i) => {
+      if (p.bbox.left > maxLeft) { maxLeft = p.bbox.left; }
+      if (p.bbox.right < minRight) { minRight = p.bbox.right; }
+    });
+
+    let visibleBounds = {
+      top: maxTop - buffer,
+      right: minRight + buffer,
+      bottom: minBottom + buffer,
+      left: maxLeft - buffer
+    };
+
+    // Check if the state of the element's position
+    //  e.g. is it full on-screen, is it partially below the screen, fully outside, etc.
+    let posInfo = {};
+
+    // Check the horizontal bounds
+    if (elemBox.right < visibleBounds.left) { posInfo.fullyOutsideLeft = true; }
+    if (elemBox.left > visibleBounds.right) { posInfo.fullyOutsideRight = true; }
+    if (elemBox.left < visibleBounds.left && elemBox.right > visibleBounds.left) {
+      if (elemBox.right < visibleBounds.right) {
+        posInfo.partiallyOutsideLeft = true;
+        // Get the visible %
+        posInfo.visibleWidth = elemBox.right - visibleBounds.left + buffer;
+        let percVisi = (posInfo.visibleWidth) / elemBox.width;
+        posInfo.percentageVisible = {
+          horizontal: percVisi
+        };
+      } else {
+        posInfo.wider = true;
+      }
+    }
+    if (elemBox.right > visibleBounds.right && elemBox.left < visibleBounds.right) {
+      if (elemBox.left < visibleBounds.left) {
+        posInfo.wider = true;
+      } else {
+        posInfo.partiallyOutsideRight = true;
+        // Get the visible %
+        posInfo.visibleWidth = visibleBounds.right - buffer - elemBox.left;
+        let percVisi = (posInfo.visibleWidth) / elemBox.width;
+        posInfo.percentageVisible = {
+          horizontal: percVisi
+        };
+      }
+    }
+
+    // Check the vertical bounds
+    if (elemBox.bottom < visibleBounds.top) { posInfo.fullyOutsideAbove = true; }
+    if (elemBox.top > visibleBounds.bottom) { posInfo.fullyOutsideBelow = true; }
+    if (elemBox.top < visibleBounds.top && elemBox.bottom > visibleBounds.top) {
+      if (elemBox.bottom < visibleBounds.bottom) {
+        posInfo.partiallyOutsideAbove = true;
+        // Get the visible %
+        posInfo.visibleHeight = elemBox.bottom - visibleBounds.top + buffer;
+        let percVisi = (posInfo.visibleHeight) / elemBox.height;
+        if (posInfo.percentageVisible) {
+          posInfo.percentageVisible.vertical = percVisi;
+        } else {
+          posInfo.percentageVisible = {
+            vertical: percVisi
+          };
+        }
+      } else {
+        posInfo.taller = true;
+      }
+    }
+    if (elemBox.bottom > visibleBounds.bottom && elemBox.top < visibleBounds.bottom) {
+      if (elemBox.top < visibleBounds.top) {
+        posInfo.taller = true;
+      } else {
+        posInfo.partiallyOutsideBelow = true;
+        // Get the visible %
+        posInfo.visibleHeight = visibleBounds.bottom - buffer - elemBox.top;
+        let percVisi = (posInfo.visibleHeight) / elemBox.height;
+        if (posInfo.percentageVisible) {
+          posInfo.percentageVisible.vertical = percVisi;
+        } else {
+          posInfo.percentageVisible = {
+            vertical: percVisi
+          };
+        }
+      }
+    }
+
+    if (Object.keys(posInfo).length === 0) {
+      // The element is fully visible
+      return;
+    }
+
+    // Find the visible portion
+    // We always want to try to see the left and top
+    let newPosn = {};
+    newPosn.height = elemBox.height;
+    newPosn.width = elemBox.width;
+
+    if (posInfo.fullyOutsideLeft || posInfo.wider || posInfo.partiallyOutsideLeft) {
+      // Always try to show the left
+      newPosn.left = visibleBounds.left;
+      newPosn.right = newPosn.left + newPosn.width;
+    } else if (posInfo.fullyOutsideRight
+      // If the element is partially outside to the left, check if enough of the element is showing
+      || (posInfo.partiallyOutsideBelow && (posInfo.percentageVisible.horizontal < .8 || posInfo.visibleWidth < 100))
+    ) {
+      if ((visibleBounds.right - visibleBounds.left) > elemBox.width) {
+        // There is enough space to move the element left so that its right edge is lined up
+        // with the right edge of the visible bounds
+        newPosn.right = visibleBounds.right;
+        newPosn.left = newPosn.right - newPosn.width;
+      } else {
+        // Too tall to set the right of the element to the right of the bounding element
+        // so set the left to 0 by default
+        newPosn.left = visibleBounds.left;
+        newPosn.right = newPosn.left + newPosn.width;
+      }
+    } else {
+      // Use the current element's position / don't move the horizontal position
+      newPosn.left = elemBox.left;
+      newPosn.right = newPosn.left + newPosn.width;
+    }
+
+
+    if (posInfo.fullyOutsideAbove || posInfo.taller || posInfo.partiallyOutsideAbove) {
+      newPosn.top = visibleBounds.top;
+      newPosn.bottom = newPosn.top + newPosn.height;
+    } else if (posInfo.fullyOutsideBelow
+      // If the element is partially outside below, check if enough of the element is showing
+      || (posInfo.partiallyOutsideBelow && (posInfo.percentageVisible.vertical < .8 || posInfo.visibleHeight < 100))
+    ) {
+      if (visibleBounds.bottom - visibleBounds.top > elemBox.height) {
+        // There is enough space to move the element up so that its bottom edge is lined up
+        // with the bottom edge of the visible bounds
+        newPosn.bottom = visibleBounds.bottom;
+        newPosn.top = newPosn.bottom - newPosn.height;
+      } else {
+        // Too tall to set the bottom of the element to the bottom of the bounding element
+        // so set the top to 0 by default
+        newPosn.top = visibleBounds.top;
+        newPosn.bottom = newPosn.top + newPosn.height;
+      }
+    } else {
+      // Use the current element's position / don't move the horizontal position
+      newPosn.top = elemBox.top;
+      newPosn.bottom = newPosn.top + newPosn.height;
+    }
+    // Adjust position vertically around the active item (if there is one) by checking 
+    // which direction has the most space
+    if (curFocusedElement
+      && newPosn.top < focusedElemBox.bottom
+      && newPosn.bottom > focusedElemBox.top
+      && newPosn.left < focusedElemBox.right
+      && newPosn.right > focusedElemBox.left
+    ) {
+      // The element is partially or fully covering the element that has the focus
+      let spaceAbove = focusedElemBox.top - visibleBounds.top;
+      let spaceBelow = visibleBounds.bottom - focusedElemBox.bottom;
+
+      if (spaceBelow >= newPosn.height) {
+        newPosn.top = focusedElemBox.bottom + buffer;
+        newPosn.bottom = newPosn.top + elemBox.height;
+      } else if (spaceAbove >= newPosn.height) {
+        newPosn.bottom = focusedElemBox.top - buffer;
+        newPosn.top = newPosn.bottom - elemBox.height;
+      } else if (spaceAbove < newPosn.height || spaceBelow > spaceAbove) {
+        newPosn.top = focusedElemBox.bottom + buffer;
+        newPosn.bottom = newPosn.top + elemBox.height;
+      } else {
+        newPosn.bottom = focusedElemBox.top - buffer;
+        newPosn.top = newPosn.bottom - elemBox.height;
+      }
+    }
+
+    // Change the values of the element relative to its original values
+    let delta = {
+      x: elemBox.left - newPosn.left,
+      y: elemBox.top - newPosn.top
+    };
+    let compVals = window.getComputedStyle(targetElem);
+    let styleVals = {
+      left: targetElem.style.left,
+      top: targetElem.style.top
+    };
+
+    // Subtract this value from the current calculated left and top, and use that in the 
+    // position method
+    newPosn.left = parseFloat(compVals.left) - delta.x;
+    newPosn.top = parseFloat(compVals.top) - delta.y;
+    newPosn.right = newPosn.left + newPosn.width;
+    newPosn.bottom = newPosn.top + newPosn.height;
+
+    // Set the position of the element
+    one1lionJsFunctions.positionElement(targetElem, newPosn.top, "unset", "unset", newPosn.left);
+  },
   scrollElementIntoViewById: function (id) {
     one1lionJsFunctions.scrollElementIntoView(document.getElementById(id));
   },
@@ -154,5 +412,42 @@
   },
   showPrintDialog: function () {
     window.print();
+  },
+  setPreventSelectOnDoubleClickById: function (elementId, on = true) {
+    one1lionJsFunctions.setPreventSelectOnDoubleClick(document.getElementById(elementId), on);
+  },
+  setPreventSelectOnDoubleClick: function (element, on = true) {
+    let elem;
+    if (element.getAttribute) {
+      elem = element;
+    } else {
+      // This is an ElementRef from c#
+      elem = document.getElementById(element.id);
+    }
+    if (elem.getAttribute("preventSelectOnDoubleClick") && on) { return; } // the attribute is already set to true
+
+    if (elem.getAttribute("preventSelectOnDoubleClick") && !on) { // the attribute is set and true, but we are unsetting it
+      if (elem.removeEventListener) {
+        elem.removeEventListener("mousedown", preventSelectOnDoubleClick);
+      } else {
+        elem.detachEvent("mousedown", preventSelectOnDoubleClick)
+      }
+    } else if (on) { // the attribute is not set or is set to false and we want it to be true
+      if (elem.addEventListener) {
+        elem.addEventListener("mousedown", preventSelectOnDoubleClick);
+      } else {
+        elem.attachEvent("mousedown", preventSelectOnDoubleClick);
+      }
+    }
+    elem.setAttribute("preventSelectOnDoubleClick", on);
+  },
+  elementExists: function (elementId) {
+    return document.getElementById(elementId) ? true : false;
   }
 };
+
+function preventSelectOnDoubleClick(e) {
+  if (e.detail > 1) {
+    e.preventDefault();
+  }
+}

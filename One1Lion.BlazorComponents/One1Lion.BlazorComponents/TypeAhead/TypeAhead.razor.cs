@@ -17,6 +17,8 @@ namespace One1Lion.BlazorComponents.TypeAhead {
     [Parameter(CaptureUnmatchedValues = true)]
     public IDictionary<string, object> AdditionalAttributes { get; set; }
     [Parameter] public List<TypeAheadItem<TItem>> Items { get; set; }
+    [Parameter] public string AddInputCss { get; set; }
+    [Parameter] public string AddSuggestListWrapperCss { get; set; }
     [Parameter] public int Debounce { get; set; } = 500;
     [Parameter] public bool CaseSensitive { get; set; }
     [Parameter] public bool LimitToList { get; set; } = true;
@@ -31,18 +33,26 @@ namespace One1Lion.BlazorComponents.TypeAhead {
     /// Invoked when the enter key is pressed.  The parameter indicates whether the
     /// suggestion list was visible when the enter key was pressed
     /// </summary>
-    [Parameter] public EventCallback<bool> OnEnterKeyPressed { get; set; }
+    [Parameter] public EventCallback<AcceptKeyPressedEventArgs> OnAcceptKeyPressed { get; set; }
     protected bool _IsExpanded;
     [Parameter]
     public bool IsExpanded {
       get => _IsExpanded;
       set {
+        if (_IsExpanded == value) { return; }
         _IsExpanded = value;
         InvokeAsync(() => ReportDropDownVisibleChanged());
+        suggestListTimer.Start();
       }
     }
     Timr.Timer collapseTimer;
+    Timr.Timer suggestListTimer;
 
+    public string Id { get; private set; }
+
+    public TypeAhead() {
+      Id = $"typeaheadinput-{Guid.NewGuid()}";
+    }
 
     private TypeAheadItem<TItem> _SelectedTypeAheadItem;
     [Parameter]
@@ -79,7 +89,7 @@ namespace One1Lion.BlazorComponents.TypeAhead {
             }));
           }
         } catch (Exception) {
-          Console.WriteLine($"TypeAhead: An error occurred while setting the value of SelectedItem for ta-{id}");
+          Console.WriteLine($"TypeAhead: An error occurred while setting the value of SelectedItem for ta-{Id}");
         }
       }
     }
@@ -109,7 +119,7 @@ namespace One1Lion.BlazorComponents.TypeAhead {
             }));
           }
         } catch (Exception) {
-          Console.WriteLine($"TypeAhead: An error occurred while setting the value of SelectedValue for ta-{id}");
+          Console.WriteLine($"TypeAhead: An error occurred while setting the value of SelectedValue for ta-{Id}");
         }
       }
     }
@@ -139,7 +149,7 @@ namespace One1Lion.BlazorComponents.TypeAhead {
             }));
           }
         } catch (Exception) {
-          Console.WriteLine($"TypeAhead: An error occurred while setting the value of SelectedDisplayText for ta-{id}");
+          Console.WriteLine($"TypeAhead: An error occurred while setting the value of SelectedDisplayText for ta-{Id}");
         }
       }
     }
@@ -194,6 +204,12 @@ namespace One1Lion.BlazorComponents.TypeAhead {
         AutoReset = false
       };
       collapseTimer.Elapsed += HandleCollapseSuggestList;
+      suggestListTimer = new Timr.Timer() {
+        Interval = 20,
+        AutoReset = false
+      };
+      suggestListTimer.Elapsed += HandleSuggestListLoaded;
+
       if (SuggestListLoader is { } && Items is { }) {
         throw new InvalidOperationException("TypeAhead requires an Items parameter, or a SuggestListLoader parameter, but not both.");
       }
@@ -216,18 +232,47 @@ namespace One1Lion.BlazorComponents.TypeAhead {
       }
     }
 
+    protected async void HandleSuggestListLoaded(Object source, Timr.ElapsedEventArgs e) {
+      if (IsExpanded) {
+        // TODO: Uncomment this when ready to work on positioning the suggest list when it
+        // falls outside of the range of the visible container (screen or parent container)
+        await One1LionJsInterop.MoveElementIntoView(JsRuntime, $"{Id}-suggest");
+      }
+    }
+
     protected async void HandleAutoComplete(Object source, Timr.ElapsedEventArgs e) {
       if (SuggestListLoader is { }) {
         await LoadSuggestList();
       }
     }
 
-    async Task HandleItemClicked(TypeAheadItem<TItem> item, int itemIndex) {
-      if (itemIndex == curHoverIndex) {
-        await TrySelect(item);
-      } else {
-        await ChangeSelection(itemIndex);
+    public async Task SetTypedText(string useText = null, bool ignoreLoader = false) {
+      debounceTimer.Stop();
+      while (tryingSelect) {
+        await Task.Delay(20);
       }
+
+      if (!string.IsNullOrWhiteSpace(useText)) {
+        _typeAheadInput = useText;
+      }
+
+      if (!ignoreLoader && SuggestListLoader is { }) {
+        await LoadSuggestList();
+      }
+
+      await UpdateLists();
+    }
+
+    async Task HandleItemClicked(TypeAheadItem<TItem> item, int itemIndex) {
+      await ChangeSelection(itemIndex);
+      await TrySelect(item);
+
+      /* This behavior requires two clicks to select an item */
+      //if (itemIndex == curHoverIndex) {
+      //  await TrySelect(item);
+      //} else {
+      //  await ChangeSelection(itemIndex);
+      //}
     }
 
     protected override void OnParametersSet() {
@@ -236,8 +281,11 @@ namespace One1Lion.BlazorComponents.TypeAhead {
         if (Items is { } && SuggestListLoader is null) {
           allOtherItems = Items;
         }
+        if (AdditionalAttributes is { } && AdditionalAttributes.ContainsKey("id") && (string)AdditionalAttributes["id"] != Id) {
+          Id = (string)AdditionalAttributes["id"];
+        }
       } catch (Exception) {
-        Console.WriteLine($"TypeAhead: An error occurred during OnParametersSet for ta-{id}");
+        Console.WriteLine($"TypeAhead: An error occurred during OnParametersSet for {Id}");
       }
     }
 
@@ -301,7 +349,7 @@ namespace One1Lion.BlazorComponents.TypeAhead {
         case "NumpadEnter":
         case "Tab":
           if (e.Type == "keyup") { break; }
-          if (OnEnterKeyPressed.HasDelegate) { await OnEnterKeyPressed.InvokeAsync(IsExpanded); }
+          if (OnAcceptKeyPressed.HasDelegate) { await OnAcceptKeyPressed.InvokeAsync(new AcceptKeyPressedEventArgs() { KeyboardEventArgs = e, DropDownListExpanded = IsExpanded }); }
           if (IsExpanded && curHoverIndex >= -1 && curHoverIndex <= totalVisSelectItems) {
             // Transform the index into the specific index for the right list:
             TypeAheadItem<TItem> taItem = null;
@@ -402,6 +450,11 @@ namespace One1Lion.BlazorComponents.TypeAhead {
       }
     }
 
+    public void UpdateSuggestList(List<TypeAheadItem<TItem>> items) {
+      loadingListCts?.Cancel();
+      Items = items;
+    }
+
     async Task LoadSuggestList() {
       loadingListCts?.Cancel();
       loadingListCts = new CancellationTokenSource();
@@ -409,7 +462,6 @@ namespace One1Lion.BlazorComponents.TypeAhead {
       loadingList = true;
       await InvokeAsync(() => StateHasChanged());
       try {
-
         var curItems = await SuggestListLoader(typeAheadInput, thisToken);
         if (thisToken.IsCancellationRequested) {
           return;
@@ -514,7 +566,7 @@ namespace One1Lion.BlazorComponents.TypeAhead {
 
     async Task SetFocus() {
       try {
-        if (!hasFocus) { await One1LionJsInterop.Focus(JsRuntime, $"typeaheadinput-{id}"); }
+        if (!hasFocus) { await One1LionJsInterop.Focus(JsRuntime, Id); }
       } catch (JSException ex) {
 #if DEBUG
         if (ex.Message.Contains("Could not find")) {
@@ -566,6 +618,7 @@ namespace One1Lion.BlazorComponents.TypeAhead {
       }
     }
 
+    #region Dispose Pattern
     protected virtual void Dispose(bool disposing) {
       if (!disposedValue) {
         if (disposing) {
@@ -573,6 +626,11 @@ namespace One1Lion.BlazorComponents.TypeAhead {
             collapseTimer.Elapsed -= HandleCollapseSuggestList;
             collapseTimer.Stop();
             collapseTimer.Dispose();
+          }
+          if (suggestListTimer is { }) {
+            suggestListTimer.Elapsed -= HandleSuggestListLoaded;
+            suggestListTimer.Stop();
+            suggestListTimer.Dispose();
           }
           if (debounceTimer is { }) {
             debounceTimer.Elapsed -= HandleAutoComplete;
@@ -592,5 +650,6 @@ namespace One1Lion.BlazorComponents.TypeAhead {
       Dispose(disposing: true);
       GC.SuppressFinalize(this);
     }
+    #endregion
   }
 }

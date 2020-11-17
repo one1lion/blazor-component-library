@@ -79,6 +79,14 @@ namespace One1Lion.BlazorComponents.JsInterop {
         element);
     }
 
+    public static ValueTask MoveElementIntoView(IJSRuntime jsRuntime, string elementId) {
+      return jsRuntime.InvokeVoidAsync("one1lionJsFunctions.moveElementIntoView", elementId);
+    }
+
+    public static ValueTask MoveIntoView(IJSRuntime jsRuntime, ElementReference element) {
+      return jsRuntime.InvokeVoidAsync("one1lionJsFunctions.moveElementIntoView", element);
+    }
+
     public static ValueTask SetInputValue(IJSRuntime jsRuntime, string elementId, object val) {
       return jsRuntime.InvokeVoidAsync("one1lionJsFunctions.setInputValueById", elementId, val);
     }
@@ -97,6 +105,18 @@ namespace One1Lion.BlazorComponents.JsInterop {
 
     public static ValueTask ShowPrintDialog(IJSRuntime jsRuntime) {
       return jsRuntime.InvokeVoidAsync("one1lionJsFunctions.showPrintDialog");
+    }
+
+    public static ValueTask SetPreventSelectOnDoubleClick(IJSRuntime jsRuntime, string elementId, bool on = true) {
+      return jsRuntime.InvokeVoidAsync("one1lionJsFunctions.setPreventSelectOnDoubleClickById", elementId, on);
+    }
+
+    public static ValueTask SetPreventSelectOnDoubleClick(IJSRuntime jsRuntime, ElementReference element, bool on = true) {
+      return jsRuntime.InvokeVoidAsync("one1lionJsFunctions.setPreventSelectOnDoubleClick", element, on);
+    }
+
+    public static ValueTask<bool> ElementExists(this IJSRuntime jsRuntime, string elementId) {
+      return jsRuntime.InvokeAsync<bool>("one1lionJsFunctions.elementExists", elementId);
     }
   }
 }

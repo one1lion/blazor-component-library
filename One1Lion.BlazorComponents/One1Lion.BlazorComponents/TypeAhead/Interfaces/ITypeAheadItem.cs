@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace One1Lion.BlazorComponents.TypeAhead {
+﻿namespace One1Lion.BlazorComponents.TypeAhead {
   public interface ITypeAheadItem {
     string MenuText { get; set; }
     string Value { get; set; }

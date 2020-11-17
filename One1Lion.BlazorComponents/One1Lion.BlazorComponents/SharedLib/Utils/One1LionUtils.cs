@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace One1Lion.BlazorComponents.SharedLib {
-  public static class Utils {
+  public static class One1LionUtils {
     public static T SimpleClone<T>(T obj) {
       // If T is one of the known primitive (or primitive-like) types listed below, then simply assign the cloned object to the object to be cloned
       if (typeof(T).GetTypeInfo().IsValueType) { return obj; }
@@ -102,7 +102,7 @@ namespace One1Lion.BlazorComponents.SharedLib {
         case var objA when fromObj.GetType().GetInterfaces().Contains(typeof(IList)):
         case var objB when fromObj.GetType().GetInterfaces().Contains(typeof(ICollection)):
         case var objC when fromObj.GetType().GetInterfaces().Contains(typeof(IEnumerable)):
-          toObj = (T)Utils.SimpleClone(fromObj, fromObj.GetType());
+          toObj = (T)One1LionUtils.SimpleClone(fromObj, fromObj.GetType());
           break;
         default:
           var props = fromObj.GetType().GetProperties();
@@ -110,7 +110,7 @@ namespace One1Lion.BlazorComponents.SharedLib {
             if (!prop.CanRead || !prop.CanWrite || (ignoreProps is { } && ignoreProps.Contains(prop))) { continue; }
             var fromObjProp = prop.GetValue(fromObj);
             var toObjProp = prop.GetValue(toObj);
-            Utils.CopyValues(fromObjProp, ref toObjProp);
+            One1LionUtils.CopyValues(fromObjProp, ref toObjProp);
             prop.SetValue(toObj, toObjProp);
           }
           break;

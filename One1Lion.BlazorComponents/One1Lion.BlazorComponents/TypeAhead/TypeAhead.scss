@@ -1,4 +1,5 @@
 ﻿.typeahead-container {
+  position: relative;
   display: flex;
   /* for using the dropdown toggle visibly inside of the input */
   /*
@@ -56,7 +57,7 @@
         border: solid 1px gray;
 
         .suggest-list-body {
-          max-height: 420px;
+          max-height: 15rem;
           overflow-y: auto;
 
           .dropdown-item {
