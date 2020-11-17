@@ -18,16 +18,17 @@
         <div class="draganddrop-item " draggable="true">
           <div class="queryparameter edit">
             <TypeAhead Items="DbFieldTypeAheadItems"
-                       SelectionOnly="true"
+                       TItem="List<DbFieldViewModel>"
                        OnSelectionMade="HandleFieldSelectionMade"
-                       SelectedText="@item.QueryField"
+                       SelectedDisplayText="@item.QueryField"
                        SelectedValue="@item.QueryField"
                        placeholder="Type or select a field" />
             @if (!string.IsNullOrWhiteSpace(item.QueryField)) {
               <TypeAhead Items="ExprTypeTypeAheadItems"
-                         SelectionOnly="true"
+                         TItem="ExpressionType"
+                         LimitToList="true"
                          OnSelectionMade="HandleExpressionSelectionMade"
-                         SelectedText="@ExpressionTypeDisplay.GetDisplayText(item.ExpressionType)"
+                         SelectedDisplayText="@ExpressionTypeDisplay.GetDisplayText(item.ExpressionType)"
                          placeholder="Type or select an expression" />
               if (item.ExpressionType != ExpressionType.NotSet) {
                 var qf = queryableFields.First(qf => qf.QueryableFieldInfo.DisplayName == item.QueryField);
@@ -125,8 +126,8 @@
   double inputNumberTo;
 
   List<ExpressionType> ExpressionTypes = new List<ExpressionType>();
-  List<TypeAheadItem> DbFieldTypeAheadItems = new List<TypeAheadItem>();
-  List<TypeAheadItem> ExprTypeTypeAheadItems = new List<TypeAheadItem>();
+  List<TypeAheadItem<List<DbFieldViewModel>>> DbFieldTypeAheadItems = new List<TypeAheadItem<List<DbFieldViewModel>>>();
+  List<TypeAheadItem<ExpressionType>> ExprTypeTypeAheadItems = new List<TypeAheadItem<ExpressionType>>();
 
   protected async override Task OnInitializedAsync() {
     loading = true;
@@ -137,7 +138,7 @@
       // Since we have asked specifically for fields that are queryable, the QueryableFieldInfo object will not be null
       DbFieldTypeAheadItems = queryableFields.GroupBy(qf => new {
         qf.QueryableFieldInfo.DisplayName
-      }).Select(qfg => new TypeAheadItem() {
+      }).Select(qfg => new TypeAheadItem<List<DbFieldViewModel>>() {
         MenuText = qfg.Key.DisplayName,
         DisplayText = qfg.Key.DisplayName,
         Value = qfg.Key.DisplayName.ToString(),
@@ -180,8 +181,8 @@
     }
   }
 
-  void HandleFieldSelectionMade(TypeAheadItem selectedItem) {
-    var qf = ((List<DbFieldViewModel>)selectedItem.Item);
+  void HandleFieldSelectionMade(TypeAheadItem<List<DbFieldViewModel>> selectedItem) {
+    var qf = selectedItem.Item;
     item.QueryField = qf.First().QueryableFieldInfo.DisplayName;
     if (!string.IsNullOrWhiteSpace(item.QueryField)) {
       ExpressionTypes = ExpressionTypeDisplay.GetExpressionTypes(qf.First().TypeName).Where(et => et != ExpressionType.NotSet).ToList();
@@ -190,7 +191,7 @@
     }
     if (!ExpressionTypes.Contains(item.ExpressionType)) { item.ExpressionType = ExpressionType.NotSet; }
     if (ExpressionTypes is { }) {
-      ExprTypeTypeAheadItems = ExpressionTypes.Select(et => new TypeAheadItem() {
+      ExprTypeTypeAheadItems = ExpressionTypes.Select(et => new TypeAheadItem<ExpressionType>() {
         MenuText = ExpressionTypeDisplay.GetDisplayText(et),
         DisplayText = ExpressionTypeDisplay.GetDisplayText(et),
         Value = et.ToString(),
@@ -199,7 +200,7 @@
     }
   }
 
-  void HandleExpressionSelectionMade(TypeAheadItem selectedItem) {
-    item.ExpressionType = (ExpressionType)selectedItem.Item;
+  void HandleExpressionSelectionMade(TypeAheadItem<ExpressionType> selectedItem) {
+    item.ExpressionType = selectedItem.Item;
   }
 }
