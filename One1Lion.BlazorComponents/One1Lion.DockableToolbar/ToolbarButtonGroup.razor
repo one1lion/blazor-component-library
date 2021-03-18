@@ -1,0 +1,53 @@
+﻿@inherits ChildElement<IToolbarContainer>
+@implements IHandleChildStateChanges
+@implements IToolbarButtonGroup
+
+<CascadingValue Value=this>
+  @ChildContent
+</CascadingValue>
+
+@code {
+  [Parameter] public RenderFragment ChildContent { get; set; }
+
+  protected override void Register(IToolbarContainer parent) {
+    parent.AddElement(this);
+  }
+
+  List<IToolbarElement> childElements = new List<IToolbarElement>();
+  public void AddElement(IToolbarElement childElement) {
+    childElements.Add(childElement);
+    StateHasChanged();
+  }
+
+  public bool HasVisibleChild => childElements?.Any(e => e.Visible) ?? false;
+
+  public override RenderFragment RenderContent => (builder => {
+    if (Visible) {
+      int i = 0;
+      foreach (var curButton in childElements) {
+        if (curButton.GetType().IsSubclassOf(typeof(ChildElement<IToolbarContainer>))) {
+          builder.AddContent(i++, (curButton as ChildElement<IToolbarContainer>).RenderContent);
+        } else {
+          builder.AddContent(i++, (curButton as ContainerChildElement<IToolbarContainer>).RenderContent);
+        }
+      }
+    }
+  });
+
+  public void NotifyChildrenStateChanged() {
+    if (childElements is { }) {
+      foreach (var curChild in childElements) {
+        curChild.NotifyStateChanged();
+      }
+    }
+  }
+
+  public void NotifyStateChanged() {
+    NotifyChildrenStateChanged();
+    StateHasChanged();
+  }
+
+  public void ChildStateChanged() {
+    StateHasChanged();
+  }
+}

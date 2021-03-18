@@ -1,0 +1,10 @@
+[
+  {
+    "outputFile": "wwwroot/css/typeahead.css",
+    "inputFile": "wwwroot/css/TypeAhead.scss"
+  },
+  {
+    "outputFile": "../One1Lion.BlazorLib/wwwroot/css/typeahead.css",
+    "inputFile": "wwwroot/css/TypeAhead.scss"
+  }
+]

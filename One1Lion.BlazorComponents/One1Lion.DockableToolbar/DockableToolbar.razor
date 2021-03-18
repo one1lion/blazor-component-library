@@ -1,0 +1,137 @@
+﻿@using System.Globalization
+
+@implements IDockableToolbar
+@implements IHandleChildStateChanges
+
+<CascadingValue Value=this>
+  @if (Visible) {
+    @ChildContent
+    <div class="dockable-toolbar-container dock-@(DockPosition.ToString().ToLower(CultureInfo.CurrentCulture))"
+         style="@(DockPosition == DockPosition.Float || DockPosition == DockPosition.Pinned ? $"position: fixed; top: {position.y}; left: {position.x};" : "")"
+         draggable="@draggable">
+
+      @if (draggable) {
+        // TODO: Implement drag handle when drag is enabled
+        <div class="drag-area"><i class="material-icons">drag_handle</i></div>
+      }
+
+      @{
+        // Whether or not there is a visible sibling prior to this element
+        // that appears without a divider element
+        var hasPrevVisibleNonDividedSibling = false;
+        var prevDisplayedWasDivider = false;
+        var prevDisplayedWasGroup = false;
+      }
+
+      @for (var i = 0; i < childElements.Count; i++) {
+        var showDivider = hasPrevVisibleNonDividedSibling && childElements[i].Visible;
+        switch (childElements[i].GetType()) {
+          case var t when t == typeof(ToolbarButtonGroup): {
+              var curButtonGroup = childElements[i] as ToolbarButtonGroup;
+              // ToolbarButtonGroup - A group of buttons contained in an element.
+              // This element would have a divider before it if there are visible
+              // elements preceeding it without another divider already showing
+
+              // Visible groups always get dividers before them when there are other
+              // visible elements before them and they have at least one visible child
+              showDivider = showDivider && curButtonGroup.HasVisibleChild;
+              if (showDivider) {
+                <div class="divider"></div>
+              }
+              @curButtonGroup.RenderContent
+              if (curButtonGroup.Visible && curButtonGroup.HasVisibleChild) {
+                prevDisplayedWasDivider = false;
+                prevDisplayedWasGroup = true;
+              }
+            }
+            break;
+          case var t when t == typeof(ToolbarSeparator): {
+              var hasSucceedingVisible = false;
+              for (var j = i; j < childElements.Count && !hasSucceedingVisible; j++) {
+                hasSucceedingVisible = childElements[j].Visible && childElements[j].GetType() != typeof(ToolbarSeparator);
+              }
+              if (showDivider && hasSucceedingVisible) {
+                var curSeparatorElem = childElements[i] as ContainerChildElement<IToolbarContainer>;
+                @curSeparatorElem.RenderContent
+                prevDisplayedWasDivider = true;
+                prevDisplayedWasGroup = false;
+              }
+            }
+            break;
+          case var t when t.IsSubclassOf(typeof(ChildElement<IToolbarContainer>)): {
+              // A single element (Button, Toggle, Popover, etc)
+
+              if (showDivider) {
+                <div class="divider"></div>
+              }
+
+              var curToolbarElem = childElements[i] as ChildElement<IToolbarContainer>;
+              @curToolbarElem.RenderContent
+
+              if (curToolbarElem.Visible) {
+                prevDisplayedWasDivider = false;
+                prevDisplayedWasGroup = false;
+              }
+            }
+            break;
+        }
+        if ((childElements[i].Visible || prevDisplayedWasGroup) && !prevDisplayedWasDivider) {
+          hasPrevVisibleNonDividedSibling = true;
+        }
+      }
+    </div>
+  }
+</CascadingValue>
+@code {
+  bool _Visible = true;
+  [Parameter]
+  public bool Visible {
+    get => _Visible;
+    set {
+      if (_Visible != value) {
+        _Visible = value;
+        if (VisibleChanged.HasDelegate) { VisibleChanged.InvokeAsync(_Visible); }
+        StateHasChanged();
+      }
+    }
+  }
+  [Parameter] public EventCallback<bool> VisibleChanged { get; set; }
+
+  [Parameter] public RenderFragment ChildContent { get; set; }
+  [Parameter] public DockPosition DockPosition { get; set; } = DockPosition.Top;
+  [Parameter] public string AddCssClasses { get; set; }
+  [Parameter(CaptureUnmatchedValues = true)]
+  public IDictionary<string, object> AdditionalAttributes { get; set; }
+
+  bool draggable => DockPosition == DockPosition.Float;
+  (double x, double y) position;
+
+  List<IToolbarElement> childElements = new List<IToolbarElement>();
+  public void AddElement(IToolbarElement childElement) {
+    childElements.Add(childElement);
+    NotifyStateChanged();
+  }
+
+  public bool HasVisibleChild => childElements?.Any(e => e.Visible) ?? false;
+
+  public void ResetChildElements() {
+    childElements = new List<IToolbarElement>();
+  }
+
+  public void NotifyChildrenStateChanged() {
+    if (childElements is { }) {
+      foreach (var curChild in childElements) {
+        curChild.NotifyStateChanged();
+      }
+    }
+  }
+
+  public void NotifyStateChanged() {
+    NotifyChildrenStateChanged();
+    StateHasChanged();
+  }
+
+  public void ChildStateChanged() {
+    StateHasChanged();
+  }
+}

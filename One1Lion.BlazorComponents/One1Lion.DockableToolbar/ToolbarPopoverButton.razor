@@ -1,0 +1,23 @@
+﻿@typeparam TItem
+
+@using System.Reflection
+
+@inherits ToolbarPopoverButtonBase<TItem>
+
+@code {
+  [Parameter] public string Title { get; set; }
+  [Parameter] public string ButtonCss { get; set; }
+  [Parameter] public string InnerText { get; set; }
+  [Parameter] public bool Disabled { get; set; }
+  [Parameter] public PropertyInfo MenuItemDisplayProperty { get; set; }
+  [Parameter] public PropertyInfo MenuItemTitleProperty { get; set; }
+  [Parameter] public List<TItem> MenuItems { get; set; }
+
+  protected override string _Title => Title;
+  protected override string _ButtonCss => ButtonCss;
+  protected override bool _Disabled => Disabled;
+  protected override string _InnerText => InnerText;
+  protected override PropertyInfo _MenuItemDisplayProperty => MenuItemDisplayProperty;
+  protected override PropertyInfo _MenuItemTitleProperty => MenuItemTitleProperty;
+  protected override List<TItem> _MenuItems => MenuItems;
+}

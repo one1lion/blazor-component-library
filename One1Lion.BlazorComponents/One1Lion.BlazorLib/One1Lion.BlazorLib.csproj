@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Version)' == ''">
+    <VersionPrefix Condition="'$(VersionPrefix)' == ''">0.1.0</VersionPrefix>
+    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+    <Version Condition="'$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</Version>
+    <Version Condition="'$(Version)' == ''">$(VersionPrefix)</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>One1Lion.BlazorComponentSuite</PackageId>
+    <AssemblyName>One1Lion.BlazorLib</AssemblyName>
+    <RootNamespace>One1Lion.BlazorLib</RootNamespace>
+    <Product>One1Lion.BlazorLib</Product>
+    <Company>One1Lion</Company>
+    <Authors>Humberto Cruz-Oyola Jr.</Authors>
+    <Description>The Razor Class Library for the One1Lion Blazor Component Library Suite to be used with Blazor applications</Description>
+    <PackageTags>Blazor, Component Library, Camera, Video, Card, Dialog, Dialog, Toolbar, Drag And Drop, Drag &amp; Drop, Loader, Spinner, Slider, Slider Button, Slider Toggle, Toggle, Toast, Toaster, Type Ahead, JSInterop</PackageTags>
+    <Copyright>2021</Copyright>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageReleaseNotes>The initial release</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\One1Lion.CameraView\One1Lion.CameraView.csproj" />
+    <ProjectReference Include="..\One1Lion.Card\One1Lion.Card.csproj" />
+    <ProjectReference Include="..\One1Lion.Dialog\One1Lion.Dialog.csproj" />
+    <ProjectReference Include="..\One1Lion.DockableToolbar\One1Lion.DockableToolbar.csproj" />
+    <ProjectReference Include="..\One1Lion.DragAndDrop\One1Lion.DragAndDrop.csproj" />
+    <ProjectReference Include="..\One1Lion.Loader\One1Lion.Loader.csproj" />
+    <ProjectReference Include="..\One1Lion.Shared\One1Lion.Shared.csproj" />
+    <ProjectReference Include="..\One1Lion.SliderButton\One1Lion.SliderButton.csproj" />
+    <ProjectReference Include="..\One1Lion.Toaster\One1Lion.Toaster.csproj" />
+    <ProjectReference Include="..\One1Lion.TypeAhead\One1Lion.TypeAhead.csproj" />
+  </ItemGroup>
+
+</Project>

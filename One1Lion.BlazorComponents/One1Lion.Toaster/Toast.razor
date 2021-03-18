@@ -1,0 +1,58 @@
+﻿@using One1Lion.Toaster.Interfaces
+
+@inject IToastService ToastService
+
+@implements IDisposable
+@*<div aria-live="polite" aria-atomic="true" style="position: fixed; min-height: 100vh;">*@
+<div style="position: fixed; bottom: 0; right: 0; z-index:3; padding:5px;">
+  @if (Toasts?.Any() ?? true) {
+    @foreach (var ct in Toasts) {
+      <ToastContent @key="ct"
+                    GUID="@ct.GUID"
+                    Time="@ct.Time"
+                    AutoReset="@ct.AutoReset"
+                    TimeDisplaying="ct.TimeDisplaying">
+        <Title>
+          @if (ct.Title is { }) {
+            @ct.Title
+          }
+        </Title>
+        <Body>
+          @ct.Body
+        </Body>
+      </ToastContent>
+    }
+  }
+</div>
+@*</div>*@
+
+@code {
+  private IList<ToastContentItem> Toasts { get; set; } = new List<ToastContentItem>();
+
+  protected override void OnInitialized() {
+    base.OnInitialized();
+
+    ToastService.OnRemove += OnRemove;
+    ToastService.OnAdd += OnAdd;
+  }
+
+  public async void OnAdd(ToastContentItem ct) {
+    await InvokeAsync(() => {
+      Toasts.Add(ct);
+
+      StateHasChanged();
+    });
+  }
+
+  public async void OnRemove(string GUID) {
+    await InvokeAsync(() => {
+      Toasts.Remove(Toasts.FirstOrDefault(q => q.GUID == GUID));
+      StateHasChanged();
+    });
+  }
+
+  void IDisposable.Dispose() {
+    ToastService.OnRemove -= OnRemove;
+    ToastService.OnAdd -= OnAdd;
+  }
+}

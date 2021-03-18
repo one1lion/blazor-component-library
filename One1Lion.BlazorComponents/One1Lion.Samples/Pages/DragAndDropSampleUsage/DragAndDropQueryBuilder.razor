@@ -1,5 +1,4 @@
-﻿@using One1Lion.BlazorComponents.DragAndDrop
-@using One1Lion.BlazorComponents.DragAndDrop.Lib
+﻿@using One1Lion.DragAndDrop.Lib
 @using One1Lion.Samples.Components.Search
 @using One1Lion.Samples.Data
 @using One1Lion.Samples.SharedLib.DbInfo
@@ -42,7 +41,7 @@
           <button type="button" class="oi oi-aperture" title="Reset" @onclick="((e) => ResetGroup(e, curHeader.Parent))"></button>
           <button type="button" class="oi oi-fullscreen-enter" title="Expand" @onclick="((e) => ExpandGroup(e, curHeader.Parent))"></button>
           <button type="button" class="oi oi-x text-danger" title="Remove" @onclick="((e) => RemoveGroup(e, curHeader.Parent))"></button>
-        }
+      }
       </GroupControlBoxTemplate>
       <ItemDisplayControlBoxTemplate Context="curItem">
         <button type="button" class="oi oi-pencil text-warning" title="Edit" @onclick="(async e => await dndState.BeginEditItem(curItem))"></button>
@@ -70,7 +69,7 @@
 
 @code {
   IQueryExpressionGroup baseGroup = new QueryExpressionGroup();
-  DnDState<IQueryElement> dndState = new DnDState<IQueryElement>();
+  DnDState<IQueryElement> dndState = new();
   List<DbFieldViewModel> dbFields { get; set; } = new List<DbFieldViewModel>();
 
   bool displayNew;

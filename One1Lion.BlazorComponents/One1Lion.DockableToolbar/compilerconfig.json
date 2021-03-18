@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/dockable-toolbar.css",
+    "inputFile": "wwwroot/css/DockableToolbar.scss"
+  },
+  {
+    "outputFile": "../One1Lion.BlazorLib/wwwroot/css/dockable-toolbar.css",
+    "inputFile": "wwwroot/css/DockableToolbar.scss"
+  }
+]

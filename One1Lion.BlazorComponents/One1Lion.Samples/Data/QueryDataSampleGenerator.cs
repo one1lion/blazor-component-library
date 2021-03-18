@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
-using One1Lion.Samples.SharedLib.DbInfo;
+﻿using One1Lion.Samples.SharedLib.DbInfo;
 using One1Lion.Samples.SharedLib.Search.DBExpressions;
 using One1Lion.Samples.SharedLib.Search.FileRepositoryExpressions;
 using One1Lion.Samples.SharedLib.Search.QueryExpressions;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace One1Lion.Samples.Data {
@@ -97,7 +97,7 @@ namespace One1Lion.Samples.Data {
     }
 
     public async static Task<List<DbFieldViewModel>> GenerateQueryableFields(HttpClient httpClient) {
-      return await httpClient.GetJsonAsync<List<DbFieldViewModel>>("SampleData/QueryableFields.json");
+      return await httpClient.GetFromJsonAsync<List<DbFieldViewModel>>("sample-data/QueryableFields.json");
     }
   }
 }

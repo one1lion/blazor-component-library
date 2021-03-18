@@ -1,0 +1,79 @@
+﻿@using System;
+@using System.Timers;
+
+@inject IToastService ToastService
+
+<div class="toast @ClassInOut" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    @if (ShowIcon) {
+      <img src="@IconUrl" width="32" height="32" class="rounded mr-2">
+    }
+    @if (Title is { }) {
+      <strong class="mx-auto">
+        @Title
+      </strong>
+    }
+    <small class="text-muted">@Time?.ToString("HH:mm:ss")</small>
+    <button type="button" class="ml-2 mb-1 close" @onclick="Remove" aria-label="Fechar">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="progress" style="height: 0.05rem;">
+    <div class="progress-bar progress-bar-striped progress-bar-animated"
+         role="progressbar"
+         aria-valuenow="@counterTimer"
+         aria-valuemin="0"
+         aria-valuemax="@maxTimeTimer"
+         style="width:@($"{(((double)counterTimer*100.0)/(double)maxTimeTimer).ToString().Replace(",",".")}%;")"></div>
+  </div>
+  <div class="toast-body text-center">
+    @Body
+  </div>
+</div>
+
+@code {
+  [Parameter] public RenderFragment Title { get; set; }
+  [Parameter] public string GUID { get; set; }
+  [Parameter] public DateTime? Time { get; set; }
+  [Parameter] public RenderFragment Body { get; set; }
+  [Parameter] public bool AutoReset { get; set; } = true;
+  [Parameter] public int TimeDisplaying { get; set; } = 4;
+  [Parameter] public bool ShowIcon { get; set; }
+  [Parameter] public string IconUrl { get; set; }
+
+  private string ClassInOut { get; set; } = "show flip-bottom";
+
+  private Timer timer;
+  private int counterTimer { get; set; } = 0;
+  private int frequencyTimer { get; set; } = 100;
+  private int maxTimeTimer => TimeDisplaying * (1000 / frequencyTimer);
+
+  protected override void OnAfterRender(bool firstRender) {
+    if (firstRender) {
+      if (AutoReset) {
+        timer = new Timer(frequencyTimer);
+        timer.Elapsed += ElapsedTimer;
+        timer.Start();
+      }
+    }
+  }
+
+  private async void ElapsedTimer(Object source, ElapsedEventArgs e) {
+    counterTimer++;
+    if (counterTimer >= maxTimeTimer + 7) await Remove();
+    else await InvokeAsync(() => StateHasChanged());
+  }
+
+  private async Task Remove() {
+    await InvokeAsync(() => {
+      ClassInOut = "fade-out";
+      StateHasChanged();
+    });
+
+    await Task.Delay(500);
+
+    ToastService.Remove(GUID);
+    timer.Stop();
+    timer.Dispose();
+  }
+}

@@ -1,0 +1,59 @@
+﻿@inject IJSRuntime JsRuntime
+
+@if (!string.IsNullOrWhiteSpace(Height)) {
+  <div class="slider-button@(!string.IsNullOrWhiteSpace(AddCssClass) ? $" {AddCssClass}" : "")">
+    <label class="switch" style="font-size:@(Height)">
+      <input type="checkbox" id="@id" value="@ToggledOn" @onchange="HandleCheckChanged" />
+      <span class="slider@(Round ? " round" : "")"></span>
+    </label>
+    @if (!string.IsNullOrWhiteSpace(LabelText)) {
+      <label for="@id" class="label-text">&nbsp;@LabelText</label>
+    }
+  </div>
+}
+
+@code {
+  [Parameter] public bool ToggledOn { get; set; }
+  [Parameter] public string LabelText { get; set; }
+  [Parameter] public bool Round { get; set; }
+  [Parameter] public string Height { get; set; }
+  [Parameter] public string AddCssClass { get; set; }
+  [Parameter] public EventCallback<bool> ToggledOnChanged { get; set; }
+
+  string id = Guid.NewGuid().ToString();
+
+  bool checkSet;
+  int counter;
+  protected override async Task OnAfterRenderAsync(bool firstRender) {
+    if (!checkSet && ToggledOn) {
+      checkSet = true;
+      while (!await O1LJsInterop.ElementExists(JsRuntime, id)) { await Task.Delay(30); }
+      await SetToggleState(ToggledOn);
+    } else if (!checkSet) {
+      counter++;
+      if (counter >= 30) {
+        checkSet = true;
+      }
+    }
+  }
+
+  async Task HandleCheckChanged(ChangeEventArgs e) {
+    var changingTo = (bool)e.Value;
+
+    if (ToggledOnChanged.HasDelegate) {
+      await ToggledOnChanged.InvokeAsync(changingTo);
+    }
+  }
+
+  async Task SetToggleState(bool newState) {
+    if (newState != ToggledOn) {
+      ToggledOn = newState;
+    }
+    await O1LJsInterop.SetInputValue(JsRuntime, id, ToggledOn);
+    await InvokeAsync(() => StateHasChanged());
+  }
+
+  public async Task UpdateState(bool newState) {
+    await SetToggleState(ToggledOn);
+  }
+}

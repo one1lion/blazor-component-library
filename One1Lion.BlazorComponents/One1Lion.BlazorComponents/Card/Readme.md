@@ -1,3 +1,0 @@
-﻿This library is the library from a DevExpress Demo located on their [Blazor Training Samples](https://github.com/DevExpress/blazor-training-samples).  Specifically, this is from the [ParentCoordinated](https://github.com/DevExpress/blazor-training-samples/tree/master/WebAssembly/ComponentStructure/final/ParentCoordinated) sample, shown in this [YouTube video](https://youtu.be/u5SXWyxOP68).  I have restructured it to study it and see how to apply it to the DragAndDrop Component Library.
-
-Also worth note is that this library uses Bootstrap 4 classes.

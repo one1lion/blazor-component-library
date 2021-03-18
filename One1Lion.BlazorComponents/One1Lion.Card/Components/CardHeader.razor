@@ -1,0 +1,13 @@
+﻿@namespace One1Lion.Card
+
+@inherits FlexibleContainerChildElement<ICard>
+
+@code {
+  [Parameter] public string AddCssClasses { get; set; }
+
+  protected override void Register(ICard parent) {
+    parent.SetHeader(this);
+  }
+
+  protected override string ContainerCssClass => $"card-header{(string.IsNullOrWhiteSpace(AddCssClasses) ? "" : $" {AddCssClasses}")}";
+}

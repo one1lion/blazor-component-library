@@ -1,0 +1,112 @@
+﻿@inject IJSRuntime JsRuntime
+@implements IAsyncDisposable
+
+<div class="camera-view-container">
+  @if (loading) {
+    if (LoadingContent is null) {
+      <p>Loading...</p>
+    } else {
+      @LoadingContent
+    }
+  } else {
+    <div class="camera-options">
+      <div class="select">
+        <label for="audioSource-@id">Audio source: </label>
+        <select id="audioSource-@id" @bind="selectedAudioDevice" disabled="@((audioDevices?.Count() ?? 0) == 0)">
+          @if (audioDevices.Count() == 0) {
+            <option selected value="0">No Devices Found</option>
+          } else {
+            var devNum = 0;
+            <option selected value="0">Don't Use Audio</option>
+            foreach (var curDevice in audioDevices) {
+              <option value="@curDevice.DeviceId">@(string.IsNullOrWhiteSpace(curDevice.Label) ? $"Audio Device #{devNum++}" : curDevice.Label)</option>
+            }
+          }
+        </select>
+      </div>
+      <div class="select">
+        <label for="videoSource-@id">Video source: </label>
+        <select id="videoSource-@id" @bind="selectedVideoDevice" disabled="@((videoDevices?.Count() ?? 0) == 0)">
+          @if (videoDevices.Count() == 0) {
+            <option selected value="0">No Devices Found</option>
+          } else {
+            var devNum = 0;
+            foreach (var curDevice in videoDevices) {
+              <option value="@curDevice.DeviceId">@(string.IsNullOrWhiteSpace(curDevice.Label) ? $"Video Device #{devNum++}" : curDevice.Label)</option>
+            }
+          }
+        </select>
+        <button type="button" @onclick="ToggleStreamVideo">@(streamRunning ? "Stop" : "Start") Video</button>
+      </div>
+    </div>
+    <video id="@id" autoplay="" muted="" playsinline=""></video>
+  }
+</div>
+
+@code {
+  string id = Guid.NewGuid().ToString();
+  [Parameter] public RenderFragment LoadingContent { get; set; }
+
+  List<DeviceInfo> deviceInfos = new List<DeviceInfo>();
+  IEnumerable<DeviceInfo> audioDevices => deviceInfos?.Where(e => e.Kind == "audioinput");
+  IEnumerable<DeviceInfo> videoDevices => deviceInfos?.Where(e => e.Kind == "videoinput");
+
+  string selectedAudioDevice = "0";
+  string selectedVideoDevice = "0";
+
+  bool hasGetUserMediaMethod;
+  bool loading = true;
+  bool streamRunning;
+
+  private Task<IJSObjectReference> _Module;
+  private Task<IJSObjectReference> Module => _Module ??= JsRuntime.InvokeAsync<IJSObjectReference>("import", "/_content/One1Lion.CameraView/js/cameraViewInterop.js").AsTask();
+
+  protected override async Task OnAfterRenderAsync(bool firstRender) {
+    if (firstRender) {
+      var module = await Module;
+      hasGetUserMediaMethod = await CameraViewJsInterop.HasGetUserMedia(module);
+      if (!hasGetUserMediaMethod) {
+        loading = false;
+        return;
+      }
+      deviceInfos = await CameraViewJsInterop.GetDeviceInfos(module);
+      if ((audioDevices?.Count() ?? 0) > 0) {
+        selectedAudioDevice = audioDevices.First().DeviceId;
+      }
+      if ((videoDevices?.Count() ?? 0) > 0) {
+        selectedVideoDevice = videoDevices.First().DeviceId;
+      }
+      loading = false;
+      await InvokeAsync(() => StateHasChanged());
+    }
+  }
+
+  async Task ToggleStreamVideo() {
+    var module = await Module;
+    if (streamRunning) {
+      // TODO: stop the stream
+      await CameraViewJsInterop.StopCapture(module, id);
+      streamRunning = false;
+    } else {
+      var constraints = new VideoCaptureConstraint();
+      if (audioDevices.Any(x => x.DeviceId == selectedAudioDevice)) {
+        constraints.AudioDeviceId = selectedAudioDevice;
+      }
+      if (videoDevices.Any(x => x.DeviceId == selectedVideoDevice)) {
+        constraints.VideoDeviceId = selectedAudioDevice;
+      } else {
+        constraints.ExactWidth = 640;
+        constraints.ExactHeight = 480;
+      }
+      await CameraViewJsInterop.StartCapture(module, id, constraints);
+      streamRunning = true;
+    }
+  }
+
+  public async ValueTask DisposeAsync() {
+    if (_Module is { }) {
+      var module = await Module;
+      await module.DisposeAsync();
+    }
+  }
+}

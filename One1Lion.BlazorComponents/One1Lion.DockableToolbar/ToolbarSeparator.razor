@@ -1,0 +1,16 @@
+﻿@inherits ContainerChildElement<IToolbarContainer>
+@implements IToolbarElement
+
+@code {
+  [Parameter] public string AddCssClasses { get; set; }
+
+  protected override void Register(IToolbarContainer parent) {
+    parent.AddElement(this);
+  }
+
+  protected override string ContainerCssClass => $"divider{(string.IsNullOrWhiteSpace(AddCssClasses) ? "" : $" {AddCssClasses}")}";
+
+  public void NotifyStateChanged() {
+    StateHasChanged();
+  }
+}

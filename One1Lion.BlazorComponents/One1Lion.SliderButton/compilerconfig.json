@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/slider-button.css",
+    "inputFile": "wwwroot/css/SliderButton.scss"
+  },
+  {
+    "outputFile": "../One1Lion.BlazorLib/wwwroot/css/slider-button.css",
+    "inputFile": "wwwroot/css/SliderButton.scss"
+  }
+]

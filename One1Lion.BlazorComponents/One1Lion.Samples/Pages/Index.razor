@@ -1,26 +1,9 @@
 ﻿@page "/"
-@using One1Lion.BlazorComponents.SplitButton
 
 <h1>One1Lion Blazor Components</h1>
 
 <p>
-  This is the landing pad for the One1Lion Blazor Component Library.  There will be more descriptions to come.
-  For now, enjoy this placeholder page and feel free to poke around.
+  This is the landing pad for the One1Lion Blazor Component Library.  There will be 
+  more descriptions to come. For now, enjoy this placeholder page and feel free to 
+  poke around.
 </p>
-
-@* TODO: Fix the standard styling *@
-<SplitButton List="buttonList" CssClass="" ExpandOnMainButtonClick="true">
-  <ButtonInnerHtml>
-    Choose
-  </ButtonInnerHtml>
-</SplitButton>
-
-@code {
-  List<string> buttonList = new List<string>() {
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5"
-  };
-}

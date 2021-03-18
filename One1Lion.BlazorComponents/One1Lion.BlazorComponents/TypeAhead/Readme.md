@@ -1,1 +1,0 @@
-﻿This library contains the TypeAhead component: an Input box with a suggest list.  The list can be populated either with a Loader that returns a List<TypeAheadItem<TItem>> or a supplied List<TypeAheadItem<TItem>>.

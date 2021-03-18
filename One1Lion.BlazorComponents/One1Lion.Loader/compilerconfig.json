@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/ivan-loaders.css",
+    "inputFile": "wwwroot/css/IvanLoaders.scss"
+  },
+  {
+    "outputFile": "../One1Lion.BlazorLib/wwwroot/css/ivan-loaders.css",
+    "inputFile": "wwwroot/css/IvanLoaders.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/threebox-loader.css",
+    "inputFile": "wwwroot/css/ThreeBoxLoader.scss"
+  },
+  {
+    "outputFile": "../One1Lion.BlazorLib/wwwroot/css/threebox-loader.css",
+    "inputFile": "wwwroot/css/ThreeBoxLoader.scss"
+  }
+]

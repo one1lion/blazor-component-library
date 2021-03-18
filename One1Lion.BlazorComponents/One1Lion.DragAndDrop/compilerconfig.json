@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/draganddrop.css",
+    "inputFile": "wwwroot/css/DragAndDrop.scss"
+  },
+  {
+    "outputFile": "../One1Lion.BlazorLib/wwwroot/css/draganddrop.css",
+    "inputFile": "wwwroot/css/DragAndDrop.scss"
+  }
+]
