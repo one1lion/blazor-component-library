@@ -1,6 +1,9 @@
 # blazor-component-library
 Collection of Component Libraries used in various projects
 
+## Caution - WIP
+This library is still a work in process.  I will continue updating it as I find time.  Most of the components have at least one implementation approach or styling or some other issue that can be improved or finished.
+
 # Quick Summary
 The One1Lion.Components project contains the component library.  Each Component is contained within its own folder.  The SharedLib folder is for the Interfaces, Utilities, Shared Components, and other code shared throughout the Components project.  
 
