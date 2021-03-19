@@ -1,0 +1,74 @@
+﻿.threebox-loader {
+  display: inline-block;
+  text-align: center;
+
+  label {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.4em;
+  }
+
+  .no-label {
+    label {
+      display: none;
+    }
+  }
+
+  .boxes {
+    display: flex;
+    justify-content: space-around;
+    min-width: 64px;
+    transition: opacity ease-in 1s;
+
+    div {
+      height: 16px;
+      width: 16px;
+      opacity: 0;
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+      transform: scale(1);
+      background-color: #fff;
+    }
+
+    div:nth-child(1) {
+      animation: fade-in-out 1.2s infinite;
+    }
+
+    div:nth-child(2) {
+      animation: fade-in-out 1.2s infinite;
+      animation-delay: 0.2s;
+    }
+
+    div:nth-child(3) {
+      animation: fade-in-out 1.2s infinite;
+      animation-delay: 0.4s;
+    }
+  }
+
+  &.vertical {
+    text-align: center;
+
+    .boxes {
+      flex-direction: column;
+      align-items: center;
+      align-content: space-around;
+      width: auto;
+      height: 64px;
+    }
+  }
+}
+
+@keyframes fade-in-out {
+  0% {
+    transform: scale(0.95);
+    opacity: 1;
+  }
+
+  70% {
+    transform: scale(1);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(0.95);
+  }
+}
