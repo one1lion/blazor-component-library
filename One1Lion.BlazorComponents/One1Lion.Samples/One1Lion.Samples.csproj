@@ -9,12 +9,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\One1Lion.BlazorLib\wwwroot\css\o1l-components.css" Link="wwwroot\css\o1l-components.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\One1Lion.BlazorLib\wwwroot\css\o1l-components.min.css" Link="wwwroot\css\o1l-components.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <content Include="Monikers.imagemanifest">
       <IncludeInVSIX>true</IncludeInVSIX>
     </content>
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\One1Lion.Shared\wwwroot\o1lJsInterop.js" Link="wwwroot\js\o1lJsInterop.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Components\Search\EditSearchCriteria.razor" />
     <None Include="Components\Search\FileRepoSearchCriteria.razor" />
     <None Include="Components\Search\SearchCriteria.razor" />
@@ -31,6 +40,10 @@
   <ItemGroup>
     <ProjectReference Include="..\One1Lion.BlazorLib\One1Lion.BlazorLib.csproj" />
     <ProjectReference Include="..\One1Lion.Samples.SharedLib\One1Lion.Samples.SharedLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>
