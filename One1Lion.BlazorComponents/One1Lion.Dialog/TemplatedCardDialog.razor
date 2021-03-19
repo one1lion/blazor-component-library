@@ -1,4 +1,5 @@
 ﻿@using One1Lion.Card
+@using One1Lion.Shared
 
 <TemplatedDialog @bind-Show="Show"
                  AddContainerCssClasses="@AdditionalDialogCssClasses"
@@ -6,7 +7,7 @@
                  AdditionalAttributes="@AdditionalAttributes">
   <Card>
     @if (CardHeaderContent is { } || ShowDismissButton) {
-      <CardHeader>
+      <CardHeader ElementType="CardHeaderElementType">
         @if (CardHeaderContent is { }) {
           @CardHeaderContent
         }
@@ -16,7 +17,7 @@
       </CardHeader>
     }
     <CardBody>
-      <CardText>
+      <CardText ElementType="CardTextElementType">
         @CardTextContent
       </CardText>
     </CardBody>
@@ -45,6 +46,8 @@
   [Parameter] public bool ShowDismissButton { get; set; }
   [Parameter] public string Title { get; set; }
   [Parameter] public string AdditionalDialogCssClasses { get; set; }
+  [Parameter] public ElementType CardHeaderElementType { get; set; } = ElementType.Div;
+  [Parameter] public ElementType CardTextElementType { get; set; } = ElementType.P;
   [Parameter] public RenderFragment CardHeaderContent { get; set; }
   [Parameter] public RenderFragment CardTextContent { get; set; }
   [Parameter] public RenderFragment CardFooterContent { get; set; }

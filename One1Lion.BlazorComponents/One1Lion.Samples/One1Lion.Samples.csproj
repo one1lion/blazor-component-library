@@ -10,10 +10,10 @@
 
   <ItemGroup>
     <Content Include="..\One1Lion.BlazorLib\wwwroot\css\o1l-components.css" Link="wwwroot\css\o1l-components.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\One1Lion.BlazorLib\wwwroot\css\o1l-components.min.css" Link="wwwroot\css\o1l-components.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <content Include="Monikers.imagemanifest">
       <IncludeInVSIX>true</IncludeInVSIX>
