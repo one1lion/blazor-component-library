@@ -12,16 +12,16 @@
       // Try to get response from component library's css
       // If it server response is not ok or the request fails
       // fallback to linked copy of css
-      fetch("_content/One1Lion.BlazorLib/css/o1l-components.min.css")
+      fetch("_content/One1Lion.BlazorLib/css/o1l-components.css")
       .then(r => {
         if (!r.ok) {
-          addCssLink("css/o1l-components.min.css");
+          addCssLink("css/o1l-components.css");
         } else {
-          addCssLink("_content/One1Lion.BlazorLib/css/o1l-components.min.css");
+          addCssLink("_content/One1Lion.BlazorLib/css/o1l-components.css");
         }
       })
       .catch(e => {
-        addCssLink("css/o1l-components.min.css");
+        addCssLink("css/o1l-components.css");
       });
       // Then add remaining css references to make sure they
       // get added in the right order
