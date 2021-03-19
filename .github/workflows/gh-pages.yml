@@ -20,7 +20,7 @@ jobs:
 
       # Publish the site
       - name: Publish
-        run: dotnet publish ProjectDir/Project.csproj -p:GHPages=true -o:public -c:Release
+        run: dotnet publish One1Lion.BlazorComponents/One1Lion.Samples/One1Lion.Samples.csproj -p:GHPages=true -o:public -c:Release
 
       # Deploy the site
       - name: Deploy
