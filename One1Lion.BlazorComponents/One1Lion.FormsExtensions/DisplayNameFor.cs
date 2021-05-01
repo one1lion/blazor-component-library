@@ -19,7 +19,7 @@ namespace One1Lion.FormsExtensions {
   /// Adapted from <see cref="Microsoft.AspNetCore.Components.Forms.ValidationMessage{TValue}"/>
   /// https://github.com/dotnet/aspnetcore/blob/4928eb3de0d80570dad93a143b52a8f5a205dac7/src/Components/Web/src/Forms/ValidationMessage.cs
   /// </remarks>
-  public class DisplayFor<T> : ComponentBase {
+  public class DisplayNameFor<T> : ComponentBase {
     private Expression<Func<T>> _previousFieldAccessor;
     private string _displayName;
 

@@ -7,11 +7,11 @@
 
 <EditForm Model="model">
   <div class="form-group">
-    <label for="dbName"><DisplayFor Field="() => model.Database" /></label>
+    <label for="dbName"><DisplayNameFor Field="() => model.Database" /></label>
     <InputText id="dbName" @bind-Value="model.Database" class="form-control" />
   </div>
   <div class="form-group">
-    <label for="tableName"><DisplayFor Field="() => model.TableName" /></label>
+    <label for="tableName"><DisplayNameFor Field="() => model.TableName" /></label>
     <InputText id="tableName" @bind-Value="model.TableName" class="form-control" />
   </div>
 </EditForm>
@@ -20,11 +20,11 @@
 
 <EditForm Model="model">
   <div class="form-group">
-    <label for="dbName2"><DisplayFor Field="() => model.Database" style="color: green;" /></label>
+    <label for="dbName2"><DisplayNameFor Field="() => model.Database" style="color: green;" /></label>
     <InputText id="dbName2" @bind-Value="model.Database" class="form-control" />
   </div>
   <div class="form-group">
-    <label for="tableName2"><DisplayFor Field="() => model.TableName" style="color: blue;" /></label>
+    <label for="tableName2"><DisplayNameFor Field="() => model.TableName" style="color: blue;" /></label>
     <InputText id="tableName2" @bind-Value="model.TableName" class="form-control" />
   </div>
 </EditForm>
