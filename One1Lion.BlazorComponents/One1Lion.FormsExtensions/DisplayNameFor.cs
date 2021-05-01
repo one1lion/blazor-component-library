@@ -13,8 +13,8 @@ namespace One1Lion.FormsExtensions {
   /// Displays a list of Display Name from the <see cref="System.ComponentModel.DataAnnotations.DisplayAttribute" />
   /// </summary>
   /// <remarks>
-  /// This is an additional component that behaves similarly to Html.DisplayFor(...)
-  /// syntax in Html. It will render as just the text if there are no additional attributes, or as a span if there are
+  /// This is an additional component that will use the Name property of the DisplayAttribute Data Annotation.
+  /// If there is no DisplayAttribute, it will use the property name.
   /// 
   /// Adapted from <see cref="Microsoft.AspNetCore.Components.Forms.ValidationMessage{TValue}"/>
   /// https://github.com/dotnet/aspnetcore/blob/4928eb3de0d80570dad93a143b52a8f5a205dac7/src/Components/Web/src/Forms/ValidationMessage.cs
