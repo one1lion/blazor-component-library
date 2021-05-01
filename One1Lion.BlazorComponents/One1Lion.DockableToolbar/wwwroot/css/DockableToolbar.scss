@@ -1,4 +1,4 @@
-﻿.dockable-toolbar-container {
+﻿.dockable-toolbar-container, .dockable-toolbar-container ::deep {
   position: fixed;
   display: flex;
   height: 2em;

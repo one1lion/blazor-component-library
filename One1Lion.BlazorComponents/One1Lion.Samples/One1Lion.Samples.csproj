@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\One1Lion.BlazorLib\One1Lion.BlazorLib.csproj" />
+    <ProjectReference Include="..\One1Lion.FormsExtensions\One1Lion.FormsExtensions.csproj" />
     <ProjectReference Include="..\One1Lion.Samples.SharedLib\One1Lion.Samples.SharedLib.csproj" />
   </ItemGroup>
 

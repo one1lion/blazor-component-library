@@ -4,6 +4,18 @@
     "inputFile": "wwwroot/css/Dialog.scss"
   },
   {
+    "outputFile": "TemplatedCardDialog.razor.css",
+    "inputFile": "wwwroot/css/Dialog.scss"
+  },
+  {
+    "outputFile": "TemplatedDialog.razor.css",
+    "inputFile": "wwwroot/css/Dialog.scss"
+  },
+  {
+    "outputFile": "TemplatedQuestionDialog.razor.css",
+    "inputFile": "wwwroot/css/Dialog.scss"
+  },
+  {
     "outputFile": "../One1Lion.BlazorLib/wwwroot/css/dialog.css",
     "inputFile": "wwwroot/css/Dialog.scss"
   }

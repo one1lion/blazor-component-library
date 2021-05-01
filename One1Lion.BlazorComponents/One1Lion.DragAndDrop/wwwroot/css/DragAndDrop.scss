@@ -1,4 +1,4 @@
-﻿.draganddrop {
+﻿.draganddrop, .draganddrop ::deep {
   /* Sizing */
   --header-height: 3rem;
   --main-container-height: calc(80vh - var(--header-height));

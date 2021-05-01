@@ -5,29 +5,31 @@ VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Samples.SharedLib", "One1Lion.Samples.SharedLib\One1Lion.Samples.SharedLib.csproj", "{E1412B55-60FA-4AAE-8A8F-321F9DFF3D9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.CameraView", "One1Lion.CameraView\One1Lion.CameraView.csproj", "{9151CFCF-18F9-4398-BD4E-ADE661B49C69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.CameraView", "One1Lion.CameraView\One1Lion.CameraView.csproj", "{9151CFCF-18F9-4398-BD4E-ADE661B49C69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.Card", "One1Lion.Card\One1Lion.Card.csproj", "{D31929AA-ED86-48E8-BE9E-3826AE82A22A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Card", "One1Lion.Card\One1Lion.Card.csproj", "{D31929AA-ED86-48E8-BE9E-3826AE82A22A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.Dialog", "One1Lion.Dialog\One1Lion.Dialog.csproj", "{344D54FA-9FF9-4303-AAEC-6837429818D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Dialog", "One1Lion.Dialog\One1Lion.Dialog.csproj", "{344D54FA-9FF9-4303-AAEC-6837429818D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.DockableToolbar", "One1Lion.DockableToolbar\One1Lion.DockableToolbar.csproj", "{F07F451A-BA08-4728-96E7-36C64B61B793}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.DockableToolbar", "One1Lion.DockableToolbar\One1Lion.DockableToolbar.csproj", "{F07F451A-BA08-4728-96E7-36C64B61B793}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.DragAndDrop", "One1Lion.DragAndDrop\One1Lion.DragAndDrop.csproj", "{9D494733-1AFE-483B-BC4C-905FE4DEA397}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.DragAndDrop", "One1Lion.DragAndDrop\One1Lion.DragAndDrop.csproj", "{9D494733-1AFE-483B-BC4C-905FE4DEA397}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.Loader", "One1Lion.Loader\One1Lion.Loader.csproj", "{F3F842C6-AD3B-4F6B-9931-CCD4EC7868F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Loader", "One1Lion.Loader\One1Lion.Loader.csproj", "{F3F842C6-AD3B-4F6B-9931-CCD4EC7868F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.Shared", "One1Lion.Shared\One1Lion.Shared.csproj", "{EF69050B-DB33-49ED-AC1B-A327A2996704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Shared", "One1Lion.Shared\One1Lion.Shared.csproj", "{EF69050B-DB33-49ED-AC1B-A327A2996704}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.SliderButton", "One1Lion.SliderButton\One1Lion.SliderButton.csproj", "{CEE787F4-777D-4064-9FF5-6152C1BDD207}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.SliderButton", "One1Lion.SliderButton\One1Lion.SliderButton.csproj", "{CEE787F4-777D-4064-9FF5-6152C1BDD207}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.Toaster", "One1Lion.Toaster\One1Lion.Toaster.csproj", "{B1EA0426-8154-4434-A2D9-927A45590A02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Toaster", "One1Lion.Toaster\One1Lion.Toaster.csproj", "{B1EA0426-8154-4434-A2D9-927A45590A02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.TypeAhead", "One1Lion.TypeAhead\One1Lion.TypeAhead.csproj", "{6577EA49-8A3E-4184-AD56-7AF4A0106F90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.TypeAhead", "One1Lion.TypeAhead\One1Lion.TypeAhead.csproj", "{6577EA49-8A3E-4184-AD56-7AF4A0106F90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.Samples", "One1Lion.Samples\One1Lion.Samples.csproj", "{9F79256C-C9F8-45BB-948E-5CA935AC5DD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Samples", "One1Lion.Samples\One1Lion.Samples.csproj", "{9F79256C-C9F8-45BB-948E-5CA935AC5DD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.BlazorLib", "One1Lion.BlazorLib\One1Lion.BlazorLib.csproj", "{53461E88-5734-4036-985D-6BC913EAA3B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.BlazorLib", "One1Lion.BlazorLib\One1Lion.BlazorLib.csproj", "{53461E88-5734-4036-985D-6BC913EAA3B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.FormsExtensions", "One1Lion.FormsExtensions\One1Lion.FormsExtensions.csproj", "{756A601F-76DB-4069-86C1-B16289F14690}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{53461E88-5734-4036-985D-6BC913EAA3B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53461E88-5734-4036-985D-6BC913EAA3B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53461E88-5734-4036-985D-6BC913EAA3B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{756A601F-76DB-4069-86C1-B16289F14690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{756A601F-76DB-4069-86C1-B16289F14690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{756A601F-76DB-4069-86C1-B16289F14690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756A601F-76DB-4069-86C1-B16289F14690}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

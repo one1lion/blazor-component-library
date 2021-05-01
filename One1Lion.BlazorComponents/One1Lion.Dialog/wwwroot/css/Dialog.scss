@@ -1,4 +1,4 @@
-﻿.dialog-container {
+﻿.dialog-container, .dialog-container ::deep {
   position: fixed;
   height: 100vh;
   top: 0;

@@ -1,0 +1,50 @@
+﻿@page "/fe-samples"
+
+@using One1Lion.Samples.SharedLib.DbInfo
+@using One1Lion.FormsExtensions
+
+<h3>Display For with no additional attributes</h3>
+
+<EditForm Model="model">
+  <div class="form-group">
+    <label for="dbName"><DisplayFor Field="() => model.Database" /></label>
+    <InputText id="dbName" @bind-Value="model.Database" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="tableName"><DisplayFor Field="() => model.TableName" /></label>
+    <InputText id="tableName" @bind-Value="model.TableName" class="form-control" />
+  </div>
+</EditForm>
+
+<h3>Display For with no attributes</h3>
+
+<EditForm Model="model">
+  <div class="form-group">
+    <label for="dbName2"><DisplayFor Field="() => model.Database" style="color: green;" /></label>
+    <InputText id="dbName2" @bind-Value="model.Database" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="tableName2"><DisplayFor Field="() => model.TableName" style="color: blue;" /></label>
+    <InputText id="tableName2" @bind-Value="model.TableName" class="form-control" />
+  </div>
+</EditForm>
+
+<h3>Label For</h3>
+<p>
+  Note: Work in progress.  Trying to find a way to automatically set the <code>for</code> attribute
+  in the component.
+</p>
+<EditForm Model="model">
+  <div class="form-group">
+    <LabelFor Field="() => model.Database" for="dbName3" />
+    <InputText id="dbName3" @bind-Value="model.Database" class="form-control" />
+  </div>
+  <div class="form-group">
+    <LabelFor Field="() => model.TableName" for="tableName3" />
+    <InputText id="tableName3" @bind-Value="model.TableName" class="form-control" />
+  </div>
+</EditForm>
+
+@code {
+  CollectionTable model = new CollectionTable();
+}

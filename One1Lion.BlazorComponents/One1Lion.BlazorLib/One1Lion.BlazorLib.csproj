@@ -50,6 +50,7 @@
     <ProjectReference Include="..\One1Lion.Dialog\One1Lion.Dialog.csproj" />
     <ProjectReference Include="..\One1Lion.DockableToolbar\One1Lion.DockableToolbar.csproj" />
     <ProjectReference Include="..\One1Lion.DragAndDrop\One1Lion.DragAndDrop.csproj" />
+    <ProjectReference Include="..\One1Lion.FormsExtensions\One1Lion.FormsExtensions.csproj" />
     <ProjectReference Include="..\One1Lion.Loader\One1Lion.Loader.csproj" />
     <ProjectReference Include="..\One1Lion.Shared\One1Lion.Shared.csproj" />
     <ProjectReference Include="..\One1Lion.SliderButton\One1Lion.SliderButton.csproj" />
