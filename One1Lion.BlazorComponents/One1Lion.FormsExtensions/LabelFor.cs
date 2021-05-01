@@ -34,7 +34,7 @@ namespace One1Lion.FormsExtensions {
     [CascadingParameter] EditContext CurrentEditContext { get; set; }
 
     /// <summary>
-    /// Specifies the field for which validation messages should be displayed.
+    /// Specifies the field to generate a label for.
     /// </summary>
     [Parameter] public Expression<Func<T>> Field { get; set; }
 
