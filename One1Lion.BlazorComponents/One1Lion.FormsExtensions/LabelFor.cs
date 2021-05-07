@@ -21,7 +21,6 @@ namespace One1Lion.FormsExtensions {
   public class LabelFor<T> : ComponentBase {
     private EditContext _previousEditContext;
     private Expression<Func<T>> _previousFieldAccessor;
-    private string _propertyName;
     private string _displayName;
 
     /// <summary>
