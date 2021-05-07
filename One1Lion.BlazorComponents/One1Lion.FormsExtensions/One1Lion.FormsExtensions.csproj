@@ -49,4 +49,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\One1Lion.Shared\One1Lion.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

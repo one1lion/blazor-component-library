@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
+using One1Lion.Shared.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace One1Lion.FormsExtensions {
   /// <summary>
@@ -37,26 +36,25 @@ namespace One1Lion.FormsExtensions {
     protected override void OnParametersSet() {
       if (Field == null) // Not possible except if you manually specify T
       {
-        throw new InvalidOperationException($"{GetType()} requires a value for the " +
-            $"{nameof(Field)} parameter.");
+        throw new InvalidOperationException($"{GetType()} requires a value for the {nameof(Field)} parameter.");
       } else if (Field != _previousFieldAccessor || string.IsNullOrWhiteSpace(_displayName) && Field is { }) {
-        var propInfo = (PropertyInfo)Field.Body.GetType().GetProperty("Member").GetValue(Field.Body);
-        _displayName = propInfo
-          .GetCustomAttributes(
-            typeof(DisplayAttribute),
-            true)
-          .Cast<DisplayAttribute>()
-          .SingleOrDefault()?.Name ?? propInfo.Name;
+        _displayName = Field.GetDisplayName();
+
         _previousFieldAccessor = Field;
       }
     }
 
     /// <inheritdoc />
     protected override void BuildRenderTree(RenderTreeBuilder builder) {
-      builder.OpenElement(0, AdditionalAttributes?.Any() ?? false ? "span" : "text");
-      builder.AddMultipleAttributes(1, AdditionalAttributes);
-      builder.AddContent(2, _displayName);
-      builder.CloseElement();
+      var curElem = 0;
+      if (AdditionalAttributes?.Any() ?? false) {
+        builder.OpenElement(curElem++, "span");
+        builder.AddMultipleAttributes(curElem++, AdditionalAttributes);
+      }
+      builder.AddContent(curElem, _displayName);
+      if (AdditionalAttributes?.Any() ?? false) {
+        builder.CloseElement();
+      }
     }
 
     private void HandleValidationStateChanged(object sender, ValidationStateChangedEventArgs eventArgs) {
