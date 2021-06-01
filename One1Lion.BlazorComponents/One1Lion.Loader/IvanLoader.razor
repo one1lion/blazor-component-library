@@ -1,6 +1,6 @@
 ﻿@if (Show) {
   <span style="@(styles)">
-    <span class="loader-@((int)Type) @AddCssClass" title="@Tooltip" @attributes="AdditionalAttributes"></span>
+    <span class="loader-@($"{(int)Type:00}") @AddCssClass" title="@Tooltip" @attributes="AdditionalAttributes"></span>
   </span>
 }
 
