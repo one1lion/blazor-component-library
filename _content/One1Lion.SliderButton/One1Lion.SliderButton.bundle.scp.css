@@ -1,0 +1,54 @@
+@import '';
+
+/* _content/One1Lion.SliderButton/SliderButton.razor.rz.scp.css */
+.slider-button[b-44ybgzlw8m] {
+  display: flex;
+  align-content: center;
+  /* The switch - the box around the slider */ }
+  .slider-button label[b-44ybgzlw8m] {
+    display: inline-block;
+    margin-bottom: 0; }
+  .slider-button .switch[b-44ybgzlw8m] {
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    height: calc(1em * 34 / 60);
+    /* Hide default HTML checkbox */
+    /* The slider */ }
+    .slider-button .switch input[b-44ybgzlw8m] {
+      opacity: 0;
+      width: 0;
+      height: 0; }
+      .slider-button .switch input:checked + .slider[b-44ybgzlw8m] {
+        background-color: #2196F3; }
+        .slider-button .switch input:checked + .slider[b-44ybgzlw8m]::before {
+          -webkit-transform: translateX(calc(1em * 26 / 60));
+          -ms-transform: translateX(calc(1em * 26 / 60));
+          transform: translateX(calc(1em * 26 / 60)); }
+      .slider-button .switch input:focus + .slider[b-44ybgzlw8m] {
+        box-shadow: 0 0 1px #2196F3; }
+    .slider-button .switch .slider[b-44ybgzlw8m] {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+      /* Rounded sliders */ }
+      .slider-button .switch .slider[b-44ybgzlw8m]:before {
+        position: absolute;
+        content: "";
+        height: calc(1em * 26 / 60);
+        width: calc(1em * 26 / 60);
+        left: calc(1em * 4 / 60);
+        bottom: calc(1em * 4 / 60);
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s; }
+      .slider-button .switch .slider.round[b-44ybgzlw8m] {
+        border-radius: calc(1em * 34 / 60); }
+        .slider-button .switch .slider.round[b-44ybgzlw8m]:before {
+          border-radius: 50%; }

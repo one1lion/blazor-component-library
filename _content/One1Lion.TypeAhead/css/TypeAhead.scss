@@ -1,0 +1,104 @@
+﻿.typeahead-container {
+  position: relative;
+  display: flex;
+  /* for using the dropdown toggle visibly inside of the input */
+  /*
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+  */
+  .refreshing-list {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: middle;
+    border: 3px solid rgba(0,0,0,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  .input-group {
+    position: relative;
+    height: calc(1.5em + .75rem + 2px);
+    overflow-y: visible;
+    width: 100%;
+    /* for using the dropdown toggle visibly inside of the input */
+    /*
+      grid-column: 1 / 3;
+      grid-row: 1;
+    */
+    input {
+      display: block !important;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      z-index: 1;
+    }
+
+    .input-group-append {
+      position: absolute;
+      top: calc(1.5em + .75rem + 4px);
+      display: none;
+      padding-left: 4px;
+      z-index: 2;
+      color: gray;
+
+      .dropdown-header {
+        padding: .8rem !important; // Force override Bootstrap class
+      }
+
+      .suggest-list {
+        background-color: #fff;
+        border: solid 1px gray;
+
+        .suggest-list-body {
+          max-height: 15rem;
+          overflow-y: auto;
+
+          .dropdown-item {
+            cursor: pointer;
+
+            &.starts-with-item {
+            }
+
+            &.contains-item {
+            }
+
+            &.other-item {
+            }
+
+            &.pre-select {
+              background-color: rgba(0, 0, 0, .2);
+              outline: 2px rgba(0, 0, 0, .4) dashed;
+            }
+          }
+        }
+      }
+
+      &.show {
+        display: block !important;
+      }
+    }
+  }
+
+  input {
+    margin: 0;
+    width: 100%;
+  }
+
+  button {
+    margin: 0;
+    border-radius: 0 .2rem .2rem 0;
+    /* for using the dropdown toggle visibly inside of the input */
+    /*
+      grid-column: 2;
+      grid-row: 2;
+      z-index: 2;
+    */
+  }
+}

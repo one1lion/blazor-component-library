@@ -1,0 +1,242 @@
+@import '';
+
+/* _content/One1Lion.Dialog/TemplatedCardDialog.razor.rz.scp.css */
+.dialog-container[b-g7nwwwzkny], .dialog-container[b-g7nwwwzkny]  {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  animation: dialog-container-entry-b-g7nwwwzkny 0.2s; }
+
+@keyframes dialog-container-entry-b-g7nwwwzkny {
+  0% {
+    opacity: .1; }
+  100% {
+    opacity: 1; } }
+
+.dialog[b-g7nwwwzkny] {
+  background-color: white;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  z-index: 2000;
+  align-self: center;
+  margin: auto;
+  width: 700px;
+  max-height: calc(100% - 3rem);
+  /*animation: dialog-entry 0.4s;
+  animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000);*/ }
+
+@keyframes dialog-entry-b-g7nwwwzkny {
+  0% {
+    transform: translateY(30px) scale(0.95); }
+  100% {
+    transform: translateX(0px) scale(1); } }
+
+.dialog-title[b-g7nwwwzkny] {
+  background-color: #444;
+  color: #fff2cc;
+  padding: 1.3rem 2rem; }
+
+.dialog-title h2[b-g7nwwwzkny] {
+  color: white;
+  font-size: 1.4rem;
+  margin: 0;
+  font-family: 'Bahnschrift', Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  line-height: 1.3rem; }
+
+.dialog-body[b-g7nwwwzkny] {
+  flex-grow: 1;
+  padding: 0.5rem 3rem 1rem 0; }
+
+.dialog-buttons[b-g7nwwwzkny] {
+  height: 4rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  background-color: #eee;
+  padding: 0 1rem; }
+
+.dialog-body > div[b-g7nwwwzkny] {
+  display: flex;
+  margin-top: 1rem;
+  align-items: center; }
+
+.dialog-body label[b-g7nwwwzkny] {
+  text-align: right;
+  width: 200px;
+  margin: 0 1.5rem; }
+
+.dialog-body input[b-g7nwwwzkny], .dialog-body select[b-g7nwwwzkny] {
+  flex-grow: 1;
+  width: unset; }
+
+.dialog-body .size-label[b-g7nwwwzkny] {
+  min-width: 110px;
+  text-align: right; }
+/* _content/One1Lion.Dialog/TemplatedDialog.razor.rz.scp.css */
+.dialog-container[b-tdj05cg23v], .dialog-container[b-tdj05cg23v]  {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  animation: dialog-container-entry-b-tdj05cg23v 0.2s; }
+
+@keyframes dialog-container-entry-b-tdj05cg23v {
+  0% {
+    opacity: .1; }
+  100% {
+    opacity: 1; } }
+
+.dialog[b-tdj05cg23v] {
+  background-color: white;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  z-index: 2000;
+  align-self: center;
+  margin: auto;
+  width: 700px;
+  max-height: calc(100% - 3rem);
+  /*animation: dialog-entry 0.4s;
+  animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000);*/ }
+
+@keyframes dialog-entry-b-tdj05cg23v {
+  0% {
+    transform: translateY(30px) scale(0.95); }
+  100% {
+    transform: translateX(0px) scale(1); } }
+
+.dialog-title[b-tdj05cg23v] {
+  background-color: #444;
+  color: #fff2cc;
+  padding: 1.3rem 2rem; }
+
+.dialog-title h2[b-tdj05cg23v] {
+  color: white;
+  font-size: 1.4rem;
+  margin: 0;
+  font-family: 'Bahnschrift', Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  line-height: 1.3rem; }
+
+.dialog-body[b-tdj05cg23v] {
+  flex-grow: 1;
+  padding: 0.5rem 3rem 1rem 0; }
+
+.dialog-buttons[b-tdj05cg23v] {
+  height: 4rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  background-color: #eee;
+  padding: 0 1rem; }
+
+.dialog-body > div[b-tdj05cg23v] {
+  display: flex;
+  margin-top: 1rem;
+  align-items: center; }
+
+.dialog-body label[b-tdj05cg23v] {
+  text-align: right;
+  width: 200px;
+  margin: 0 1.5rem; }
+
+.dialog-body input[b-tdj05cg23v], .dialog-body select[b-tdj05cg23v] {
+  flex-grow: 1;
+  width: unset; }
+
+.dialog-body .size-label[b-tdj05cg23v] {
+  min-width: 110px;
+  text-align: right; }
+/* _content/One1Lion.Dialog/TemplatedQuestionDialog.razor.rz.scp.css */
+.dialog-container[b-4xfrlo2wgy], .dialog-container[b-4xfrlo2wgy]  {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  animation: dialog-container-entry-b-4xfrlo2wgy 0.2s; }
+
+@keyframes dialog-container-entry-b-4xfrlo2wgy {
+  0% {
+    opacity: .1; }
+  100% {
+    opacity: 1; } }
+
+.dialog[b-4xfrlo2wgy] {
+  background-color: white;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  z-index: 2000;
+  align-self: center;
+  margin: auto;
+  width: 700px;
+  max-height: calc(100% - 3rem);
+  /*animation: dialog-entry 0.4s;
+  animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000);*/ }
+
+@keyframes dialog-entry-b-4xfrlo2wgy {
+  0% {
+    transform: translateY(30px) scale(0.95); }
+  100% {
+    transform: translateX(0px) scale(1); } }
+
+.dialog-title[b-4xfrlo2wgy] {
+  background-color: #444;
+  color: #fff2cc;
+  padding: 1.3rem 2rem; }
+
+.dialog-title h2[b-4xfrlo2wgy] {
+  color: white;
+  font-size: 1.4rem;
+  margin: 0;
+  font-family: 'Bahnschrift', Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  line-height: 1.3rem; }
+
+.dialog-body[b-4xfrlo2wgy] {
+  flex-grow: 1;
+  padding: 0.5rem 3rem 1rem 0; }
+
+.dialog-buttons[b-4xfrlo2wgy] {
+  height: 4rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  background-color: #eee;
+  padding: 0 1rem; }
+
+.dialog-body > div[b-4xfrlo2wgy] {
+  display: flex;
+  margin-top: 1rem;
+  align-items: center; }
+
+.dialog-body label[b-4xfrlo2wgy] {
+  text-align: right;
+  width: 200px;
+  margin: 0 1.5rem; }
+
+.dialog-body input[b-4xfrlo2wgy], .dialog-body select[b-4xfrlo2wgy] {
+  flex-grow: 1;
+  width: unset; }
+
+.dialog-body .size-label[b-4xfrlo2wgy] {
+  min-width: 110px;
+  text-align: right; }

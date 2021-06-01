@@ -1,0 +1,97 @@
+﻿.dialog-container, .dialog-container ::deep {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2000;
+  display: flex;
+  animation: dialog-container-entry 0.2s;
+}
+
+@keyframes dialog-container-entry {
+  0% {
+    opacity: .1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.dialog {
+  background-color: white;
+  box-shadow: 0 0 12px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  z-index: 2000;
+  align-self: center;
+  margin: auto;
+  width: 700px;
+  max-height: calc(100% - 3rem);
+  /*animation: dialog-entry 0.4s;
+  animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000);*/
+}
+
+@keyframes dialog-entry {
+  0% {
+    transform: translateY(30px) scale(0.95);
+  }
+
+  100% {
+    transform: translateX(0px) scale(1.0);
+  }
+}
+
+.dialog-title {
+  background-color: #444;
+  color: #fff2cc;
+  padding: 1.3rem 2rem;
+}
+
+.dialog-title h2 {
+  color: white;
+  font-size: 1.4rem;
+  margin: 0;
+  font-family: 'Bahnschrift', Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  line-height: 1.3rem;
+}
+
+.dialog-body {
+  flex-grow: 1;
+  padding: 0.5rem 3rem 1rem 0;
+}
+
+.dialog-buttons {
+  height: 4rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  background-color: #eee;
+  padding: 0 1rem;
+}
+
+.dialog-body > div {
+  display: flex;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.dialog-body label {
+  text-align: right;
+  width: 200px;
+  margin: 0 1.5rem;
+}
+
+.dialog-body input, .dialog-body select {
+  flex-grow: 1;
+  width: unset;
+}
+
+.dialog-body .size-label {
+  min-width: 110px;
+  text-align: right;
+}

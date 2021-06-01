@@ -1,0 +1,279 @@
+﻿.draganddrop, .draganddrop ::deep {
+  /* Sizing */
+  --header-height: 3rem;
+  --main-container-height: calc(80vh - var(--header-height));
+  /* Colors */
+  --header-background-color: #3d4a56;
+  --header-bottom-border-color: var(--gray);
+  --header-text-color: var(--light);
+  --default-button-text-color: var(--light);
+  --main-container-border-color: #3d4a56;
+  --main-container-background-color: var(--header-background-color);
+  --main-body-background-color: rgba(255,255,255,.07);
+  --alternating-background-color-1: #ddd;
+  --alternating-background-color-2: #fff;
+  /* Left border styles for groups and items */
+  --border-left: 10px solid var(--indent-default);
+  --border-right: 1px solid var(--indent-default);
+  --border-top: 1px solid var(--indent-default);
+  --border-bottom: 1px solid var(--indent-default);
+  --indent-level-1: #4551be;
+  --indent-level-2: #834dca;
+  --indent-level-3: #61bdbf;
+  --indent-level-4: #3d4a56;
+  --indent-level-5: var(--gray-dark);
+  --indent-level-6: orange;
+  --indent-default: black;
+
+  * {
+    align-items: center;
+    align-content: center;
+  }
+
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  color: black;
+  border: 2px solid var(--main-container-border-color);
+  border-bottom-width: 1px;
+  padding: 0;
+  width: 100%;
+  min-width: 480px;
+  background-color: var(--main-container-background-color);
+  /* Base Control Boxes */
+  .draganddrop-controlbox {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: end;
+
+    button {
+      color: var(--default-button-text-color);
+      height: 80%;
+      background: none;
+      border: none;
+      /* All but the first Button inside of Control Boxes */
+      &:not(:first-of-type) {
+        margin-left: .2em;
+      }
+    }
+  }
+  /* Base Separators */
+  .draganddrop-separator {
+    padding: 0;
+    margin: 4px 0;
+
+    &.separator-before {
+    }
+
+    &.separator-after {
+    }
+  }
+  /* Base Headers */
+  .draganddrop-header {
+    display: flex;
+    flex: 1 0 auto;
+    font-size: calc(var(--header-height) - calc(var(--header-height) / 2));
+    justify-content: space-between;
+    height: var(--header-height);
+    background-color: var(--header-background-color);
+    color: var(--header-text-color);
+    font-weight: bold;
+    padding: 0 .5em;
+    border-bottom: 1px groove var(--header-bottom-border-color);
+    /* Base Titles (inisde Headers) */
+    .draganddrop-title {
+      /* This is to allow users to customize the styles */
+    }
+    /* Control Boxes inside Headers */
+    .draganddrop-controlbox {
+      height: 100%;
+      font-size: .8em;
+      /* Buttons inside of Control Boxes that are inside Headers */
+      button {
+        width: calc(var(--header-height) / 1.3);
+      }
+    }
+  }
+  /* Base Items */
+  .draganddrop-item {
+    display: flex;
+    padding: 5px;
+    padding-left: 10px;
+    justify-content: space-between;
+    border-left: var(--border-left);
+    border-right: var(--border-right);
+    border-top: var(--border-top);
+    border-bottom: var(--border-bottom);
+    border-radius: 10px;
+
+    .draganddrop-controlbox {
+      height: auto;
+    }
+  }
+  /* Base Body (content sections inside the Container or Groups) */
+  .draganddrop-body {
+    width: 100%;
+    padding: 4px 10px;
+    /* The main body (only one in the top-level wrapper) */
+    &.main-body {
+      background-color: var(--main-body-background-color);
+      min-height: 180px;
+      max-height: var(--main-container-height);
+      overflow-y: auto;
+    }
+    /* Containers that are children of the DragonDrop component, added when adding DragonDropGroup (or DragonDropTypedGroup) components */
+    .draganddrop-container {
+      border-left: var(--border-left);
+      border-right: var(--border-right);
+      border-top: var(--border-top);
+      border-bottom: var(--border-bottom);
+      border-radius: 10px 0 0 10px;
+      /* The first Group container, just to visibly see it */
+      &:first-of-type {
+      }
+      /* Headers for Containers */
+      .draganddrop-header {
+        height: calc(var(--header-height) - .4rem);
+        border-radius: 0;
+        /* Titles for Containers */
+        .draganddrop-title {
+        }
+        /* Control Boxes for Containers */
+        .draganddrop-controlbox {
+        }
+      }
+      /* Items that are inside of Containers */
+      .draganddrop-item {
+      }
+    }
+    /* Nested Group left border styles */
+    .draganddrop-container, .draganddrop-item:not(.target) {
+      /* First level left border */
+      border-color: var(--indent-level-1);
+      background-color: var(--alternating-background-color-1);
+
+      .draganddrop-header {
+        background-color: var(--indent-level-1);
+      }
+
+      .draganddrop-container, .draganddrop-item:not(.target) {
+        /* Second level left border */
+        border-color: var(--indent-level-2);
+        background-color: var(--alternating-background-color-2);
+
+        .draganddrop-header {
+          background-color: var(--indent-level-2);
+        }
+
+        .draganddrop-container, .draganddrop-item:not(.target) {
+          /* Third level left border */
+          border-color: var(--indent-level-3);
+          background-color: var(--alternating-background-color-1);
+
+          .draganddrop-header {
+            background-color: var(--indent-level-3);
+          }
+
+          .draganddrop-container, .draganddrop-item:not(.target) {
+            /* Fourth level left border */
+            border-color: var(--indent-level-4);
+            background-color: var(--alternating-background-color-2);
+
+            .draganddrop-header {
+              background-color: var(--indent-level-4);
+            }
+
+            .draganddrop-container, .draganddrop-item:not(.target) {
+              /* Fifth level left border */
+              border-color: var(--indent-level-5);
+              background-color: var(--alternating-background-color-1);
+
+              .draganddrop-header {
+                background-color: var(--indent-level-5);
+              }
+
+              .draganddrop-container, .draganddrop-item:not(.target) {
+                /* Sixth level left border */
+                border-color: var(--indent-level-6);
+                background-color: var(--alternating-background-color-2);
+
+                .draganddrop-header {
+                  background-color: var(--indent-level-6);
+                }
+
+                .draganddrop-container, .draganddrop-item:not(.target) {
+                  /* Seventh level and beyond left border */
+                  border-color: var(--indent-default);
+                  background-color: var(--alternating-background-color-1);
+
+                  .draganddrop-header {
+                    background-color: var(--indent-level-default);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .drag-hover {
+      outline: 2px dashed green;
+    }
+
+    .picked-up {
+      outline: 2px dashed var(--gray);
+      opacity: .4;
+
+      &.drag-hover {
+        outline: 2px dashed red;
+      }
+
+      .drag-hover {
+        outline: none;
+      }
+    }
+
+    .draganddrop-target {
+      display: block;
+      color: black;
+      height: .4em;
+      border: dashed .1em transparent;
+      overflow-y: hidden;
+
+      &:hover:not(.drag-hover) {
+        background-color: rgba(127,127,127,.4);
+        border-radius: 2px;
+        outline: 2px dashed rgba(127,127,127,.8);
+      }
+    }
+    /* Group display */
+    .draganddrop-grouphovering {
+      background: none;
+      background-color: #eee;
+      display: flex;
+      flex-direction: column;
+
+      .draganddrop-dropfirst,
+      .draganddrop-dropsecond {
+        height: .8em;
+        width: 100%;
+        padding: 0;
+
+        &.target {
+          background-color: #000;
+        }
+      }
+
+      .draganddrop-dropfirst {
+        margin-top: .1em;
+        margin-bottom: .05em;
+      }
+
+      .draganddrop-dropsecond {
+        margin-top: .05em;
+        margin-bottom: .1em;
+      }
+    }
+  }
+}
