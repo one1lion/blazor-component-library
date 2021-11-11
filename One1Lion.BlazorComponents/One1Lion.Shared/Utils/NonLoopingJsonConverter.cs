@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace One1Lion.Shared.Utils {
+namespace One1Lion.Shared {
   // Adapted from GitHub issue #29900 using https://github.com/dotnet/runtime/issues/29900#issuecomment-582678375
   public class NonLoopingJsonConverter : JsonConverterFactory {
     public override bool CanConvert(Type typeToConvert) => true;
@@ -48,14 +48,20 @@ namespace One1Lion.Shared.Utils {
     }
   }
 
+
   public static class SafeJsonSerializer {
 
     static readonly MethodInfo SerializeEnumerableMethod = typeof(SafeJsonSerializer).GetMethod("SerializeEnumerable", BindingFlags.Static | BindingFlags.NonPublic);
 
+
+
     public static void Serialize<T>(T obj, Utf8JsonWriter jw) =>
         Serialize(obj, null, jw, new List<int> { });
 
+
+
     static void Serialize<T>(T obj, string propertyName, Utf8JsonWriter jw, List<int> hashCodes, bool isContainerType = false) {
+
       var jsonValueType = GetJsonValueKind(obj);
       if (jsonValueType == JsonValueKind.Array || jsonValueType == JsonValueKind.Object) {
         var hashCode = obj.GetHashCode();
@@ -70,6 +76,7 @@ namespace One1Lion.Shared.Utils {
       if (propertyName != null) {
         jw.WritePropertyName(propertyName);
       }
+
 
       if (obj != null && obj.GetType().IsEnum) {
         jw.WriteStringValue(Enum.GetName(obj.GetType(), obj));
@@ -116,6 +123,7 @@ namespace One1Lion.Shared.Utils {
 
             SerializeEnumerable(list, jw, hashCodes);
           } catch {
+
             //upon failure, use reflection and generic SerializeEnumerable method
             Type[] args = obj.GetType().GetGenericArguments();
             Type itemType = args[0];
@@ -150,6 +158,7 @@ namespace One1Lion.Shared.Utils {
         Serialize(item, null, jw, hashCodes);
     }
 
+
     static JsonValueKind GetJsonValueKind(object obj) {
       if (obj == null)
         return JsonValueKind.Null;
@@ -181,6 +190,7 @@ namespace One1Lion.Shared.Utils {
         return JsonValueKind.Undefined;
     }
 
+
     static bool IsContainerType(Type type) {
       if (type.IsArray)
         return true;
@@ -208,17 +218,16 @@ namespace One1Lion.Shared.Utils {
     }
   }
 
+
   internal static class TypeExtensions {
     internal static bool IsIEnumerable(this Type type) {
       return type != typeof(string) && type.GetInterfaces().Contains(typeof(IEnumerable));
     }
-
     internal static bool IsIDictionary(this Type type) {
       return
           type.GetInterfaces().Contains(typeof(IDictionary))
           || (type.IsGenericType && typeof(Dictionary<,>).IsAssignableFrom(type.GetGenericTypeDefinition()));
     }
-
     internal static bool IsNumber(this Type type) {
       return type == typeof(byte)
           || type == typeof(ushort)
@@ -229,7 +238,8 @@ namespace One1Lion.Shared.Utils {
           || type == typeof(long)
           || type == typeof(decimal)
           || type == typeof(double)
-          || type == typeof(float);
+          || type == typeof(float)
+          ;
     }
   }
 }

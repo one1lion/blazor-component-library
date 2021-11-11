@@ -26,6 +26,40 @@ window.o1lJsFunctions = {
       }
     }
   },
+  b64toBlob: function (b64Data, contentType = '', sliceSize = 512) {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+  },
+  clipboardCopy: {
+    writeString: function (textToWrite) {
+      return navigator.clipboard.writeText(textToWrite)
+        .then(function () {
+          return true;
+        })
+        .catch(function (error) {
+          return false;
+        });
+    },
+    writeElementContent: function (elemOrSelector) {
+      let elem = o1lJsFunctions.getElement(elemOrSelector);
+      return o1lJsFunctions.clipboardCopy.writeString(elem.textContent);
+    }
+  },
   dynamicallyLoadScript: function (url) {
     // from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
     var script = document.createElement("script");  // create a script DOM node
@@ -40,14 +74,12 @@ window.o1lJsFunctions = {
 
     document.body.appendChild(script);
   },
-  elementExists: function (elementId) {
-    return document.getElementById(elementId) ? true : false;
+  elementExists: function (elemOrSelector) {
+    return o1lJsFunctions.getElement(elemOrSelector) ? true : false;
   },
-  getBoundingBoxById: function (elementId) {
-    return o1lJsFunctions.getBoundingBox(document.getElementById(id));
-  },
-  getBoundingBox: function (element) {
-    if (element === window) {
+  getBoundingBox: function (elemOrSelector) {
+    let elem = o1lJsFunctions.getElement(elemOrSelector);
+    if (elem === window) {
       return {
         x: 0,
         y: 0,
@@ -60,18 +92,35 @@ window.o1lJsFunctions = {
       };
     }
 
-    return element.getBoundingClientRect();
+    return elem.getBoundingClientRect();
   },
-  getElement: function (elemOrId) {
-    let elem = (typeof elemOrId === 'string') ? document.getElementById(elemOrId) : elemOrId;
+  getElement: function (elemOrSelector) {
+    let elem = (typeof elemOrSelector === 'string')
+      ? document.getElementById(elemOrSelector)
+      : elemOrSelector;
 
-    if (!elem.getAttribute && elem.id) {
+    if (!elem && typeof elemOrSelector === 'string') { elem = document.querySelector(elemOrSelector); }
+
+    if (!elem?.getAttribute && elem?.id) {
       // It is possible the passed in value is an ElementRef from c#
       elem = document.getElementById(elem.id);
     }
     return elem;
   },
-  getStyle: function (target, prop) {
+  getMultiSelectValues: function (elemOrSelector) {
+    var selectElem = o1lJsFunctions.getElement(elemOrSelector);
+    if (!selectElem) { return null; }
+    const results = [];
+
+    for (let i = 0; i < selectElem.options.length; i++) {
+      if (selectElem.options[i].selected) {
+        results[results.length] = selectElem.options[i].value;
+      }
+    }
+    return results;
+  },
+  getStyle: function (elemOrSelector, prop) {
+    let target = o1lJsFunctions.getElement(elemOrSelector);
     if (window.getComputedStyle) { // gecko and webkit
       prop = prop.replace(/([a-z])([A-Z])/, o1lJsFunctions.hyphenate);  // requires hyphenated, not camel
       return window.getComputedStyle(target, null).getPropertyValue(prop);
@@ -81,10 +130,8 @@ window.o1lJsFunctions = {
     }
     return target.style[prop];
   },
-  getUnitsById: function (elementId, prop) {
-    return o1lJsFunctions.getUnits(document.getElementById(elementId), prop);
-  },
-  getUnits: function (target, prop) {
+  getUnits: function (elemOrSelector, prop) {
+    let target = o1lJsFunctions.getElement(elemOrSelector);
     let baseline = 100;  // any number serves 
     let item;  // generic iterator
 
@@ -153,8 +200,16 @@ window.o1lJsFunctions = {
   isMobileDevice: function () {
     return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini|mobile/i.test(navigator.userAgent);
   },
-  moveElementIntoView: function (elemOrId) {
-    let targetElem = o1lJsFunctions.getElement(elemOrId);
+  localSaveAs: function (filename, bytesBase64) {
+    var link = document.createElement('a');
+    link.download = filename;
+    link.href = "data:application/octet-stream;base64," + bytesBase64;
+    document.body.appendChild(link); // Needed for Firefox
+    link.click();
+    document.body.removeChild(link);
+  },
+  moveElementIntoView: function (elemOrSelector) {
+    let targetElem = o1lJsFunctions.getElement(elemOrSelector);
     let elemBox = o1lJsFunctions.getBoundingBox(targetElem);
 
     // Provide a buffer for element wiggle room
@@ -402,10 +457,25 @@ window.o1lJsFunctions = {
     // Set the position of the element
     o1lJsFunctions.positionElement(targetElem, newPosn.top, "unset", "unset", newPosn.left);
   },
-  positionElementById: function (elementId, top = "unset", right = "unset", bottom = "unset", left = "unset") {
-    return o1lJsFunctions.positionElement(document.getElementById(elementId), top, right, bottom, left);
+  openUrl: function (url, targ = "_blank") {
+    if (!url) { return null; }
+
+    if (url.startsWith("data:")) {
+      const newTab = window.open("about:blank", targ);
+      if (url.startsWith("data:image")) {
+        const img = newTab.document.createElement('img');
+        img.src = url;
+        newTab.document.body.appendChild(img);
+      } else {
+        newTab.document.body.innerHTML = `<h2>Unsupported Content</h2><p>Unable to determine the content type for the provided data URL.<br /><a href="${url}">Click this</a> to try to open the url manually</p>`;
+      }
+      return newTab;
+    } else {
+      return window.open(url, targ);
+    }
   },
-  positionElement: function (element, top = "unset", right = "unset", bottom = "unset", left = "unset") {
+  positionElement: function (elemOrSelector, top = "unset", right = "unset", bottom = "unset", left = "unset") {
+    let element = o1lJsFunctions.getElement(elemOrSelector);
     if (element) {
       if (top !== "unset") { element.style.top = top + "px"; }
       if (right !== "unset") { element.style.right = right + "px"; }
@@ -435,16 +505,12 @@ window.o1lJsFunctions = {
       document.body.removeChild(link);
     }
   },
-  scrollElementIntoViewById: function (id) {
-    o1lJsFunctions.scrollElementIntoView(document.getElementById(id));
-  },
-  scrollElementIntoView: function (element) {
+  scrollElementIntoView: function (elemOrSelector) {
+    let element = o1lJsFunctions.getElement(elemOrSelector);
     element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   },
-  setFocusById: function (elementId, autoSelectText) {
-    return o1lJsFunctions.setFocus(document.getElementById(elementId), autoSelectText);
-  },
-  setFocus: function (element, autoSelectText) {
+  setFocus: function (elemOrSelector, autoSelectText) {
+    let element = o1lJsFunctions.getElement(elemOrSelector);
     if (element) {
       if (autoSelectText && element.value.length > 0) {
         element.setSelectionRange(0, element.value.length);
@@ -453,10 +519,8 @@ window.o1lJsFunctions = {
     }
     return null;
   },
-  setInputValueById: function (elementId, val) {
-    return o1lJsFunctions.setInputValue(document.getElementById(elementId), val);
-  },
-  setInputValue: function (element, val) {
+  setInputValue: function (elemOrSelector, val) {
+    let element = o1lJsFunctions.getElement(elemOrSelector);
     if (element?.checked !== undefined && (val === true || val === false)) {
       element.checked = val;
       return true;
@@ -467,10 +531,8 @@ window.o1lJsFunctions = {
     }
     return false
   },
-  setPreventSelectOnDoubleClickById: function (elementId, on = true) {
-    o1lJsFunctions.setPreventSelectOnDoubleClick(document.getElementById(elementId), on);
-  },
-  setPreventSelectOnDoubleClick: function (element, on = true) {
+  setPreventSelectOnDoubleClick: function (elemOrSelector, on = true) {
+    let element = o1lJsFunctions.getElement(elemOrSelector);
     let elem;
     if (element.getAttribute) {
       elem = element;

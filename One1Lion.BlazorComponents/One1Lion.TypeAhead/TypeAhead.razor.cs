@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
+using Newtonsoft.Json;
 using One1Lion.Shared;
 using One1Lion.Shared.Constants;
 using System;
@@ -356,7 +357,7 @@ namespace One1Lion.TypeAhead {
           if (OnAcceptKeyPressed.HasDelegate) {
             var akpea = (AcceptKeyPressedEventArgs)e;
             akpea.DropDownListExpanded = IsExpanded;
-            await OnAcceptKeyPressed.InvokeAsync(akpea);
+            await OnAcceptKeyPressed.InvokeAsync(akpea); 
           }
           if (IsExpanded && curHoverIndex >= -1 && curHoverIndex <= totalVisSelectItems) {
             // Transform the index into the specific index for the right list:
@@ -446,7 +447,7 @@ namespace One1Lion.TypeAhead {
       } catch (JSException ex) {
 #if DEBUG
         if (ex.Message.Contains("Could not find")) {
-          Console.Error.WriteLine("Unable to scroll the active item into view since the TypeAhead Javascript reference was not added.  To enable this feature, add a reference to the TypeAhead:\r\n  <script src=\"_content/One1Lion.Shared/o1lJsInterop.js\"></script>");
+          Console.Error.WriteLine("Unable to scroll the active item into view since the TypeAhead Javascript reference was not added.  To enable this feature, add a reference to the TypeAhead:\r\n  <script src=\"_content/One1Lion.Shared/O1LJsInterop.js\"></script>");
         } else {
           Console.Error.WriteLine(ex);
         }
@@ -591,7 +592,7 @@ namespace One1Lion.TypeAhead {
       } catch (JSException ex) {
 #if DEBUG
         if (ex.Message.Contains("Could not find")) {
-          Console.Error.WriteLine("Unable to scroll the active item into view since the TypeAhead Javascript reference was not added.  To enable this feature, add a reference to the TypeAhead:\r\n  <script src=\"_content/One1Lion.Shared/o1lJsInterop.js\"></script>");
+          Console.Error.WriteLine("Unable to scroll the active item into view since the TypeAhead Javascript reference was not added.  To enable this feature, add a reference to the TypeAhead:\r\n  <script src=\"_content/One1Lion.Shared/O1LJsInterop.js\"></script>");
         } else {
           Console.Error.WriteLine(ex);
         }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace One1Lion.DockableToolbar.ComponentBase {
+namespace One1Lion.DockableToolbar.ComponentBases {
   public class ToolbarToggleButtonBase : ToolbarButtonBase {
     [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
 

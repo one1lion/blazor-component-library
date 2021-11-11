@@ -19,79 +19,79 @@
                          Parent="this"
                          IndexInParent="IndexInParent" />
     }
-    <div class="draganddrop-body">
-      @if (Children is null) {
-        <p>Loading...</p>
-      } else {
-        if (Children.Count == 0) {
-          if (DnDState.BaseContainer.AllowNewItem && DnDState.BaseContainer.EditTemplate is { }) {
-            <DragAndDropTarget TItem="TItem"
-                               IndexInParent="0"
-                               Parent="this"
-                               IsDropAfter="false" />
-          } else {
-            <DragAndDropTarget TItem="TItem"
-                               IndexInParent="0"
-                               Parent="this"
-                               IsDropAfter="false" />
-          }
-        }
-        ChildElements.Clear();
-        for (var i = 0; i < Children.Count; i++) {
-          if (Children[i] is { }) {
-            if (new[] { SeparatorDisplay.BeforeOnly, SeparatorDisplay.BeforeAndAfter }.Contains(DnDState.BaseContainer.SeparatorDisplay) && DnDState.BaseContainer.SeparatorTemplate is { }) {
-              <DragAndDropSeparator Item="Children[i]"
-                                    Position="SeparatorPosition.Before"
-                                    Parent="this"
-                                    IndexInParent="i" />
-            }
-            if (DnDState.BaseContainer.AllowNewItem && DnDState.BaseContainer.EditTemplate is { }) {
-              <DragAndDropTarget TItem="TItem"
-                                 IndexInParent="i"
-                                 Parent="this"
-                                 IsDropAfter="false" />
-            } else {
-              <DragAndDropTarget TItem="TItem"
-                                 IndexInParent="i"
-                                 Parent="this"
-                                 IsDropAfter="false" />
-            }
-            var childProp = string.IsNullOrWhiteSpace(DnDState.BaseContainer.ChildrenPropertyName) ? null : Children[i].GetType().GetProperty(DnDState.BaseContainer.ChildrenPropertyName);
-            IDnDElement<TItem> newChild = null;
-            if (childProp is { }) {
-              <DragAndDropGroup Item="Children[i]"
-                                Children="(List<TItem>)childProp.GetValue(Children[i])"
-                                Parent="this"
-                                IndexInParent="i" />
-            } else {
-              <DragAndDropItem Item="Children[i]"
-                               Parent="this"
-                               IndexInParent="i" />
-            }
-            if (newChild is { }) { ChildElements.Add(newChild); }
-            if (DnDState.BaseContainer.AllowNewItem && DnDState.BaseContainer.EditTemplate is { }) {
-              <DragAndDropTarget TItem="TItem"
-                                 IndexInParent="i + 1"
-                                 Parent="this"
-                                 IsDropAfter="true" />
-            } else {
-              <DragAndDropTarget TItem="TItem"
-                                 IndexInParent="i + 1"
-                                 Parent="this"
-                                 IsDropAfter="true" />
-            }
-            if (new[] { SeparatorDisplay.AfterOnly, SeparatorDisplay.Between, SeparatorDisplay.BeforeAndAfter }.Contains(DnDState.BaseContainer.SeparatorDisplay) && DnDState.BaseContainer.SeparatorTemplate is { } && (DnDState.BaseContainer.SeparatorDisplay != SeparatorDisplay.Between || i < Children.Count - 1)) {
-              <DragAndDropSeparator Item="Children[i]"
-                                    Position="SeparatorPosition.After"
-                                    Parent="this"
-                                    IndexInParent="i + 1" />
-            }
-          } else {
-            // TODO: Handle null item
-          }
+  <div class="draganddrop-body">
+    @if (Children is null) {
+      <p>Loading...</p>
+    } else {
+      if (Children.Count == 0) {
+        if (DnDState.BaseContainer.AllowNewItem && DnDState.BaseContainer.EditTemplate is { }) {
+          <DragAndDropTarget TItem="TItem"
+                             IndexInParent="0"
+                             Parent="this"
+                             IsDropAfter="false" />
+        } else {
+          <DragAndDropTarget TItem="TItem"
+                             IndexInParent="0"
+                             Parent="this"
+                             IsDropAfter="false" />
         }
       }
-    </div>
+      ChildElements.Clear();
+      for (var i = 0; i < Children.Count; i++) {
+        if (Children[i] is { }) {
+          if (new[] { SeparatorDisplay.BeforeOnly, SeparatorDisplay.BeforeAndAfter }.Contains(DnDState.BaseContainer.SeparatorDisplay) && DnDState.BaseContainer.SeparatorTemplate is { }) {
+            <DragAndDropSeparator Item="Children[i]"
+                                  Position="SeparatorPosition.Before"
+                                  Parent="this"
+                                  IndexInParent="i" />
+          }
+          if (DnDState.BaseContainer.AllowNewItem && DnDState.BaseContainer.EditTemplate is { }) {
+            <DragAndDropTarget TItem="TItem"
+                               IndexInParent="i"
+                               Parent="this"
+                               IsDropAfter="false" />
+          } else {
+            <DragAndDropTarget TItem="TItem"
+                               IndexInParent="i"
+                               Parent="this"
+                               IsDropAfter="false" />
+          }
+          var childProp = string.IsNullOrWhiteSpace(DnDState.BaseContainer.ChildrenPropertyName) ? null : Children[i].GetType().GetProperty(DnDState.BaseContainer.ChildrenPropertyName);
+          IDnDElement<TItem> newChild = null;
+          if (childProp is { }) {
+            <DragAndDropGroup Item="Children[i]"
+                              Children="(List<TItem>)childProp.GetValue(Children[i])"
+                              Parent="this"
+                              IndexInParent="i" />
+          } else {
+            <DragAndDropItem Item="Children[i]"
+                             Parent="this"
+                             IndexInParent="i" />
+          }
+          if (newChild is { }) { ChildElements.Add(newChild); }
+          if (DnDState.BaseContainer.AllowNewItem && DnDState.BaseContainer.EditTemplate is { }) {
+            <DragAndDropTarget TItem="TItem"
+                               IndexInParent="i + 1"
+                               Parent="this"
+                               IsDropAfter="true" />
+          } else {
+            <DragAndDropTarget TItem="TItem"
+                               IndexInParent="i + 1"
+                               Parent="this"
+                               IsDropAfter="true" />
+          }
+          if (new[] { SeparatorDisplay.AfterOnly, SeparatorDisplay.Between, SeparatorDisplay.BeforeAndAfter }.Contains(DnDState.BaseContainer.SeparatorDisplay) && DnDState.BaseContainer.SeparatorTemplate is { } && (DnDState.BaseContainer.SeparatorDisplay != SeparatorDisplay.Between || i < Children.Count - 1)) {
+            <DragAndDropSeparator Item="Children[i]"
+                                  Position="SeparatorPosition.After"
+                                  Parent="this"
+                                  IndexInParent="i + 1" />
+          }
+        } else {
+          // TODO: Handle null item
+        }
+      }
+    }
+  </div>
   </div>
 </CascadingValue>
 

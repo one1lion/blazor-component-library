@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
-namespace One1Lion.DockableToolbar.ComponentBase {
+namespace One1Lion.DockableToolbar.ComponentBases {
   public class ToolbarPopoverButtonBase<TItem> : ToolbarButtonBase {
     [Parameter] public EventCallback<TItem> OnMenuItemClicked { get; set; }
 

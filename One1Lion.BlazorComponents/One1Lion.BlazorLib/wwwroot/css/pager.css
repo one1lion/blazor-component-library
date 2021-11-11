@@ -1,0 +1,33 @@
+﻿.pager {
+  display: flex;
+  justify-content: space-between;
+  max-width: 600px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  /* TODO: Style these better */ }
+  .pager button {
+    background: none;
+    border: none;
+    color: var(--text-primary); }
+    .pager button.active {
+      cursor: not-allowed;
+      background: rgba(187, 204, 238, 0.4) !important;
+      border-radius: 45%;
+      font-weight: 600;
+      position: relative;
+      text-decoration: underline; }
+    .pager button.bottom-caret::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      border-left: .5em solid transparent;
+      border-right: .5em solid transparent;
+      border-top: 0.5em solid var(--text-primary);
+      clear: both; }
+  .pager .direction-buttons button:disabled, .pager .direction-buttons button[disabled] {
+    color: #888;
+    cursor: not-allowed; }

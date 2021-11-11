@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/pager.css",
+    "inputFile": "wwwroot/css/Pager.scss"
+  },
+  {
+    "outputFile": "../One1Lion/wwwroot/css/pager.css",
+    "inputFile": "wwwroot/css/Pager.scss"
+  }
+]

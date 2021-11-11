@@ -1,0 +1,55 @@
+﻿.pager-cell {
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  max-width: 600px;
+  color: var(--text-primary);
+  white-space: nowrap;
+
+  button {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+
+    &.active {
+      cursor: not-allowed;
+      background: rgba(#bce, .4) !important;
+      border-radius: 45%;
+      font-weight: 600;
+      position: relative;
+      text-decoration: underline;
+    }
+
+    &.bottom-caret {
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        transform: translate(-50%, -50%);
+        width: 0;
+        height: 0;
+        border-left: .5em solid transparent;
+        border-right: .5em solid transparent;
+        border-top: .5em solid var(--text-primary);
+        clear: both;
+      }
+    }
+  }
+  /* TODO: Style these better */
+  .direction-buttons {
+    button {
+      &:disabled, &[disabled] {
+        color: #888;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .page-selection {
+    button {
+    }
+  }
+}

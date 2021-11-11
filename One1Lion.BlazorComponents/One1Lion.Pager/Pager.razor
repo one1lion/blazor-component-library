@@ -1,0 +1,40 @@
+﻿@inject IJSRuntime JsRuntime
+
+<div id="@($"pager-{baseId}")" class="pager">
+  <div class="direction-buttons">
+    <button type="button" title="First" disabled="@(CurrentPage == 1 || TotalPages == 0)" @onclick="_ => ChangePage((int)PagerDirection.First)">&lt;&lt;</button>
+    <button type="button" title="Previous" disabled="@(CurrentPage == 1 || TotalPages == 0)" @onclick="_ => ChangePage((int)PagerDirection.Previous)">&lt;</button>
+  </div>
+  <div class="page-selection page-count-@(TotalPages)">
+    @if (TotalPages == 0) {
+      <button type="button" disabled>0</button>
+    } else {
+      var startPage = Math.Max(2, Math.Min(CurrentPage - 2, TotalPages - 8));
+      var lastPage = Math.Min(TotalPages, startPage + 7);
+      <button type="button" id="@($"page1-{baseId}")" class="@(CurrentPage == 1 ? "active" : "")" disabled="@(CurrentPage == 1)" @onclick="async _ => { if (CurrentPage != 1) await ChangePage((int)PagerDirection.First); }">1</button>
+      if (startPage >= 3) {
+        <span>&hellip;</span>
+      }
+      for (var i = startPage; i <= lastPage; i++) {
+        var curPage = i;
+        <button type="button" id="@($"page{curPage}-{baseId}")" class="@(CurrentPage == curPage ? "active" : "")" @onclick="async _ => { if (CurrentPage != curPage) await ChangePage(curPage); }">@(curPage)</button>
+      }
+      if (lastPage < TotalPages - 1) {
+        <span>&hellip;</span>
+      }
+      @if (TotalPages >= 10) {
+        <button type="button" id="@($"page{TotalPages}-{baseId}")" class="@(CurrentPage == TotalPages ? "active" : "")" disabled="@(CurrentPage == TotalPages)" @onclick="async _ => { if(CurrentPage != TotalPages) await ChangePage((int)PagerDirection.Last);}">@TotalPages</button>
+      }
+    }
+  </div>
+  <div class="direction-buttons">
+    <button type="button" title="Next" disabled="@(CurrentPage == TotalPages)" @onclick="_ => ChangePage((int)PagerDirection.Next)">&gt;</button>
+    <button type="button" title="Last" disabled="@(CurrentPage == TotalPages)" @onclick="_ => ChangePage((int)PagerDirection.Last)">&gt;&gt;</button>
+    <label for="@($"jumpTo-{baseId}")">Jump To:</label>
+    <select id="@($"jumpTo-{baseId}")" @onchange="async e => { if (!string.IsNullOrWhiteSpace((string)e.Value)) { await ChangePage(int.Parse((string)e.Value)); } }">
+      @for (var j = 1; j <= TotalPages; j++) {
+        <option value="@j" selected="@(j == CurrentPage)">@j</option>
+      }
+    </select>
+  </div>
+</div>

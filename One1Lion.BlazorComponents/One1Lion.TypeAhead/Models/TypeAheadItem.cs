@@ -11,8 +11,8 @@
     public string Value { get; set; }
     public string DisplayText { get; set; }
     public TItem Item { get; set; }
-    object ITypeAheadItem.Item {
-      get => Item as object;
+    object ITypeAheadItem.Item { 
+      get => Item as object; 
       set {
         Item = (TItem)value;
       }

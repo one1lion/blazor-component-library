@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using One1Lion.DockableToolbar.Interfaces;
 using One1Lion.Shared;
-using System.Collections.Generic;
 
-namespace One1Lion.DockableToolbar.ComponentBase {
+namespace One1Lion.DockableToolbar.ComponentBases {
   public class ToolbarButtonBase : ChildElement<IToolbarContainer>, IToolbarButton {
     protected virtual string _InnerText => null;
     protected virtual string _Title => null;

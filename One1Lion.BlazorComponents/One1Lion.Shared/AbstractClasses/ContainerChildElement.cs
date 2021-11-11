@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using System;
 
 namespace One1Lion.Shared {
   public abstract class ContainerChildElement<TParent> : ChildElement<TParent> {

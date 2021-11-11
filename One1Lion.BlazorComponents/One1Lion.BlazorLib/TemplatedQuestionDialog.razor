@@ -1,0 +1,84 @@
+﻿@namespace One1Lion.Dialog
+
+<TemplatedDialog @bind-Show="Show"
+                 AddContainerCssClasses="@($"question-dialog {AddContainerCssClasses}")">
+  <Card>
+    <CardHeader>
+      @TitleContent
+    </CardHeader>
+    <CardBody>
+      <CardText ElementType="ElementType.Div">
+        @QuestionContent
+      </CardText>
+    </CardBody>
+    <CardFooter>
+      @if (ShowConfirmFirst) {
+        <button type="button" class="btn @(ConfirmButtonCss)" disabled="@DisableConfirm" @onclick="HandleConfirmClicked" title="@ConfirmButtonTitle">@ConfirmButtonTitle</button>
+        <button type="button" class="btn @(CancelButtonCss)" disabled="@DisableCancel" @onclick="HandleCancelClicked" title="@CancelButtonTitle">@CancelButtonTitle</button>
+      } else {
+        <button type="button" class="btn @(CancelButtonCss)" disabled="@DisableCancel" @onclick="HandleCancelClicked" title="@CancelButtonTitle">@CancelButtonTitle</button>
+        <button type="button" class="btn @(ConfirmButtonCss)" disabled="@DisableConfirm" @onclick="HandleConfirmClicked" title="@ConfirmButtonTitle">@ConfirmButtonTitle</button>
+      }
+    </CardFooter>
+  </Card>
+</TemplatedDialog>
+
+@code {
+  bool _Show;
+  [Parameter] public bool Show {
+    get => _Show;
+    set {
+      if(_Show != value) {
+        _Show = value;
+        if(ShowChanged.HasDelegate) { ShowChanged.InvokeAsync(_Show); }
+        StateHasChanged();
+      }
+    }
+  }
+  [Parameter] public EventCallback<bool> ShowChanged { get; set; }
+  [Parameter] public bool ShowConfirmFirst { get; set; }
+
+  [Parameter] public string AddContainerCssClasses { get; set; }
+  [Parameter] public RenderFragment TitleContent { get; set; }
+  [Parameter] public RenderFragment QuestionContent { get; set; }
+
+  [Parameter] public string ConfirmButtonCss { get; set; }
+  [Parameter] public string CancelButtonCss { get; set; }
+
+  [Parameter] public string ConfirmButtonTitle { get; set; }
+  [Parameter] public string CancelButtonTitle { get; set; }
+
+  bool _DisableConfirm;
+  [Parameter] public bool DisableConfirm {
+    get => _DisableConfirm;
+    set {
+      if(_DisableConfirm!=value) {
+        _DisableConfirm = value;
+        StateHasChanged();
+      }
+    }
+  }
+  bool _DisableCancel;
+  [Parameter] public bool DisableCancel {
+    get => _DisableCancel;
+    set {
+      if (_DisableCancel != value) {
+        _DisableCancel = value;
+        StateHasChanged();
+      }
+    }
+  }
+
+  [Parameter] public EventCallback OnConfirmClicked { get; set; }
+  [Parameter] public EventCallback OnCancelClicked { get; set; }
+
+  async Task HandleConfirmClicked() {
+    if(DisableConfirm) { return; }
+    await OnConfirmClicked.InvokeAsync(null);
+  }
+
+  async Task HandleCancelClicked() {
+    if(DisableCancel) { return; }
+    await OnCancelClicked.InvokeAsync(null);
+  }
+}

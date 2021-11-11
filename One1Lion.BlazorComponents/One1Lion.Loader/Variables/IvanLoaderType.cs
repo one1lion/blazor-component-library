@@ -1,4 +1,7 @@
 ﻿namespace One1Lion.Loader {
+  /// <summary>
+  /// The Ivan Loader number from the original <see href="https://codepen.io/vank0/pen/mARwLg">code pen</see>
+  /// </summary>
   public enum IvanLoaderType {
     Type1=1,
     Type2,

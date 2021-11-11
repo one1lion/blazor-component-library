@@ -70,10 +70,10 @@
         return;
       }
       deviceInfos = await CameraViewJsInterop.GetDeviceInfos(module);
-      if ((audioDevices?.Count() ?? 0) > 0) {
+      if((audioDevices?.Count() ?? 0) > 0) {
         selectedAudioDevice = audioDevices.First().DeviceId;
       }
-      if ((videoDevices?.Count() ?? 0) > 0) {
+      if((videoDevices?.Count() ?? 0) > 0) {
         selectedVideoDevice = videoDevices.First().DeviceId;
       }
       loading = false;

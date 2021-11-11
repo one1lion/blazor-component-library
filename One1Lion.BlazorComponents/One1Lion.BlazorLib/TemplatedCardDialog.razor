@@ -1,0 +1,56 @@
+﻿<TemplatedDialog @bind-Show="Show"
+                 AddContainerCssClasses="@AdditionalDialogCssClasses"
+                 Title="@Title"
+                 AdditionalAttributes="@AdditionalAttributes">
+  <Card>
+    @if (CardHeaderContent is { } || ShowDismissButton) {
+      <CardHeader ElementType="CardHeaderElementType">
+        @if (CardHeaderContent is { }) {
+          @CardHeaderContent
+        }
+        @if (ShowDismissButton) {
+          <span class="dismiss-button" @onclick="HandleDismiss"></span>
+        }
+      </CardHeader>
+    }
+    <CardBody>
+      <CardText ElementType="CardTextElementType">
+        @CardTextContent
+      </CardText>
+    </CardBody>
+    @if (CardFooterContent is { }) {
+      <CardFooter>
+        @CardFooterContent
+      </CardFooter>
+    }
+  </Card>
+</TemplatedDialog>
+
+@code {
+  bool _Show;
+  [Parameter]
+  public bool Show {
+    get => _Show;
+    set {
+      if (_Show != value) {
+        _Show = value;
+        if (ShowChanged.HasDelegate) { ShowChanged.InvokeAsync(_Show); }
+        StateHasChanged();
+      }
+    }
+  }
+  [Parameter] public EventCallback<bool> ShowChanged { get; set; }
+  [Parameter] public bool ShowDismissButton { get; set; }
+  [Parameter] public string Title { get; set; }
+  [Parameter] public string AdditionalDialogCssClasses { get; set; }
+  [Parameter] public ElementType CardHeaderElementType { get; set; } = ElementType.Div;
+  [Parameter] public ElementType CardTextElementType { get; set; } = ElementType.P;
+  [Parameter] public RenderFragment CardHeaderContent { get; set; }
+  [Parameter] public RenderFragment CardTextContent { get; set; }
+  [Parameter] public RenderFragment CardFooterContent { get; set; }
+  [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> AdditionalAttributes { get; set; }
+
+  void HandleDismiss() {
+    Show = false;
+  }
+}

@@ -4,14 +4,15 @@
 
 @implements IDisposable
 @*<div aria-live="polite" aria-atomic="true" style="position: fixed; min-height: 100vh;">*@
-<div style="position: fixed; bottom: 0; right: 0; z-index:3; padding:5px;">
+<div class="toast-wrapper @(Position.CssClass())">
   @if (Toasts?.Any() ?? true) {
     @foreach (var ct in Toasts) {
       <ToastContent @key="ct"
                     GUID="@ct.GUID"
                     Time="@ct.Time"
                     AutoReset="@ct.AutoReset"
-                    TimeDisplaying="ct.TimeDisplaying">
+                    TimeDisplaying="ct.TimeDisplaying"
+                    Type="ct.ToastType">
         <Title>
           @if (ct.Title is { }) {
             @ct.Title
@@ -27,6 +28,7 @@
 @*</div>*@
 
 @code {
+  [Parameter] public ElementPosition Position { get; set; } = ElementPosition.TopRight;
   private IList<ToastContentItem> Toasts { get; set; } = new List<ToastContentItem>();
 
   protected override void OnInitialized() {

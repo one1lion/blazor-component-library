@@ -1,4 +1,8 @@
-﻿namespace One1Lion.Shared {
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace One1Lion.Shared {
   public enum UpdateEventType {
     NotSet,
     ItemAdded,

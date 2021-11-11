@@ -1,4 +1,4 @@
-﻿namespace One1Lion.Card.Interfaces {
+﻿namespace One1Lion.Card {
   public interface ICardBody {
     void SetTitle(CardTitle title);
     void AddText(CardText text);

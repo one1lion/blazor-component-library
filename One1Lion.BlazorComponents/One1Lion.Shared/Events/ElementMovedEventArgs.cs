@@ -1,4 +1,4 @@
-﻿namespace One1Lion.Shared.Shared {
+﻿namespace One1Lion.Shared {
   public class ElementMovedEventArgs {
     public object MovedItem { get; set; }
     public string FromAddress { get; set; }

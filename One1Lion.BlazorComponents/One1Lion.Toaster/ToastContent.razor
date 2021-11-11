@@ -3,7 +3,7 @@
 
 @inject IToastService ToastService
 
-<div class="toast @ClassInOut" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="toast @CssClass" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="toast-header">
     @if (ShowIcon) {
       <img src="@IconUrl" width="32" height="32" class="rounded mr-2">
@@ -40,13 +40,15 @@
   [Parameter] public int TimeDisplaying { get; set; } = 4;
   [Parameter] public bool ShowIcon { get; set; }
   [Parameter] public string IconUrl { get; set; }
+  [Parameter] public ToastType Type { get; set; } = ToastType.Neutral;
 
   private string ClassInOut { get; set; } = "show flip-bottom";
+  private string CssClass => $"{ClassInOut}{(Type != ToastType.Neutral ? $" {Type.CssClass()}" : "")}";
 
   private Timer timer;
   private int counterTimer { get; set; } = 0;
   private int frequencyTimer { get; set; } = 100;
-  private int maxTimeTimer => TimeDisplaying * (1000 / frequencyTimer);
+  private int maxTimeTimer  => TimeDisplaying * (1000 / frequencyTimer);
 
   protected override void OnAfterRender(bool firstRender) {
     if (firstRender) {

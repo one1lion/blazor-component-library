@@ -19,8 +19,8 @@
            @ref="TypeAheadInputBox" />
     @if (IsExpanded) {
       <div id="@Id-suggest" class="input-group-append show@(!string.IsNullOrWhiteSpace(AddSuggestListWrapperCss) ? $" {AddSuggestListWrapperCss}" : "")"
-           @onkeypress="HandleKeyPress"
-           @onmousedown="HandleOverrideClose"
+           @onkeypress="HandleKeyPress" 
+           @onmousedown="HandleOverrideClose" 
            @onmouseup="HandleOverrideClose"
            @onmouseout="HandleOverrideClose">
         <div class="suggest-list">
