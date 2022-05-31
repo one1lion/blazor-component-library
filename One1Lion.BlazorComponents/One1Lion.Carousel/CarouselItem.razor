@@ -1,0 +1,29 @@
+﻿@code {
+    [CascadingParameter(Name = "Parent")] public Carousel Parent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    public bool Active { get; set; }
+    public int Index { get; set; }
+
+    public string Id => $"{Parent.Id}-{Index}";
+
+    protected override void OnInitialized()
+    {
+        Parent.AddChild(this);
+    }
+
+    private void HandleItemClicked()
+    {
+        Parent.SetActive(Index);
+    }
+
+    public RenderFragment Render(int position) =>
+    @<div id="@(Parent.Id)-@(Index)" class="o1l-carousel-item@(Active ? " active" : "")" style="--position: @position" @onclick=HandleItemClicked>
+        @ChildContent
+    </div>;
+
+    public static RenderFragment Empty(string parentId) =>
+    @<div id="@(parentId)-empty" class="o1l-carousel-item active">
+        <p>Empty</p>
+    </div>;
+}

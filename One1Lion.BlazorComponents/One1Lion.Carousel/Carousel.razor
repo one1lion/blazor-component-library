@@ -1,0 +1,144 @@
+﻿<CascadingValue Value=this Name="Parent">
+    @ChildContent
+
+    <div class="o1l-carousel">
+        <button type="button" class="control-button" @onclick="_ => SetActive((int)NavDirection.Prev)">&lt;</button>
+        <button type="button" class="control-button" @onclick="_ => SetActive((int)NavDirection.Next)">&gt;</button>
+        <div class="carousel-items">
+            @if (ItemCount == 0)
+            {
+                @CarouselItem.Empty(Id)
+            }
+            else
+            {
+                foreach (var item in _items)
+                {
+                    @item.Render(GetPosition(item.Index))
+                }
+            }
+        </div>
+        <div class="item-selectors">
+            @if (ItemCount == 0)
+            {
+                <label for="@(Id)-empty" class="item-selector active">&nbsp;</label>
+            }
+            else
+            {
+                foreach (var item in _items)
+                {
+                    <label for="@item.Id" class="item-selector@(item.Active ? " active" : "")" @onclick="_ => SetActive(item.Index)">&nbsp;</label>
+                }
+            }
+
+        </div>
+    </div>
+</CascadingValue>
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public bool AutoAdvance { get; set; }
+    [Parameter] public EventCallback<bool> AutoAdvanceChanged { get; set; }
+    private bool _lastAutoAdvance;
+    public string Id { get; } = Guid.NewGuid().ToString()[^5..];
+
+    private readonly List<CarouselItem> _items = new();
+    private int ItemCount => _items.Count;
+    private int ActiveIndex => _items.SingleOrDefault(x => x.Active)?.Index ?? 0;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if(_lastAutoAdvance != AutoAdvance)
+        {
+            _lastAutoAdvance = AutoAdvance;
+            if(AutoAdvanceChanged.HasDelegate)
+            {
+                await AutoAdvanceChanged.InvokeAsync(_lastAutoAdvance);
+            }
+        }
+    }
+
+    public void AddChild(CarouselItem item)
+    {
+        if (_items.Contains(item)) { return; }
+        item.Index = ItemCount;
+        if (ItemCount == 0)
+        {
+            item.Active = true;
+        }
+        _items.Add(item);
+        StateHasChanged();
+    }
+
+    public void SetActive(int dirOrIndex)
+    {
+        if (!_items.Any())
+        {
+            return;
+        }
+
+        switch (dirOrIndex)
+        {
+            case (int)NavDirection.Prev:
+                dirOrIndex = ActiveIndex - 1;
+                if (dirOrIndex < 0) { dirOrIndex = ItemCount - 1; }
+                break;
+            case (int)NavDirection.Next:
+                dirOrIndex = ActiveIndex + 1;
+                if (dirOrIndex >= ItemCount) { dirOrIndex = 0; }
+                break;
+            case (int)NavDirection.First:
+                dirOrIndex = 0;
+                break;
+        }
+        dirOrIndex = Math.Clamp(dirOrIndex, 0, ItemCount - 1);
+        var itemAtIndex = _items.SingleOrDefault(i => i.Index == dirOrIndex);
+
+        if (itemAtIndex is null)
+        {
+            dirOrIndex = 0;
+            itemAtIndex = _items.First();
+        }
+
+        if (itemAtIndex.Active) { return; }
+        _items.ForEach(x => x.Active = false);
+        itemAtIndex.Active = true;
+        StateHasChanged();
+    }
+
+    private int GetPosition(int index)
+    {
+        return index - ActiveIndex;
+        //var position = index - ActiveIndex;
+        //if (position >= 0 && position <= ItemCount -1) { return position; }
+        //if (position < 0)
+        //{
+        //    return position + ItemCount;
+        //}
+
+        //return position - ItemCount;
+    }
+
+    private RenderFragment ItemAt(int index, bool relativeToActive = true) =>
+    @<text>
+        @{
+            var itemIndex = (relativeToActive ? ActiveIndex : 0) + index;
+            while (itemIndex < 0)
+            {
+                itemIndex += ItemCount;
+            }
+            while (itemIndex > ItemCount - 1)
+            {
+                itemIndex -= ItemCount;
+            }
+            var itemAtIndex = _items.Single(x => x.Index == itemIndex);
+            }
+            @itemAtIndex.Render
+        </text>;
+
+    private enum NavDirection
+    {
+        Prev = -2,
+        Next = -1,
+        First = 0
+    }
+}

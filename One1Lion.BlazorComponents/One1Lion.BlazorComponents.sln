@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31829.152
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32505.426
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Samples.SharedLib", "One1Lion.Samples.SharedLib\One1Lion.Samples.SharedLib.csproj", "{E1412B55-60FA-4AAE-8A8F-321F9DFF3D9F}"
 EndProject
@@ -59,11 +59,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toaster", "Toaster", "{F5C7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TypeAhead", "TypeAhead", "{13A8E9C6-CA09-4C61-AFB6-D119574F17E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.ChartJs", "One1Lion.ChartJs\One1Lion.ChartJs.csproj", "{3553D05A-0B16-41F9-B1D9-9BB038B13AA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.ChartJs", "One1Lion.ChartJs\One1Lion.ChartJs.csproj", "{3553D05A-0B16-41F9-B1D9-9BB038B13AA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.Pager", "One1Lion.Pager\One1Lion.Pager.csproj", "{3309A9EB-8742-409F-AB8D-2BCDE9EE23DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Pager", "One1Lion.Pager\One1Lion.Pager.csproj", "{3309A9EB-8742-409F-AB8D-2BCDE9EE23DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "One1Lion.ChartJs.Test", "One1Lion.ChartJs.Test\One1Lion.ChartJs.Test.csproj", "{80486CF5-E9AB-4F54-B24C-1921760531E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.ChartJs.Test", "One1Lion.ChartJs.Test\One1Lion.ChartJs.Test.csproj", "{80486CF5-E9AB-4F54-B24C-1921760531E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Carousel", "Carousel", "{5754B8B7-C384-49BC-822C-AB91D1588398}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One1Lion.Carousel", "One1Lion.Carousel\One1Lion.Carousel.csproj", "{E15FAEC7-2B90-4EA5-AE25-6E9A69DDC58C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -139,6 +143,10 @@ Global
 		{80486CF5-E9AB-4F54-B24C-1921760531E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80486CF5-E9AB-4F54-B24C-1921760531E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80486CF5-E9AB-4F54-B24C-1921760531E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E15FAEC7-2B90-4EA5-AE25-6E9A69DDC58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E15FAEC7-2B90-4EA5-AE25-6E9A69DDC58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E15FAEC7-2B90-4EA5-AE25-6E9A69DDC58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E15FAEC7-2B90-4EA5-AE25-6E9A69DDC58C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -171,6 +179,8 @@ Global
 		{3553D05A-0B16-41F9-B1D9-9BB038B13AA9} = {C5765C2A-9D76-450C-AA79-034DD218FEC0}
 		{3309A9EB-8742-409F-AB8D-2BCDE9EE23DB} = {EC3ED15C-30DE-4F4B-8EF5-E43371FB02CC}
 		{80486CF5-E9AB-4F54-B24C-1921760531E1} = {C5765C2A-9D76-450C-AA79-034DD218FEC0}
+		{5754B8B7-C384-49BC-822C-AB91D1588398} = {25870BCA-7084-44F6-8931-CFB67816C29C}
+		{E15FAEC7-2B90-4EA5-AE25-6E9A69DDC58C} = {5754B8B7-C384-49BC-822C-AB91D1588398}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CB32B720-7896-4E98-A6F2-79957B2A10E6}

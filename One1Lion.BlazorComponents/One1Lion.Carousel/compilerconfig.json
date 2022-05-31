@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "Carousel.razor.css",
+    "inputFile": "Sass/Carousel.scss"
+  },
+  {
+    "outputFile": "CarouselItem.razor.css",
+    "inputFile": "Sass/CarouselItem.scss"
+  }
+]

@@ -33,7 +33,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   
   <ItemGroup>
@@ -41,17 +41,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\One1Lion.CameraView\One1Lion.CameraView.csproj" />
     <ProjectReference Include="..\One1Lion.Card\One1Lion.Card.csproj" />
+    <ProjectReference Include="..\One1Lion.Carousel\One1Lion.Carousel.csproj" />
+    <ProjectReference Include="..\One1Lion.ChartJs\One1Lion.ChartJs.csproj" />
     <ProjectReference Include="..\One1Lion.Dialog\One1Lion.Dialog.csproj" />
     <ProjectReference Include="..\One1Lion.DockableToolbar\One1Lion.DockableToolbar.csproj" />
     <ProjectReference Include="..\One1Lion.DragAndDrop\One1Lion.DragAndDrop.csproj" />
     <ProjectReference Include="..\One1Lion.FormsExtensions\One1Lion.FormsExtensions.csproj" />
     <ProjectReference Include="..\One1Lion.Loader\One1Lion.Loader.csproj" />
+    <ProjectReference Include="..\One1Lion.Pager\One1Lion.Pager.csproj" />
     <ProjectReference Include="..\One1Lion.Shared\One1Lion.Shared.csproj" />
     <ProjectReference Include="..\One1Lion.SliderButton\One1Lion.SliderButton.csproj" />
     <ProjectReference Include="..\One1Lion.Toaster\One1Lion.Toaster.csproj" />
