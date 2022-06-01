@@ -50,7 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="compilerconfig.json">
+    <Content Update="compilerconfig.json" CopyToPublishDirectory="Never">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
