@@ -61,4 +61,10 @@
     <ProjectReference Include="..\One1Lion.TypeAhead\One1Lion.TypeAhead.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="compilerconfig.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -4,10 +4,6 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="compilerconfig.json" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -22,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="compilerconfig.json" />
+    <Content Update="compilerconfig.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -37,11 +37,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="compilerconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="compilerconfig.json" />
     <None Include="wwwroot\css\Dialog.scss" />
   </ItemGroup>
 
@@ -52,6 +47,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="compilerconfig.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

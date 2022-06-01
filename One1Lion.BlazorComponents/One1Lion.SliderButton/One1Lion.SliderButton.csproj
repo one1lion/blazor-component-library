@@ -52,4 +52,10 @@
     <ProjectReference Include="..\One1Lion.Shared\One1Lion.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="compilerconfig.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
