@@ -1,0 +1,21 @@
+﻿.page {
+    display: grid;
+    grid-template-areas: 'sb tb' 'sb m';
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+
+    ::deep .sidebar {
+        grid-area: sb;
+    }
+
+    ::deep .topbar {
+        grid-area: tb;
+    }
+
+    .main {
+        grid-area: m;
+        overflow: auto;
+    }
+}

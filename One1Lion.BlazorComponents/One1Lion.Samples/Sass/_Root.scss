@@ -1,0 +1,16 @@
+﻿@import 'ColorVariables';
+
+:root {
+    --top-bar-bg: white;
+    --top-bar-fore: black;
+    --side-nav-bg: blue;
+    --side-nav-fore: pink;
+    --top-row-height: 3.3rem;
+}
+
+.dark-theme {
+    --top-bar-bg: #333;
+    --top-bar-fore: white;
+    --side-nav-bg: #111;
+    --side-nav-fore: #ddd;
+}

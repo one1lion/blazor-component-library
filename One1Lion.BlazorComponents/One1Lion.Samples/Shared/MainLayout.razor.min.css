@@ -1,0 +1,1 @@
+﻿.page{display:grid;grid-template-areas:"sb tb" "sb m";grid-template-rows:auto 1fr;height:100vh;width:100vw;overflow:hidden;}.page ::deep .sidebar{grid-area:sb;}.page ::deep .topbar{grid-area:tb;}.page .main{grid-area:m;overflow:auto;}
