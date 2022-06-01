@@ -1,0 +1,78 @@
+﻿.toast-wrapper {
+  position: fixed;
+  z-index: 3;
+  padding: 5px;
+
+
+  &.top-left {
+    top: 0;
+    left: 0;
+  }
+
+  &.top-center {
+    top: 0;
+    left: 50vw;
+    transform: translateX(-50%);
+  }
+
+  &.top-right {
+    top: 0;
+    right: 0;
+  }
+
+  &.middle-left {
+    top: 50vh;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  &.middle-center {
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+  }
+
+  &.middle-right {
+    top: 50vh;
+    right: 0;
+    transform: translateY(-50%);
+  }
+
+  &.bottom-left {
+    bottom: 0;
+    left: 0;
+  }
+
+  &.bottom-center {
+    bottom: 0;
+    left: 50vw;
+    transform: translateX(-50%);
+  }
+
+  &.bottom-right {
+    bottom: 0;
+    right: 0;
+  }
+
+  .toast {
+    &.info-toast {
+      // TODO: Add Default Styles
+    }
+
+    &.highlight-toast {
+      // TODO: Add Default Styles
+    }
+
+    &.success-toast {
+      // TODO: Add Default Styles
+    }
+
+    &.warning-toast {
+      // TODO: Add Default Styles
+    }
+
+    &.error-toast {
+      // TODO: Add Default Styles
+    }
+  }
+}

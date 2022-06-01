@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>One1Lion.Samples</title>
+  <base href="/blazor-component-library/" />
+  <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+  <script>
+    function fbTest() {
+      // Try to get response from component library's css
+      // If it server response is not ok or the request fails
+      // fallback to linked copy of css
+      fetch("_content/One1Lion.BlazorLib/css/o1l-components.css")
+      .then(r => {
+        if (!r.ok) {
+          addCssLink("css/o1l-components.css");
+        } else {
+          addCssLink("_content/One1Lion.BlazorLib/css/o1l-components.css");
+        }
+      })
+      .catch(e => {
+        addCssLink("css/o1l-components.css");
+      });
+      // Then add remaining css references to make sure they
+      // get added in the right order
+      addCssLink("css/site.min.css");
+      addCssLink("One1Lion.Samples.styles.css");
+    }
+
+    function addCssLink(toHref) {
+      var cssLink = document.createElement("link");
+      cssLink.setAttribute("rel", "stylesheet");
+      cssLink.setAttribute("type", "text/css");
+      cssLink.setAttribute("href", toHref);
+      document.getElementsByTagName("head")[0].appendChild(cssLink);
+      return cssLink;
+    }
+
+    fbTest();
+  </script>
+
+</head>
+
+<body>
+  <div id="app">Loading...</div>
+  <div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+  </div>
+  <script src="_content/One1Lion.Shared/o1lJsInterop.js"></script>
+  <script>
+    // Script test for js interop from o1l library
+    if (!window.o1lJsFunctions) { // the interop object is not present
+      var newScript = document.createElement("script");
+      newScript.setAttribute("src", "js/o1lJsInterop.js");
+      document.getElementsByTagName("head")[0].appendChild(newScript);
+    }
+  </script>
+  <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script src="decode.min.js"></script>
+    <script src="brotliloader.min.js"></script>
+</body>
+
+</html>

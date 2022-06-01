@@ -1,0 +1,78 @@
+/* _content/One1Lion.Carousel/Carousel.razor.rz.scp.css */
+.o1l-carousel[b-fm7tzw1ahw] {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+  background-color: #1d213e;
+}
+.o1l-carousel .control-button[b-fm7tzw1ahw] {
+  position: absolute;
+  font-size: 2rem;
+  color: rgba(222, 222, 222, 0.8);
+  outline: none;
+  top: 50%;
+  transform: translateY(calc(-50% - 1rem));
+  z-index: 3;
+  background-color: rgba(62, 11, 212, 0.2);
+  box-shadow: 0 0 1em rgba(62, 11, 212, 0.2);
+  border: none;
+}
+.o1l-carousel .control-button:first-of-type[b-fm7tzw1ahw] {
+  left: 0;
+}
+.o1l-carousel .control-button:nth-of-type(2)[b-fm7tzw1ahw] {
+  right: 0;
+}
+.o1l-carousel .carousel-items[b-fm7tzw1ahw] {
+  position: relative;
+  height: 30ch;
+  width: 100%;
+  overflow-x: hidden;
+  z-index: 2;
+  --position: 0;
+}
+.o1l-carousel .carousel-items[b-fm7tzw1ahw]  .o1l-carousel-item {
+  /*visibility: hidden;*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  transform: translate(calc(-50% + var(--position) * 100% + clamp(var(--position), -1, 1) * 1rem), -50%);
+  width: 60%;
+  border: 1px solid orange;
+  background-color: rgba(134, 232, 12, 0.4);
+  transition: transform ease-in-out 0.4s;
+}
+.o1l-carousel .carousel-items[b-fm7tzw1ahw]  .o1l-carousel-item.active {
+  visibility: visible;
+  transform: translate(-50%, -50%);
+  background-color: aliceblue;
+}
+.o1l-carousel .carousel-items .prev-item-ind[b-fm7tzw1ahw] +  .o1l-carousel-item {
+  visibility: visible;
+  left: calc(-10% - 1rem);
+}
+.o1l-carousel .carousel-items .next-item-ind[b-fm7tzw1ahw] +  .o1l-carousel-item {
+  visibility: visible;
+  left: calc(110% + 1rem);
+}
+.o1l-carousel .item-selectors[b-fm7tzw1ahw] {
+  position: absolute;
+  bottom: 0.2rem;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  z-index: 4;
+}
+.o1l-carousel .item-selectors .item-selector[b-fm7tzw1ahw] {
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  background-color: pink;
+  cursor: pointer;
+}
+.o1l-carousel .item-selectors .item-selector.active[b-fm7tzw1ahw] {
+  background-color: green;
+}
+/* _content/One1Lion.Carousel/CarouselItem.razor.rz.scp.css */

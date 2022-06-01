@@ -1,0 +1,31 @@
+{
+	"ObjectDefinitions": [
+		{
+			"PropertyName": "Name",
+			"Type": "String",
+			"Required": true
+		},
+		{
+			"PropertyName": "Age",
+			"Type": "Int"
+		}
+	],
+	"PassedInObjects": [
+		{
+			"Name": "John",
+			"Age": 32
+		},
+		{
+			"Name": "Brian",
+			"Age": 12
+		},
+		{
+			"Age": 1
+		}
+	]
+} 
+public class ObjectDefinitions
+{
+	public string PropertyName {get;set;}
+	public TypeCode Type { get; set; }
+}

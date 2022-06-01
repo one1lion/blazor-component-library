@@ -1,0 +1,36 @@
+﻿.toast-wrapper {
+  position: fixed;
+  z-index: 3;
+  padding: 5px; }
+  .toast-wrapper.top-left {
+    top: 0;
+    left: 0; }
+  .toast-wrapper.top-center {
+    top: 0;
+    left: 50vw;
+    transform: translateX(-50%); }
+  .toast-wrapper.top-right {
+    top: 0;
+    right: 0; }
+  .toast-wrapper.middle-left {
+    top: 50vh;
+    left: 0;
+    transform: translateY(-50%); }
+  .toast-wrapper.middle-center {
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%); }
+  .toast-wrapper.middle-right {
+    top: 50vh;
+    right: 0;
+    transform: translateY(-50%); }
+  .toast-wrapper.bottom-left {
+    bottom: 0;
+    left: 0; }
+  .toast-wrapper.bottom-center {
+    bottom: 0;
+    left: 50vw;
+    transform: translateX(-50%); }
+  .toast-wrapper.bottom-right {
+    bottom: 0;
+    right: 0; }
