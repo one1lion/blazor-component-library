@@ -13,12 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\One1Lion.BlazorLib\wwwroot\css\o1l-components.css" Link="wwwroot\css\o1l-components.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\One1Lion.BlazorLib\wwwroot\css\o1l-components.min.css" Link="wwwroot\css\o1l-components.min.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <content Include="Monikers.imagemanifest">
       <IncludeInVSIX>true</IncludeInVSIX>
     </content>
@@ -32,6 +26,10 @@
     <None Include="Components\Search\FileRepoSearchCriteria.razor" />
     <None Include="Components\Search\SearchCriteria.razor" />
     <None Include="Components\WrappedItemTemplate.razor" />
+    <None Include="wwwroot\css\open-iconic\FONT-LICENSE" />
+    <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
+    <None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
+    <None Include="wwwroot\css\open-iconic\README.md" />
   </ItemGroup>
 
   <ItemGroup>

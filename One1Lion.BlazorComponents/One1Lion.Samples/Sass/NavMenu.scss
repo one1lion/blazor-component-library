@@ -1,8 +1,96 @@
 ﻿.sidebar {
+    display: flex;
+    flex-direction: column;
     background-color: var(--side-nav-bg);
     color: var(--side-nav-fore);
+    width: var(--side-nav-width);
+    box-shadow: var(--light-shadow);
+    z-index: 9;
 
     .top-row {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: flex-start;
+        gap: 1ch;
+        align-items: center;
+        color: var(--side-nav-fore);
+        background-color: rgba(0, 0, 0, .6);
         height: var(--top-row-height);
+        padding: 0 calc(1ch);
+
+        .navbar-toggler {
+            background-color: rgba(0, 0, 0, .4);
+            color: var(--side-nav-fore);
+            border: none;
+            border-radius: .4rem;
+            padding: .4rem 1.1rem;
+        }
+
+        .navbar-home {
+            color: var(--side-nav-fore);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    }
+
+    .nav-link-wrapper {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        padding: .4rem 0;
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin: .2rem 0;
+                padding: 0;
+
+                ::deep .nav-item {
+                    position: relative;
+                    display: flex;
+                    justify-content: flex-start;
+                    height: 1.4rem;
+                    gap: 1ch;
+                    color: var(--side-nav-fore);
+                    text-decoration: none;
+                    margin: 0 1ch;
+                    padding: .4rem 1rem;
+                    transition: background-color ease-in .2s;
+                    border-radius: .4rem;
+
+                    &:not(.active):hover {
+                        background-color: rgba(0, 0, 0, .4);
+                    }
+
+                    &.active {
+                        background-color: rgba(255, 255, 255, .2);
+                        transition: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &.collapse {
+        width: auto;
+
+        .top-row {
+            a {
+                display: none;
+            }
+        }
+
+        .nav-links {
+            li {
+                ::deep .nav-item {
+                    .link-text {
+                        display: none;
+                    }
+                }
+            }
+        }
     }
 }

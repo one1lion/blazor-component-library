@@ -1,11 +1,21 @@
-﻿@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+﻿@import url("/css/open-iconic/font/css/open-iconic-bootstrap.min.css");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css");
+/* Neutral */
+/* Purple */
+/* Turquoise / Teal */
+/* Blue */
+/* Green */
+/* Orange / Yellow */
+/* Red */
 :root {
   --top-bar-bg: white;
   --top-bar-fore: black;
+  --top-row-height: 3.3rem;
   --side-nav-bg: blue;
   --side-nav-fore: pink;
-  --top-row-height: 3.3rem;
+  --side-nav-width: 35ch;
+  --light-shadow: 0 0 2rem rgba(170, 170, 170, .3);
 }
 
 .dark-theme {

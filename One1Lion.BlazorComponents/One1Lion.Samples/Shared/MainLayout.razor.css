@@ -1,7 +1,8 @@
 ﻿.page {
   display: grid;
   grid-template-areas: "sb tb" "sb m";
-  grid-template-rows: auto 1fr;
+  grid-template-rows: var(--top-row-height) 1fr;
+  grid-template-columns: auto 1fr;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -15,4 +16,7 @@
 .page .main {
   grid-area: m;
   overflow: auto;
+}
+.page .main ::deep .page-content {
+  padding: 1rem;
 }

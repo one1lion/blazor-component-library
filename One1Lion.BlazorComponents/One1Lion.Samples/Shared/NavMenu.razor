@@ -1,41 +1,41 @@
-﻿<div class="sidebar">
+﻿<div class="sidebar @NavMenuCssClass">
     <div class="top-row">
-        <a class="" href="">One1Lion.Samples</a>
         <button class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
+            <span class="oi oi-menu"></span>
         </button>
+        <a class="navbar-home" href="">One1Lion Components</a>
     </div>
 
-    <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-        <ul class="">
-            <li class="">
-                <NavLink class="" href="" Match="NavLinkMatch.All">
-                    <span class="oi oi-home" aria-hidden="true"></span> Home
+    <div class="nav-link-wrapper">
+        <ul class="nav-links">
+            <li>
+                <NavLink class="nav-item" href="" Match="NavLinkMatch.All">
+                    <span class="oi oi-home" aria-hidden="true"></span> <span class="link-text">Home</span>
                 </NavLink>
             </li>
-            <li class="">
-                <NavLink class="" href="card">
-                    <span class="oi oi-aperture" aria-hidden="true"></span> Card
+            <li>
+                <NavLink class="nav-item" href="card">
+                    <span class="oi oi-aperture" aria-hidden="true"></span> <span class="link-text">Card</span>
                 </NavLink>
             </li>
-            <li class="">
-                <NavLink class="" href="dnd-samples">
-                    <span class="oi oi-aperture" aria-hidden="true"></span> DnD
+            <li>
+                <NavLink class="nav-item" href="dnd-samples">
+                    <span class="oi oi-aperture" aria-hidden="true"></span> <span class="link-text">DnD</span>
                 </NavLink>
             </li>
-            <li class="">
-                <NavLink class="" href="ta-samples">
-                    <span class="oi oi-aperture" aria-hidden="true"></span> TypeAhead
+            <li>
+                <NavLink class="nav-item" href="ta-samples">
+                    <span class="oi oi-aperture" aria-hidden="true"></span> <span class="link-text">TypeAhead</span>
                 </NavLink>
             </li>
-            <li class="">
-                <NavLink class="" href="fe-samples">
-                    <span class="oi oi-aperture" aria-hidden="true"></span> Form Ext
+            <li>
+                <NavLink class="nav-item" href="fe-samples">
+                    <span class="oi oi-aperture" aria-hidden="true"></span> <span class="link-text">Form Ext</span>
                 </NavLink>
             </li>
-            <li class="">
-                <NavLink class="" href="carousel">
-                    <span class="oi oi-aperture" aria-hidden="true"></span> Carousel
+            <li>
+                <NavLink class="nav-item" href="carousel">
+                    <span class="oi oi-aperture" aria-hidden="true"></span> <span class="link-text">Carousel</span>
                 </NavLink>
             </li>
         </ul>
@@ -43,12 +43,12 @@
 </div>
 
 @code {
-    private bool collapseNavMenu = true;
+    private bool _collapseNavMenu = true;
 
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string NavMenuCssClass => _collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
     {
-        collapseNavMenu = !collapseNavMenu;
+        _collapseNavMenu = !_collapseNavMenu;
     }
 }

@@ -10,5 +10,9 @@
     {
         "outputFile": "Shared/NavMenu.razor.css",
         "inputFile": "Sass/NavMenu.scss"
+    },
+    {
+        "outputFile": "Shared/TopBar.razor.css",
+        "inputFile": "Sass/TopBar.scss"
     }
 ]
