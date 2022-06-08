@@ -35,6 +35,10 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
   
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -49,6 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="compilerconfig.json" />
     <None Include="Components\Card.razor" />
     <None Include="Components\CardBody.razor" />
     <None Include="Components\CardFooter.razor" />

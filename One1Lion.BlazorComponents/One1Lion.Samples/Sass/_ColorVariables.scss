@@ -1,11 +1,14 @@
-﻿/* Neutral */
-$gray1: #EEEEEE;
-$gray2: #C9C9C9;
-$gray3: #A4A4A4;
-$gray4: #808080;
+﻿
+/* Neutral */
+$white: #FFF;
+$gray1: #FAFAFA;
+$gray2: #CBCBCB;
+$gray3: #A6A6A6;
+$gray4: #818181;
 $gray5: #5B5B5B;
 $gray6: #363636;
-$gray7: #111111;
+$gray7: #111;
+$black: #000;
 
 /* Purple */
 $purple1: #9720BA;
@@ -60,3 +63,14 @@ $red4: #B84545;
 $red5: #AA3232;
 $red6: #882020;
 $red7: #700D0D;
+
+/* Light Theme */
+// Note: Themes might be handled this way
+// https://sass-lang.com/documentation/variables
+// For now, I am using Theme SCSS variables
+$light-theme-bg: $gray1;
+$light-theme-fore: $purple7;
+$light-theme-sidebar-bg: $purple7;
+$light-theme-sidebar-fore: $gray1;
+$light-theme-topbar-bg: $purple7;
+$light-theme-topbar-fore: $gray1;

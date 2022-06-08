@@ -4,6 +4,8 @@ html, body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: var(--page-bg);
+    color: var(--default-fore);
 }
 
 #blazor-error-ui {

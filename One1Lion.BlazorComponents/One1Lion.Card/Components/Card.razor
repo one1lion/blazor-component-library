@@ -1,53 +1,69 @@
 ﻿@namespace One1Lion.Card
+@using System.Drawing
 
 @implements ICard
 @implements IHandleChildStateChanges
 
 <CascadingValue Value=this>
-  @ChildContent
+    @ChildContent
 
-  <div class="card@(string.IsNullOrWhiteSpace(AddCssClasses) ? "" : $" {AddCssClasses}")" @attributes=AdditionalAttributes>
-    @if (header != null) {
-      @header.RenderContent
-    }
+    <div class="@CssClasses" style="@ColorOverrides" @attributes=AdditionalAttributes>
+        @if (_header != null)
+        {
+            @_header.RenderContent
+        }
 
-    @foreach (var body in bodies) {
-      @body.RenderContent
-    }
+        @foreach (var body in _bodies)
+        {
+            @body.RenderContent
+        }
 
-    @if (footer != null) {
-      @footer.RenderContent
-    }
-  </div>
+        @if (_footer != null)
+        {
+            @_footer.RenderContent
+        }
+    </div>
 </CascadingValue>
 
 @code {
-  [Parameter]
-  public RenderFragment ChildContent { get; set; }
-  [Parameter]
-  public string AddCssClasses { get; set; }
-  [Parameter(CaptureUnmatchedValues =true )]
-  public IDictionary<string, object> AdditionalAttributes { get; set; }
-  List<CardBody> bodies = new List<CardBody>();
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public ElevationLevel ElevationLevel { get; set; }
+    [Parameter] public bool Outlined { get; set; }
+    [Parameter] public bool Filled { get; set; }
+    [Parameter] public Color? ShadowColor { get; set; }
+    [Parameter] public Color? OutlineColor { get; set; }
+    [Parameter] public Color? FillColor { get; set; }
+    [Parameter] public string AddCssClasses { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object> AdditionalAttributes { get; set; }
 
-  public void AddBody(CardBody body) {
-    bodies.Add(body);
-    StateHasChanged();
-  }
+    public string CssClasses => $"o1l-card elevated-{(int)ElevationLevel}{(Outlined ? $" outlined" : string.Empty)}{(Filled ? $" filled" : string.Empty)}{(string.IsNullOrWhiteSpace(AddCssClasses) ? string.Empty : $" {AddCssClasses}")}";
+    public string ColorOverrides => $"{(ShadowColor.HasValue ? $"--o1l-shadow-color: rgba({ShadowColor.Value.R},{ShadowColor.Value.G},{ShadowColor.Value.B},{ShadowColor.Value.A});" : string.Empty)}{(OutlineColor.HasValue ? $"--o1l-outline-color: rgba({OutlineColor.Value.R},{OutlineColor.Value.G},{OutlineColor.Value.B},{OutlineColor.Value.A});" : string.Empty)}{(FillColor.HasValue ? $"--o1l-fill-color: rgba({FillColor.Value.R},{FillColor.Value.G},{FillColor.Value.B},{FillColor.Value.A});" : string.Empty)}";
 
-  CardHeader header;
-  public void SetHeader(CardHeader header) {
-    this.header = header;
-    StateHasChanged();
-  }
+    private List<CardBody> _bodies = new List<CardBody>();
 
-  CardFooter footer;
-  public void SetFooter(CardFooter footer) {
-    this.footer = footer;
-    StateHasChanged();
-  }
+    public void AddBody(CardBody body)
+    {
+        _bodies.Add(body);
+        StateHasChanged();
+    }
 
-  public void ChildStateChanged() {
-    StateHasChanged();
-  }
+    private CardHeader _header;
+    public void SetHeader(CardHeader header)
+    {
+        _header = header;
+        StateHasChanged();
+    }
+
+    private CardFooter _footer;
+    public void SetFooter(CardFooter footer)
+    {
+        _footer = footer;
+        StateHasChanged();
+    }
+
+    public void ChildStateChanged()
+    {
+        StateHasChanged();
+    }
 }

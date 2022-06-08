@@ -1,0 +1,28 @@
+﻿.o1l-card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 40ch;
+  min-height: 30ch;
+  border-radius: 0.2rem;
+  --o1l-shadow-color: rgba(0,0,0,.2);
+  --o1l-outline-color: #000;
+  --o1l-fill-color: #fff;
+}
+.o1l-card.outlined {
+  outline: 1px solid var(--o1l-outline-color);
+}
+.o1l-card.filled {
+  background-color: var(--o1l-fill-color);
+}
+.o1l-card[class*=elevated].elevated-0 {
+  box-shadow: 0 1px 2px var(--o1l-shadow-color);
+}
+.o1l-card[class*=elevated].elevated-1 {
+  box-shadow: 0 2px 4px var(--o1l-shadow-color);
+}
+.o1l-card[class*=elevated].elevated-2 {
+  box-shadow: 0 3px 6px var(--o1l-shadow-color);
+}
+.o1l-card[class*=elevated].elevated-3 {
+  box-shadow: 0 4px 8px var(--o1l-shadow-color);
+}

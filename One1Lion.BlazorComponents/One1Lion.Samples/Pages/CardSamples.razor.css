@@ -1,0 +1,7 @@
+﻿.card-samples-page {
+  display: grid;
+  grid-template-columns: repeat(2, 50ch);
+  justify-content: flex-start;
+  align-items: center;
+  grid-gap: 1rem;
+}

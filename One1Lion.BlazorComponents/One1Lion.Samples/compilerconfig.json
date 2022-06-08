@@ -14,5 +14,9 @@
     {
         "outputFile": "Shared/TopBar.razor.css",
         "inputFile": "Sass/TopBar.scss"
+    },
+    {
+        "outputFile": "Pages/CardSamples.razor.css",
+        "inputFile": "Sass/CardSamplesPage.scss"
     }
 ]

@@ -1,1 +1,1 @@
-﻿.topbar{display:flex;align-items:center;background-color:var(--tob-bar-bg);color:var(--tob-bar-fore);height:var(--top-row-height);padding:0 1rem;box-shadow:var(--light-shadow);z-index:10;}.topbar a{color:var(--top-bar-fore);text-decoration:none;}
+﻿.topbar{display:flex;align-items:center;background-color:var(--top-bar-bg);color:var(--tob-bar-fore);height:var(--top-row-height);padding:0 1rem;box-shadow:var(--light-shadow);z-index:10;}.topbar a{color:var(--top-bar-fore);text-decoration:none;text-transform:uppercase;font-weight:bold;}

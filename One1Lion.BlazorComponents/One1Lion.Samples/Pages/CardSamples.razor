@@ -1,7 +1,87 @@
 ﻿@page "/card"
+@using One1Lion.Card.Lib.Enums
+@using One1Lion.Samples.SharedLib.Search.DBExpressions
+@using System.Drawing
 
-<h3>CardSamples</h3>
+<article class="page-content card-samples-page">
+    <div class="card-options">
+        <div class="control-group">
+            <label>Elevation Level: </label>
+            <select @bind=_cardOptions.ElevationLevel>
+                @foreach (var curElev in Enum.GetValues<ElevationLevel>())
+                {
+                    <option value=@curElev>@curElev</option>
+                }
+            </select>
+        </div>
+        <div class="control-group">
+            <label><input type="checkbox" @bind=_cardOptions.Outlined /> Outlined</label>
+        </div>
+        <div class="control-group">
+            <label><input type="checkbox" @bind=_cardOptions.Filled /> Filled</label>
+        </div>
+        <div class="control-group">
+            <label>Shadow Color</label>
+            <input type="color" @oninput="e => SetShadowColor(e)" />
+        </div>
+        <div class="control-group">
+            <label>Outline Color</label>
+            <input type="color" @oninput="e => SetOutlineColor(e)" />
+        </div>
+        <div class="control-group">
+            <label>Fill Color</label>
+            <input type="color" @oninput="e => SetFillColor(e)" />
+        </div>
+
+    </div>
+    <Card ElevationLevel=_cardOptions.ElevationLevel
+          Outlined=_cardOptions.Outlined
+          Filled=_cardOptions.Filled
+          ShadowColor=_cardOptions.ShadowColor
+          OutlineColor=_cardOptions.OutlineColor
+          FillColor=_cardOptions.FillColor>
+        <CardHeader ElementType=ElementType.H3>
+            This is a Flat Card
+        </CardHeader>
+        <CardBody>
+            <CardText>
+                This is card content. Note this must be inside of a <code>CardText</code> component that is a child of a <code>CardBody</code> component.
+            </CardText>
+        </CardBody>
+        <CardFooter>
+            <button type="button">A button</button>
+            <button type="button">In the card</button>
+        </CardFooter>
+    </Card>
+
+</article>
 
 @code {
+    private CardOptions _cardOptions = new();
 
+    private void SetShadowColor(ChangeEventArgs e)
+    {
+        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(e));
+
+    }
+
+    private void SetOutlineColor(ChangeEventArgs e)
+    {
+        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(e));
+    }
+
+    private void SetFillColor(ChangeEventArgs e)
+    {
+        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(e));
+    }
+
+    class CardOptions
+    {
+        public ElevationLevel ElevationLevel { get; set; }
+        public bool Outlined { get; set; }
+        public bool Filled { get; set; }
+        public Color? ShadowColor { get; set; }
+        public Color? OutlineColor { get; set; }
+        public Color? FillColor { get; set; }
+    }
 }

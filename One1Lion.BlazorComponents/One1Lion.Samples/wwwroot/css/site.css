@@ -8,12 +8,15 @@
 /* Green */
 /* Orange / Yellow */
 /* Red */
+/* Light Theme */
 :root {
-  --top-bar-bg: white;
-  --top-bar-fore: black;
+  --page-bg: #FAFAFA;
+  --default-fore: #0B0415;
+  --top-bar-bg: #FFF;
+  --top-bar-fore: #5B5B5B;
   --top-row-height: 3.3rem;
-  --side-nav-bg: blue;
-  --side-nav-fore: pink;
+  --side-nav-bg: #0B0415;
+  --side-nav-fore: #FAFAFA;
   --side-nav-width: 35ch;
   --light-shadow: 0 0 2rem rgba(170, 170, 170, .3);
 }
@@ -29,6 +32,8 @@ html, body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: var(--page-bg);
+  color: var(--default-fore);
 }
 
 #blazor-error-ui {

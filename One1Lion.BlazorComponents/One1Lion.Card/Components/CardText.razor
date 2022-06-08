@@ -3,12 +3,14 @@
 @inherits ContainerChildElement<ICardBody>
 
 @code {
-  [Parameter] public string AddCssClasses { get; set; }
-  [Parameter] public ElementType ElementType { get; set; } = ElementType.P;
-  protected override void Register(ICardBody parent) {
-    parent.AddText(this);
-  }
+    [Parameter] public string AddCssClasses { get; set; }
+    [Parameter] public ElementType ElementType { get; set; } = ElementType.P;
 
-  protected override string ContainerCssClass => $"card-text{(string.IsNullOrWhiteSpace(AddCssClasses) ? "" : $" {AddCssClasses}")}";
-  protected override ElementType ContainerElementType => ElementType;
+    protected override void Register(ICardBody parent)
+    {
+        parent.AddText(this);
+    }
+
+    protected override string ContainerCssClass => $"o1l-card-text{(string.IsNullOrWhiteSpace(AddCssClasses) ? string.Empty : $" {AddCssClasses}")}";
+    protected override ElementType ContainerElementType => ElementType;
 }

@@ -1,11 +1,13 @@
 ﻿@import 'ColorVariables';
 
 :root {
-    --top-bar-bg: white;
-    --top-bar-fore: black;
+    --page-bg: #{$light-theme-bg};
+    --default-fore: #{$light-theme-fore};
+    --top-bar-bg: #{$white};
+    --top-bar-fore: #{$gray5};
     --top-row-height: 3.3rem;
-    --side-nav-bg: blue;
-    --side-nav-fore: pink;
+    --side-nav-bg: #{$purple7};
+    --side-nav-fore: #{$gray1};
     --side-nav-width: 35ch;
     --light-shadow: 0 0 2rem rgba(170, 170, 170, .3);
 }
