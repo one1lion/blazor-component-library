@@ -1,57 +1,68 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <!--<Nullable>enable</Nullable>-->
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Monikers.imagemanifest" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Remove="Pages\ToggleSamples.razor" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\img\icons\hold.json" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="Monikers.imagemanifest" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <content Include="Monikers.imagemanifest">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </content>
-  </ItemGroup>
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="Pages\ToggleSamples.razor" />
+        <_ContentIncludedByDefault Remove="wwwroot\img\icons\hold.json" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="..\One1Lion.Shared\wwwroot\o1lJsInterop.js" Link="wwwroot\js\o1lJsInterop.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Components\Search\EditSearchCriteria.razor" />
-    <None Include="Components\Search\FileRepoSearchCriteria.razor" />
-    <None Include="Components\Search\SearchCriteria.razor" />
-    <None Include="Components\WrappedItemTemplate.razor" />
-    <None Include="wwwroot\css\open-iconic\FONT-LICENSE" />
-    <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
-    <None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
-    <None Include="wwwroot\css\open-iconic\README.md" />
-  </ItemGroup>
+    <ItemGroup>
+        <content Include="Monikers.imagemanifest">
+            <IncludeInVSIX>true</IncludeInVSIX>
+        </content>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.5" PrivateAssets="all" />
-    <PackageReference Include="PublishSPAforGitHubPages.Build" Version="1.3.6" />
-    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="..\One1Lion.Shared\wwwroot\o1lJsInterop.js" Link="wwwroot\js\o1lJsInterop.js">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Include="Components\Search\EditSearchCriteria.razor" />
+        <None Include="Components\Search\FileRepoSearchCriteria.razor" />
+        <None Include="Components\Search\SearchCriteria.razor" />
+        <None Include="Components\WrappedItemTemplate.razor" />
+        <None Include="Pages\ToggleSamples.razor" />
+        <None Include="wwwroot\css\open-iconic\FONT-LICENSE" />
+        <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
+        <None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
+        <None Include="wwwroot\css\open-iconic\README.md" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\One1Lion.BlazorLib\One1Lion.BlazorLib.csproj" />
-    <ProjectReference Include="..\One1Lion.Samples.SharedLib\One1Lion.Samples.SharedLib.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.5" PrivateAssets="all" />
+        <PackageReference Include="PublishSPAforGitHubPages.Build" Version="1.3.6" />
+        <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\js\" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\One1Lion.BlazorLib\One1Lion.BlazorLib.csproj" />
+        <ProjectReference Include="..\One1Lion.Samples.SharedLib\One1Lion.Samples.SharedLib.csproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="compilerconfig.json" CopyToPublishDirectory="Never">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="wwwroot\js\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Update="compilerconfig.json" CopyToPublishDirectory="Never">
+            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <UpToDateCheckInput Remove="Pages\ToggleSamples.razor" />
+    </ItemGroup>
 
 </Project>

@@ -1,0 +1,64 @@
+﻿@page "/toggle-button-samples"
+
+<style>
+    .give-me-space {
+        padding: 2rem;
+    }
+
+    .toggle-button {
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: visible;
+        padding: 0;
+        margin: 0;
+        width: 5ch;
+        height: 1.2em;
+        background-color: #bbb;
+    }
+
+        .toggle-button input {
+            visibility: hidden;
+        }
+
+        .toggle-button .thumb {
+            position: absolute;
+            padding: 0;
+            margin: 0;
+            left: .2em;
+            width: .9em;
+            height: .9em;
+            background-color: #eee;
+            transition: left linear .2s, background-color ease-out .2s;
+        }
+
+        .toggle-button input:checked + .thumb {
+            left: calc(100% - 1.2em);
+            background-color: rgb(25,135,84);
+        }
+
+
+        .toggle-button.rounded {
+            height: .4em;
+            width: 3ch;
+            border-radius: .2em;
+        }
+
+            .toggle-button.rounded .thumb {
+                transform: translateX(-.4em);
+                border-radius: 50%;
+                transition: left linear .2s, transform linear .2s, background-color ease-out .2s;
+            }
+
+            .toggle-button.rounded input:checked + .thumb {
+                transform: translateX(.4em);
+            }
+
+</style>
+
+<div class="give-me-space">
+    <label class="toggle-button">
+        <input type="checkbox" />
+        <span class="thumb"></span>
+    </label>
+</div>

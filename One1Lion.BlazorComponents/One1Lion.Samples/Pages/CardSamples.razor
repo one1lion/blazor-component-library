@@ -1,7 +1,9 @@
 ﻿@page "/card"
 @using One1Lion.Card.Lib.Enums
+@using One1Lion.Samples.Helpers
 @using One1Lion.Samples.SharedLib.Search.DBExpressions
 @using System.Drawing
+@using System.Text.Json
 
 <article class="page-content card-samples-page">
     <div class="card-options">
@@ -23,14 +25,17 @@
         <div class="control-group">
             <label>Shadow Color</label>
             <input type="color" @oninput="e => SetShadowColor(e)" />
+            <input type="range" min="0" max="255" @oninput=HandleShadowAlphaChanged />
         </div>
         <div class="control-group">
             <label>Outline Color</label>
             <input type="color" @oninput="e => SetOutlineColor(e)" />
+            <input type="range" min="0" max="255" @oninput=HandleOutlineAlphaChanged />
         </div>
         <div class="control-group">
             <label>Fill Color</label>
             <input type="color" @oninput="e => SetFillColor(e)" />
+            <input type="range" min="0" max="255" @oninput=HandleFillAlphaChanged />
         </div>
 
     </div>
@@ -54,28 +59,65 @@
         </CardFooter>
     </Card>
 
+
+    <div class="code-block-wrapper">
+        <pre>
+        <code>
+&ltCard ElevationLevel=ElevationLevel.@(_cardOptions.ElevationLevel)<br />
+                @if (_cardOptions.Outlined)
+                {
+     <text>Outlined=true</text>
+                }
+        </code>
+        </pre>
+
+    </div>
+
 </article>
 
 @code {
     private CardOptions _cardOptions = new();
+    private int _shadowAlpha = 255;
+    private int _outlineAlpha = 255;
+    private int _fillAlpha = 255;
 
     private void SetShadowColor(ChangeEventArgs e)
     {
-        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(e));
-
+        var newColor = ColorHelpers.FromHexString((string)e.Value, _shadowAlpha);
+        _cardOptions.ShadowColor = newColor;
     }
 
     private void SetOutlineColor(ChangeEventArgs e)
     {
-        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(e));
+        var newColor = ColorHelpers.FromHexString((string)e.Value, _outlineAlpha);
+        _cardOptions.OutlineColor = newColor;
     }
 
     private void SetFillColor(ChangeEventArgs e)
     {
-        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(e));
+        var newColor = ColorHelpers.FromHexString((string)e.Value, _fillAlpha);
+        _cardOptions.FillColor = newColor;
     }
 
-    class CardOptions
+    private void HandleShadowAlphaChanged(ChangeEventArgs e)
+    {
+        if (!int.TryParse(((string)e.Value) ?? string.Empty, out var alpha)) { return; }
+        _cardOptions.ShadowColor = Color.FromArgb(alpha, !_cardOptions.ShadowColor.HasValue ? Color.Black : _cardOptions.ShadowColor.Value);
+    }
+    private void HandleOutlineAlphaChanged(ChangeEventArgs e)
+    {
+        if (!int.TryParse(((string)e.Value) ?? string.Empty, out var alpha)) { return; }
+        _cardOptions.OutlineColor = Color.FromArgb(alpha, !_cardOptions.OutlineColor.HasValue ? Color.Black : _cardOptions.OutlineColor.Value);
+    }
+    private void HandleFillAlphaChanged(ChangeEventArgs e)
+    {
+        if (!int.TryParse(((string)e.Value) ?? string.Empty, out var alpha)) { return; }
+        Console.WriteLine($"New Alpha: {alpha}\r\nColor Before: {JsonSerializer.Serialize(_cardOptions.FillColor)}");
+        _cardOptions.FillColor = Color.FromArgb(alpha, !_cardOptions.FillColor.HasValue ? Color.Black : _cardOptions.FillColor.Value);
+        Console.WriteLine($"Color after: {JsonSerializer.Serialize(_cardOptions.FillColor)}");
+    }
+
+    private class CardOptions
     {
         public ElevationLevel ElevationLevel { get; set; }
         public bool Outlined { get; set; }

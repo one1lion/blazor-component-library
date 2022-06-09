@@ -38,7 +38,7 @@
     public IDictionary<string, object> AdditionalAttributes { get; set; }
 
     public string CssClasses => $"o1l-card elevated-{(int)ElevationLevel}{(Outlined ? $" outlined" : string.Empty)}{(Filled ? $" filled" : string.Empty)}{(string.IsNullOrWhiteSpace(AddCssClasses) ? string.Empty : $" {AddCssClasses}")}";
-    public string ColorOverrides => $"{(ShadowColor.HasValue ? $"--o1l-shadow-color: rgba({ShadowColor.Value.R},{ShadowColor.Value.G},{ShadowColor.Value.B},{ShadowColor.Value.A});" : string.Empty)}{(OutlineColor.HasValue ? $"--o1l-outline-color: rgba({OutlineColor.Value.R},{OutlineColor.Value.G},{OutlineColor.Value.B},{OutlineColor.Value.A});" : string.Empty)}{(FillColor.HasValue ? $"--o1l-fill-color: rgba({FillColor.Value.R},{FillColor.Value.G},{FillColor.Value.B},{FillColor.Value.A});" : string.Empty)}";
+    public string ColorOverrides => $"{(ShadowColor.HasValue ? $"--o1l-shadow-color: rgba({ShadowColor.Value.R},{ShadowColor.Value.G},{ShadowColor.Value.B},{ShadowColor.Value.A / 255.0f});" : string.Empty)}{(OutlineColor.HasValue ? $"--o1l-outline-color: rgba({OutlineColor.Value.R},{OutlineColor.Value.G},{OutlineColor.Value.B},{OutlineColor.Value.A / 255.0f});" : string.Empty)}{(FillColor.HasValue ? $"--o1l-fill-color: rgba({FillColor.Value.R},{FillColor.Value.G},{FillColor.Value.B},{FillColor.Value.A / 255.0f});" : string.Empty)}";
 
     private List<CardBody> _bodies = new List<CardBody>();
 
