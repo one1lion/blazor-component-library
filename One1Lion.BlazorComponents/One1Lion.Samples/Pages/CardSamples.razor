@@ -4,15 +4,44 @@
 @using One1Lion.Samples.SharedLib.Search.DBExpressions
 @using System.Drawing
 @using System.Text.Json
+@using System.Text
 
 <article class="page-content card-samples-page">
+    <div class="sample-component">
+        <Card ElevationLevel=_cardOptions.ElevationLevel
+              Outlined=_cardOptions.Outlined
+              Filled=_cardOptions.Filled
+              ShadowColor=_cardOptions.ShadowColor
+              OutlineColor=_cardOptions.OutlineColor
+              FillColor=_cardOptions.FillColor>
+            <CardHeader ElementType=ElementType.H3>
+                This is a Flat Card
+            </CardHeader>
+            <CardBody>
+                <CardText>
+                    This is card content. Note this must be inside of a <code>CardText</code> component that is a child of a <code>CardBody</code> component.
+                </CardText>
+                <CardLink Href="#!">
+                    Here's a Card Link <i class="oi oi-chevron-right" />
+                </CardLink>
+                <CardLink Href="#!" Target="_blank">
+                    Here's a Card Link To Extern <i class="oi oi-chevron-right" />
+                </CardLink>
+            </CardBody>
+            <CardFooter>
+                <button type="button">A button</button>
+                <button type="button">In the card</button>
+            </CardFooter>
+        </Card>
+    </div>
+
     <div class="card-options">
         <div class="control-group">
             <label>Elevation Level: </label>
             <select @bind=_cardOptions.ElevationLevel>
                 @foreach (var curElev in Enum.GetValues<ElevationLevel>())
                 {
-                    <option value=@curElev>@curElev</option>
+                    <option value=@curElev>@curElev @(curElev == ElevationLevel.Low ? "(Default)" : string.Empty)</option>
                 }
             </select>
         </div>
@@ -25,105 +54,146 @@
         <div class="control-group">
             <label>Shadow Color</label>
             <input type="color" @oninput="e => SetShadowColor(e)" />
-            <input type="range" min="0" max="255" @oninput=HandleShadowAlphaChanged />
+            <input type="range" min="0" max="255" @oninput=HandleShadowAlphaChanged value="@_shadowAlpha" />
         </div>
         <div class="control-group">
             <label>Outline Color</label>
             <input type="color" @oninput="e => SetOutlineColor(e)" />
-            <input type="range" min="0" max="255" @oninput=HandleOutlineAlphaChanged />
+            <input type="range" min="0" max="255" @oninput=HandleOutlineAlphaChanged value="@_outlineAlpha" />
         </div>
         <div class="control-group">
             <label>Fill Color</label>
             <input type="color" @oninput="e => SetFillColor(e)" />
-            <input type="range" min="0" max="255" @oninput=HandleFillAlphaChanged />
+            <input type="range" min="0" max="255" @oninput=HandleFillAlphaChanged value="@_fillAlpha" />
         </div>
 
     </div>
-    <Card ElevationLevel=_cardOptions.ElevationLevel
-          Outlined=_cardOptions.Outlined
-          Filled=_cardOptions.Filled
-          ShadowColor=_cardOptions.ShadowColor
-          OutlineColor=_cardOptions.OutlineColor
-          FillColor=_cardOptions.FillColor>
-        <CardHeader ElementType=ElementType.H3>
-            This is a Flat Card
-        </CardHeader>
-        <CardBody>
-            <CardText>
-                This is card content. Note this must be inside of a <code>CardText</code> component that is a child of a <code>CardBody</code> component.
-            </CardText>
-        </CardBody>
-        <CardFooter>
-            <button type="button">A button</button>
-            <button type="button">In the card</button>
-        </CardFooter>
-    </Card>
-
-
+    <div>
+        @(TimeZoneInfo.TryConvertWindowsIdToIanaId(TimeZoneInfo.Local.Id, out var iana) ? iana : "Bad Convert")
+    </div>
     <div class="code-block-wrapper">
         <pre>
         <code>
-&ltCard ElevationLevel=ElevationLevel.@(_cardOptions.ElevationLevel)<br />
-                @if (_cardOptions.Outlined)
-                {
-     <text>Outlined=true</text>
-                }
+                @GenerateMarkup()
         </code>
         </pre>
-
     </div>
-
 </article>
 
 @code {
-    private CardOptions _cardOptions = new();
-    private int _shadowAlpha = 255;
+    private readonly CardOptions _cardOptions = new();
+    private int _shadowAlpha = 51;
     private int _outlineAlpha = 255;
     private int _fillAlpha = 255;
 
+    private readonly CardOptions _defaultCardOptions = new();
+
+    protected override void OnInitialized()
+    {
+        _shadowAlpha = _defaultCardOptions.ShadowColor.A;
+        _outlineAlpha = _defaultCardOptions.OutlineColor.A;
+        _fillAlpha = _defaultCardOptions.FillColor.A;
+    }
+
     private void SetShadowColor(ChangeEventArgs e)
     {
-        var newColor = ColorHelpers.FromHexString((string)e.Value, _shadowAlpha);
+        var newColor = ColorHelpers.FromHexString((string)e.Value, _cardOptions.ShadowColor.A);
         _cardOptions.ShadowColor = newColor;
     }
 
     private void SetOutlineColor(ChangeEventArgs e)
     {
-        var newColor = ColorHelpers.FromHexString((string)e.Value, _outlineAlpha);
+        var newColor = ColorHelpers.FromHexString((string)e.Value, _cardOptions.OutlineColor.A);
         _cardOptions.OutlineColor = newColor;
     }
 
     private void SetFillColor(ChangeEventArgs e)
     {
-        var newColor = ColorHelpers.FromHexString((string)e.Value, _fillAlpha);
+        var newColor = ColorHelpers.FromHexString((string)e.Value, _cardOptions.FillColor.A);
         _cardOptions.FillColor = newColor;
     }
 
     private void HandleShadowAlphaChanged(ChangeEventArgs e)
     {
         if (!int.TryParse(((string)e.Value) ?? string.Empty, out var alpha)) { return; }
-        _cardOptions.ShadowColor = Color.FromArgb(alpha, !_cardOptions.ShadowColor.HasValue ? Color.Black : _cardOptions.ShadowColor.Value);
+        _cardOptions.ShadowColor = Color.FromArgb(alpha, _cardOptions.ShadowColor);
     }
     private void HandleOutlineAlphaChanged(ChangeEventArgs e)
     {
         if (!int.TryParse(((string)e.Value) ?? string.Empty, out var alpha)) { return; }
-        _cardOptions.OutlineColor = Color.FromArgb(alpha, !_cardOptions.OutlineColor.HasValue ? Color.Black : _cardOptions.OutlineColor.Value);
+        _cardOptions.OutlineColor = Color.FromArgb(alpha, _cardOptions.OutlineColor);
     }
     private void HandleFillAlphaChanged(ChangeEventArgs e)
     {
         if (!int.TryParse(((string)e.Value) ?? string.Empty, out var alpha)) { return; }
-        Console.WriteLine($"New Alpha: {alpha}\r\nColor Before: {JsonSerializer.Serialize(_cardOptions.FillColor)}");
-        _cardOptions.FillColor = Color.FromArgb(alpha, !_cardOptions.FillColor.HasValue ? Color.Black : _cardOptions.FillColor.Value);
-        Console.WriteLine($"Color after: {JsonSerializer.Serialize(_cardOptions.FillColor)}");
+        _cardOptions.FillColor = Color.FromArgb(alpha, _cardOptions.FillColor);
     }
 
     private class CardOptions
     {
-        public ElevationLevel ElevationLevel { get; set; }
+        public ElevationLevel ElevationLevel { get; set; } = ElevationLevel.Low;
         public bool Outlined { get; set; }
         public bool Filled { get; set; }
-        public Color? ShadowColor { get; set; }
-        public Color? OutlineColor { get; set; }
-        public Color? FillColor { get; set; }
+        public Color ShadowColor { get; set; } = Color.FromArgb(51, 0, 0, 0);
+        public Color OutlineColor { get; set; } = Color.FromArgb(255, 0, 0, 0);
+        public Color FillColor { get; set; } = Color.FromArgb(255, 255, 255, 255);
+    }
+
+    private string GenerateMarkup()
+    {
+        var sb = new StringBuilder();
+        var nextLine = "\r\n      ";
+
+        // Card outer component
+        if (_cardOptions.ElevationLevel != _defaultCardOptions.ElevationLevel)
+        {
+            sb.Append($"ElevationLevel=ElevationLevel.{_cardOptions.ElevationLevel}");
+        }
+        if (_cardOptions.ShadowColor != _defaultCardOptions.ShadowColor)
+        {
+            sb.Append($"{(sb.Length != 0 ? nextLine : string.Empty)}ShadowColor=Color.FromArgb({_cardOptions.ShadowColor.A}, {_cardOptions.ShadowColor.R}, {_cardOptions.ShadowColor.G}, {_cardOptions.ShadowColor.B})");
+        }
+        if (_cardOptions.Outlined)
+        {
+            sb.Append($"{(sb.Length != 0 ? nextLine : string.Empty)}Outlined=true");
+            if (_cardOptions.OutlineColor != _defaultCardOptions.OutlineColor)
+            {
+                sb.Append($"{(sb.Length != 0 ? nextLine : string.Empty)}OutlineColor=Color.FromArgb({_cardOptions.OutlineColor.A}, {_cardOptions.OutlineColor.R}, {_cardOptions.OutlineColor.G}, {_cardOptions.OutlineColor.B})");
+            }
+        }
+        if (_cardOptions.Filled)
+        {
+            sb.Append($"{(sb.Length != 0 ? nextLine : string.Empty)}Filled=true");
+            if (_cardOptions.FillColor != _defaultCardOptions.FillColor)
+            {
+                sb.Append($"{(sb.Length != 0 ? nextLine : string.Empty)}FillColor=Color.FromArgb({_cardOptions.FillColor.A}, {_cardOptions.FillColor.R}, {_cardOptions.FillColor.G}, {_cardOptions.FillColor.B})");
+            }
+        }
+        sb.Insert(0, $"<Card{(sb.Length != 0 ? " " : string.Empty)}");
+        sb.Append(">");
+
+        // Card content
+        sb.Append(@"
+    <CardHeader ElementType=ElementType.H3>
+        This is a Flat Card
+    </CardHeader>
+    <CardBody>
+        <CardText>
+            This is card content. Note this must be inside of a <code>CardText</code> component that is a child of a <code>CardBody</code> component.
+        </CardText>
+        <CardLink Href=""#!"">
+            Here's a Card Link <i class=""oi oi-chevron-right"" />
+        </CardLink>
+        <CardLink Href=""#!"" Target=""_blank"">
+            Here's a Card Link To Extern <i class=""oi oi-chevron-right"" />
+        </CardLink>
+    </CardBody>
+    <CardFooter>
+        <button type=""button"">A button</button>
+        <button type=""button"">In the card</button>
+    </CardFooter>
+</Card>");
+
+        return sb.ToString();
     }
 }

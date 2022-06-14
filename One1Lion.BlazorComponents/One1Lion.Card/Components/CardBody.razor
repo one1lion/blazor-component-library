@@ -43,16 +43,16 @@
     @<div class="o1l-card-body@(string.IsNullOrWhiteSpace(AddCssClasses) ? string.Empty : $" {AddCssClasses}")">
         @if (_title is not null)
         {
-                @_title.RenderContent
+            @_title.RenderContent
         }
-            @foreach (var text in _texts)
+        @foreach (var text in _texts)
         {
-                @text.RenderContent
+            @text.RenderContent
         }
-            @foreach (var link in _links)
+        @foreach (var link in _links)
         {
-                @link.RenderContent
+            @link.RenderContent
         }
-        </div>;
+    </div>;
 }
 

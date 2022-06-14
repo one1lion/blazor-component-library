@@ -19,6 +19,7 @@
   --side-nav-fore: #FAFAFA;
   --side-nav-width: 35ch;
   --light-shadow: 0 0 2rem rgba(170, 170, 170, .3);
+  --primary: #0037AA;
 }
 
 .dark-theme {
@@ -52,4 +53,10 @@ html, body {
   position: absolute;
   right: 0.75rem;
   top: 0.5rem;
+}
+
+button {
+  border-width: 0.1em;
+  background-color: transparent;
+  color: var(--primary);
 }

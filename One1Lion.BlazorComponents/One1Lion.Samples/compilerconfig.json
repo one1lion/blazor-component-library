@@ -1,22 +1,22 @@
 ﻿[
-    {
-        "outputFile": "wwwroot/css/site.css",
-        "inputFile": "Sass/Site.scss"
-    },
-    {
-        "outputFile": "Shared/MainLayout.razor.css",
-        "inputFile": "Sass/MainLayout.scss"
-    },
-    {
-        "outputFile": "Shared/NavMenu.razor.css",
-        "inputFile": "Sass/NavMenu.scss"
-    },
-    {
-        "outputFile": "Shared/TopBar.razor.css",
-        "inputFile": "Sass/TopBar.scss"
-    },
-    {
-        "outputFile": "Pages/CardSamples.razor.css",
-        "inputFile": "Sass/CardSamplesPage.scss"
-    }
+  {
+    "outputFile": "wwwroot/css/site.css",
+    "inputFile": "Sass/Site.scss"
+  },
+  {
+    "outputFile": "Shared/MainLayout.razor.css",
+    "inputFile": "Sass/MainLayout.scss"
+  },
+  {
+    "outputFile": "Shared/NavMenu.razor.css",
+    "inputFile": "Sass/NavMenu.scss"
+  },
+  {
+    "outputFile": "Shared/TopBar.razor.css",
+    "inputFile": "Sass/TopBar.scss"
+  },
+  {
+    "outputFile": "Pages/CardSamples.razor.css",
+    "inputFile": "Sass/CardSamplesPage.scss"
+  }
 ]

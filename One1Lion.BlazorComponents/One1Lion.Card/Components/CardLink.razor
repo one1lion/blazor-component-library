@@ -5,15 +5,39 @@
 @code {
     [Parameter] public RenderFragment ChildContent { get; set; }
     [Parameter] public string AddCssClasses { get; set; }
+    [Parameter] public string Href { get; set; }
     [Parameter] public string Target { get; set; }
-
+    [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> AdditionalAttributes { get; set; }
     protected override void Register(ICardBody parent)
     {
         parent.AddLink(this);
     }
 
     public override RenderFragment RenderContent =>
-    @<a class="o1l-card-link@(string.IsNullOrWhiteSpace(AddCssClasses) ? string.Empty : $" {AddCssClasses}")" href="@Target">
-        @ChildContent
-    </a>;
+    builder =>
+    {
+        var curElem = 0;
+        builder.OpenElement(curElem++, "a");
+        builder.AddAttribute(curElem++, "class", $"o1l-card-link{(string.IsNullOrWhiteSpace(AddCssClasses) ? string.Empty : $" {AddCssClasses}")}");
+        if(!string.IsNullOrWhiteSpace(Href))
+        {
+            builder.AddAttribute(curElem++, "href", Href);
+        }
+
+        if(!string.IsNullOrWhiteSpace(Target))
+        {
+            builder.AddAttribute(curElem++, "target", Target);
+        }
+        builder.AddContent(curElem++, ChildContent);
+        builder.CloseElement();
+    };
+
+    //@<a class="o1l-card-link@(string.IsNullOrWhiteSpace(AddCssClasses) ? string.Empty : $" {AddCssClasses}")" 
+    //    href="@Href" 
+    //    @if(!string.IsNullOrWhiteSpace(Target)){
+    //        target="@Target"
+    //    }
+    //    >
+    //    @ChildContent
+    //</a>;
 }

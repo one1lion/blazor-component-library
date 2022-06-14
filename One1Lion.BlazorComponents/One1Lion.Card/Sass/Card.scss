@@ -34,4 +34,25 @@
             box-shadow: 0 4px 8px var(--o1l-shadow-color);
         }
     }
+
+    ::deep .o1l-card-header {
+        padding: 0.8em;
+        margin: 0;
+    }
+
+    ::deep .o1l-card-body {
+        .o1l-card-text {
+            margin: 0;
+            padding: .8em;
+        }
+
+        .o1l-card-link {
+            display: block;
+            padding: .2em .8em;
+        }
+    }
+
+    ::deep .o1l-card-footer {
+        padding: .8em;
+    }
 }
